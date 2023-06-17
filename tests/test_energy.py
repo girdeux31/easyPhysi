@@ -40,7 +40,6 @@ def test_energy_15a():
     assert vf
     assert str(round(vf[1], 2)) == '4.54'
 
-
 def test_energy_15b():
     """
     15 problemas trabajo y energia mecanica
@@ -76,7 +75,6 @@ def test_energy_15b():
     assert dx
     assert str(round(dx[1], 3)) == '0.227'
 
-
 def test_energy_15c():
     """
     15 problemas trabajo y energia mecanica
@@ -111,3 +109,67 @@ def test_energy_15c():
 
     assert vf
     assert str(round(vf[1], 2)) == '3.72'
+
+def test_energy_20a():
+    """
+    15 problemas trabajo y energia mecanica
+    Problema 20a
+    """
+    m = 3.0
+    ha = 4.0
+    hb = 0.0
+    va = 0.0
+    vb = Symbol('vb')
+    g = 9.81
+
+    Epa = m*g*ha
+    Eka = 1/2*m*va**2
+    Epb = -m*g*hb
+    Ekb = -1/2*m*vb**2
+
+    body = Body(dimensions=2)
+
+    body.add_energy('Epa', Epa)
+    body.add_energy('Eca', Eka)
+    body.add_energy('Epb', Epb)
+    body.add_energy('Ecb', Ekb)
+
+    vb = body.solve_energy_equation('vb')
+
+    assert vb
+    assert str(round(vb[1], 2)) == '8.86'
+
+
+def test_energy_20c():
+    """
+    15 problemas trabajo y energia mecanica
+    Problema 20c
+    """
+    m = 3.0
+    hc = 0.0
+    hb = 0.0
+    vc = 0.0
+    vb = 8.86
+    x = 10.0
+    g = 9.81
+    mu = Symbol('mu')
+
+    Epb = m*g*hb
+    Ekb = 1/2*m*vb**2
+    Epc = -m*g*hc
+    Ekc = -1/2*m*vc**2
+    Wfr = -mu*m*g*x
+
+    body = Body(dimensions=2)
+
+    body.add_energy('Epb', Epb)
+    body.add_energy('Ecb', Ekb)
+    body.add_energy('Epa', Epc)
+    body.add_energy('Eca', Ekc)
+    body.add_energy('Wfr', Wfr)
+
+    mu = body.solve_energy_equation('mu')
+
+    assert mu
+    assert str(round(mu[0], 2)) == '0.40'
+
