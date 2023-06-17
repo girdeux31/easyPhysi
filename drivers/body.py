@@ -3,6 +3,7 @@ from .scalar import Scalar
 from .tuple import Tuple
 from ..equations.linear_movement import LinearMovement
 from ..equations.newton_law import NewtonLaw
+from ..equations.energy_law import EnergyLaw
 
 
 class Body:
@@ -14,6 +15,7 @@ class Body:
         
         self.dimensions = dimensions
         self.forces = list()
+        self.energies = list()
 
         # initialize tuples
         
@@ -33,6 +35,7 @@ class Body:
 
         self.kinetics_equation = LinearMovement(self)
         self.dynamics_equation = NewtonLaw(self)
+        self.energy_equation = EnergyLaw(self)
 
     def help(self):
 
@@ -55,6 +58,10 @@ class Body:
     def solve_newton_equation(self, unknown, axis='x'):
 
         return self.dynamics_equation.solve_newton_equation(unknown, axis)
+
+    def solve_energy_equation(self, unknown):
+
+        return self.energy_equation.solve_energy_equation(unknown)
 
     def set(self, parameter, value, axis=None):
 
@@ -84,3 +91,8 @@ class Body:
 
         force = Tuple(name, dimensions=self.dimensions, value=value)
         self.forces.append(force)
+
+    def add_energy(self, name, value):
+
+        energy = Scalar(name, value=value)
+        self.energies.append(energy)

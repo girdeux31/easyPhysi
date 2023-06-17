@@ -1,6 +1,8 @@
 
 from sympy import Symbol
 
+from ..utils import none_type
+
 
 class Scalar:
 
@@ -8,7 +10,7 @@ class Scalar:
 
         self.name = name
 
-        self.value = value if value else self._get_default_value()
+        self.value = self._get_default_value() if isinstance(value, none_type) else value
 
     def __str__(self):
 

@@ -1,6 +1,8 @@
 
 import math
 
+none_type = type(None)
+
 
 def magnitude(array):
 
