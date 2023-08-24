@@ -1,7 +1,8 @@
 from scipy.constants import G
 
 from .body import Body
-from ..equations.gravitation_law import GravitationLaw
+from ..equations.gravitational_force_law import GravitationalForceLaw
+from ..equations.gravitational_potential_energy_law import GravitationalPotentialEnergyLaw
 from ..utils import distance
 
 
@@ -18,7 +19,8 @@ class Field:
 
         # define equations
 
-        self.gravitation_equation = GravitationLaw(self)
+        self.gravitational_force_equation = GravitationalForceLaw(self)
+        self.gravitational_potential_energy_equation = GravitationalPotentialEnergyLaw(self)
 
     def add_body(self, body):
 
@@ -36,24 +38,46 @@ class Field:
         
         return body[0]
 
-    def solve_gravitation_equation(self, name, unknown, axis='x'):
+    def solve_gravitational_force_equation(self, name, unknown, axis='x'):
 
         body = self.get_body(name)
 
-        return self.gravitation_equation.solve_gravitation_equation(body, unknown, axis)
-    
+        return self.gravitational_force_equation.solve(body, unknown, axis)
+
+    def solve_gravitational_potential_energy_equation(self, name, unknown, axis='x'):
+
+        body = self.get_body(name)
+
+        return self.gravitational_potential_energy_equation.solve(body, unknown, axis)
+
     def get_gravitational_force_over(self, name):
 
-        force = 0.0
+        foo = 0.0
         main_body = self.get_body(name)
         
         for body in self.bodies:
             if body is not main_body:
                 
                 dist = distance(main_body.position.value, body.position.value)
-                force += body.mass.value/dist**2
+                foo += body.mass.value/dist**2
 
-        force *= -G*main_body.mass.value
+        foo *= -G*main_body.mass.value
         
-        return force
+        return foo
+
+    def get_gravitational_potential_energy_over(self, name):
+
+        foo = 0.0
+        main_body = self.get_body(name)
+        
+        for body in self.bodies:
+            if body is not main_body:
+                
+                dist = distance(main_body.position.value, body.position.value)
+                foo += body.mass.value/dist
+
+        foo *= -G*main_body.mass.value
+        
+        return foo
+
 

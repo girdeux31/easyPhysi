@@ -1,7 +1,8 @@
 
 from .scalar import Scalar
 from .tuple import Tuple
-from ..equations.linear_movement import LinearMovement
+from ..equations.linear_position_law import LinearPositionLaw
+from ..equations.linear_velocity_law import LinearVelocityLaw
 from ..equations.newton_law import NewtonLaw
 from ..equations.energy_law import EnergyLaw
 
@@ -33,13 +34,16 @@ class Body:
         self.mass = Scalar('m')
         self.time = Scalar('t')
         self.charge = Scalar('q')
-        self.gravity_force = Scalar('Fg')
-        self.electric_force = Scalar('Fe')
+        self.gravitational_force = Scalar('Fg')  # TODO this is not scalar
+        self.gravitational_potential_energy = Scalar('Epg')
+        self.electrical_force = Scalar('Fe')  # TODO this is not scalar
+        self.electrical_potential_energy = Scalar('Epe')
 
         # define equations
 
-        self.kinetics_equation = LinearMovement(self)
-        self.dynamics_equation = NewtonLaw(self)
+        self.linear_position_equation = LinearPositionLaw(self)
+        self.linear_velocity_equation = LinearVelocityLaw(self)
+        self.newton_equation = NewtonLaw(self)
         self.energy_equation = EnergyLaw(self)
 
     def help(self):
@@ -52,21 +56,23 @@ class Body:
             if isinstance(value, (Tuple, Scalar)):
                 print(f'{key:20s} {value.name:8s} {value.value}')
 
-    def solve_position_equation(self, unknown, axis='x'):
+    # TODO move solve_* to field?
 
-        return self.kinetics_equation.solve_position_equation(unknown, axis)
+    def solve_linear_position_equation(self, unknown, axis='x'):
+
+        return self.linear_position_equation.solve(unknown, axis)
     
-    def solve_velocity_equation(self, unknown, axis='x'):
+    def solve_linear_velocity_equation(self, unknown, axis='x'):
 
-        return self.kinetics_equation.solve_velocity_equation(unknown, axis)
+        return self.linear_velocity_equation.solve(unknown, axis)
 
     def solve_newton_equation(self, unknown, axis='x'):
 
-        return self.dynamics_equation.solve_newton_equation(unknown, axis)
+        return self.newton_equation.solve(unknown, axis)
 
     def solve_energy_equation(self, unknown):
 
-        return self.energy_equation.solve_energy_equation(unknown)
+        return self.energy_equation.solve(unknown)
 
     def set(self, parameter, value, axis=None):
 
