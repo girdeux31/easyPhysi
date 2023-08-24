@@ -8,6 +8,7 @@ sys.path.append(r'/home/cmesado/Dropbox/dev')
 sys.path.append(r'C:\Users\cmem\onedrive_cmem\OneDrive - ENUSA Industrias Avanzadas, S.A., S.M.E\python')
 
 from physics.drivers.body import Body
+from physics.utils import compare_floats
 
 
 def test_newton_i():
@@ -34,10 +35,10 @@ def test_newton_i():
     assert a
 
     f = m*a[0].subs('mu', 0.0)
-    assert str(round(f, 2)) == '-1036.47'
+    assert compare_floats(f, -1036.47)
 
     f = m*a[0].subs('mu', 0.1)
-    assert str(round(f, 2)) == '-1258.74'
+    assert compare_floats(f, -1258.74)
 
 def test_newton_ii():
     """
@@ -63,7 +64,7 @@ def test_newton_ii():
     assert a
 
     f = m*a[0]
-    assert str(round(f, 2)) == '-1258.74'
+    assert compare_floats(f, -1258.74)
 
 def test_newton_iii():
     """
@@ -116,7 +117,7 @@ def test_newton_iii():
     solution = solve([aa[0]-Symbol('a'), ab[0]-Symbol('a'), ac[0]-Symbol('a')], ['T1', 'T2', 'a'])
     
     assert solution
-    assert str(round(solution[a], 2)) == '0.79'
+    assert compare_floats(solution[a], 0.79)
 
 def test_newton_iv():
     """
@@ -159,5 +160,5 @@ def test_newton_iv():
     a = body.solve_newton_equation('a', axis='x')
     
     assert a
-    assert str(round(a[0], 2)) == '0.79'
+    assert compare_floats(a[0], 0.79)
 

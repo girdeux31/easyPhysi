@@ -7,6 +7,7 @@ sys.path.append(r'/home/cmesado/Dropbox/dev')
 sys.path.append(r'C:\Users\cmem\onedrive_cmem\OneDrive - ENUSA Industrias Avanzadas, S.A., S.M.E\python')
 
 from physics.drivers.body import Body
+from physics.utils import compare_floats
 
 
 def test_energy_15a():
@@ -38,7 +39,7 @@ def test_energy_15a():
     vf = body.solve_energy_equation('vf')
 
     assert vf
-    assert str(round(vf[1], 2)) == '4.54'
+    assert compare_floats(vf[1], 4.54)
 
 def test_energy_15b():
     """
@@ -73,7 +74,7 @@ def test_energy_15b():
     dx = body.solve_energy_equation('dx')
 
     assert dx
-    assert str(round(dx[1], 3)) == '0.227'
+    assert compare_floats(dx[1], 0.227, decimals=3)
 
 def test_energy_15c():
     """
@@ -108,7 +109,7 @@ def test_energy_15c():
     vf = body.solve_energy_equation('vf')
 
     assert vf
-    assert str(round(vf[1], 2)) == '3.72'
+    assert compare_floats(vf[1], 3.72)
 
 def test_energy_20a():
     """
@@ -137,7 +138,7 @@ def test_energy_20a():
     vb = body.solve_energy_equation('vb')
 
     assert vb
-    assert str(round(vb[1], 2)) == '8.86'
+    assert compare_floats(vb[1], 8.86)
 
 
 def test_energy_20c():
@@ -171,5 +172,5 @@ def test_energy_20c():
     mu = body.solve_energy_equation('mu')
 
     assert mu
-    assert str(round(mu[0], 2)) == '0.40'
+    assert compare_floats(mu[0], 0.40)
 

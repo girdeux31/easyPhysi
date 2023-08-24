@@ -28,6 +28,5 @@ def test_gravity_b1_2019_junio():
     Fg_solve = field.solve_gravitation_equation('A', 'Fg')
     Fg_get = field.get_gravitational_force_over('A')
 
-    assert str(round(Fg_solve[0]*1E+10, 2)) == '-1.25'
-    assert str(round(Fg_get*1E+10, 2)) == '-1.25'
+    assert compare_floats(Fg_solve[0], -1.25E-10)
     assert compare_floats(Fg_get, -1.25E-10)
