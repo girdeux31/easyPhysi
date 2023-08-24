@@ -8,12 +8,14 @@ from ..equations.energy_law import EnergyLaw
 
 class Body:
 
-    def __init__(self, dimensions=2):
+    def __init__(self, dimensions=2, name=None):
 
         if dimensions < 1 or dimensions > 3:
             raise ValueError('Parameter \'dimensions\' must be between 1 and 3')
         
         self.dimensions = dimensions
+        self.name = name
+        
         self.forces = list()
         self.energies = list()
 
@@ -30,8 +32,11 @@ class Body:
 
         self.mass = Scalar('m')
         self.time = Scalar('t')
+        self.charge = Scalar('q')
+        self.gravity_force = Scalar('Fg')
+        self.electric_force = Scalar('Fe')
 
-        # define movements
+        # define equations
 
         self.kinetics_equation = LinearMovement(self)
         self.dynamics_equation = NewtonLaw(self)
