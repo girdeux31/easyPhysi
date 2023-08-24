@@ -10,7 +10,7 @@ class NewtonLaw:
         self.body = body
         self.axes = Axes(self.body.dimensions)
 
-    def _get_newton_equation(self, axis):
+    def _equation(self, axis):
 
         foo = 0.0
         axis = self.axes.components[axis]
@@ -23,11 +23,11 @@ class NewtonLaw:
         
         return Equation(foo)  # TODO return for all axis as tuple?
     
-    def solve_newton_equation(self, unknown, axis):
+    def solve(self, unknown, axis):
 
         if axis not in self.axes.components.keys():
             raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
 
-        equation = self._get_newton_equation(axis)
+        equation = self._equation(axis)
 
         return equation.solve(unknown)

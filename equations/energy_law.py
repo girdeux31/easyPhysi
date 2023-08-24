@@ -10,7 +10,7 @@ class EnergyLaw:
         self.body = body
         self.axes = Axes(self.body.dimensions)
 
-    def _get_energy_equation(self):
+    def _equation(self):
 
         foo = 0.0
 
@@ -20,8 +20,8 @@ class EnergyLaw:
         
         return Equation(foo)
     
-    def solve_energy_equation(self, unknown):
+    def solve(self, unknown):
 
-        equation = self._get_energy_equation()
+        equation = self._equation()
 
         return equation.solve(unknown)

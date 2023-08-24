@@ -12,7 +12,7 @@ class GravitationLaw:
         self.field = filed
         self.axes = Axes(self.field.dimensions)
 
-    def _get_gravitation_equation(self, _body, axis):
+    def _equation(self, _body, axis):
 
         foo = 0.0
         axis = self.axes.components[axis]
@@ -30,11 +30,11 @@ class GravitationLaw:
         
         return Equation(foo)
     
-    def solve_gravitation_equation(self, _body, unknown, axis):
+    def solve(self, _body, unknown, axis):
 
         if axis not in self.axes.components.keys():
             raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
 
-        equation = self._get_gravitation_equation(_body, axis)
+        equation = self._equation(_body, axis)
 
         return equation.solve(unknown)
