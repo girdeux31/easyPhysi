@@ -44,7 +44,7 @@ def angle(array_u, array_v):
 
 def compare_floats(float_ref, float_test, decimals=2):
     
-    power = round(math.log10(abs(float_ref)))
+    power = round(math.log10(abs(float_ref))) if float_ref != 0.0 else 0.0
     power = power - decimals
     eps = 10**(power)
 
