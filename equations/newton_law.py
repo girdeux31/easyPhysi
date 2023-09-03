@@ -21,7 +21,7 @@ class NewtonLaw:
 
         foo -= self.body.mass.value*self.body.acceleration.value[axis]
         
-        return Equation(foo)  # TODO return for all axis as tuple?
+        return Equation(foo)
     
     def solve(self, unknown, axis):
 
@@ -31,4 +31,4 @@ class NewtonLaw:
         axis = self.axes.components[axis]
         equation = self._equation(axis)
 
-        return equation.solve(unknown)
+        return equation.solve(unknown)  # TODO return for all axis as tuple?

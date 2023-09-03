@@ -31,4 +31,4 @@ class GravitationalFieldIntensityLaw:
 
         equation = self._equation(point)
 
-        return equation.solve(unknown)
+        return equation.solve(unknown)  # TODO return for all axis as tuple?

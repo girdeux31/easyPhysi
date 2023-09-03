@@ -33,4 +33,4 @@ class GravitationalForceLaw:
 
         equation = self._equation(main_body)
 
-        return equation.solve(unknown)
+        return equation.solve(unknown)  # TODO return for all axis as tuple?
