@@ -72,7 +72,7 @@ class Field:
 
         body = self.get_body(name)
 
-        return self.gravitational_potential_energy_equation.solve(body, 'Epg')[0]
+        return self.gravitational_potential_energy_equation.solve(body, 'Ug')[0]
 
     def get_gravitational_field_intensity_in(self, point):
 

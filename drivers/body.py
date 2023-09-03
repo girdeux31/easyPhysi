@@ -34,9 +34,9 @@ class Body:
         self.mass = Scalar('m')
         self.time = Scalar('t')
         self.charge = Scalar('q')
-        self.gravitational_potential_energy = Scalar('Epg')
+        self.gravitational_potential_energy = Scalar('Ug')
         self.gravitational_potential = Scalar('Vg')
-        self.electrical_potential_energy = Scalar('Epe')
+        self.electrical_potential_energy = Scalar('Ue')
         self.electrical_potential = Scalar('Ve')
 
         # these are tuples, but handled as scalars so far  # TODO tuples?
@@ -62,8 +62,6 @@ class Body:
 
             if isinstance(value, (Tuple, Scalar)):
                 print(f'{key:20s} {value.name:8s} {value.value}')
-
-    # TODO move solve_* to field?
 
     def solve_linear_position_equation(self, unknown, axis='x'):
 

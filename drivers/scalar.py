@@ -16,6 +16,10 @@ class Scalar:
 
         return self.name
 
+    def __getitem__(self, idx):
+
+        return self.value
+
     def _get_default_value(self):
 
         return Symbol(self.name)
