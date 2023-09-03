@@ -3,6 +3,8 @@ from scipy.constants import G
 from .body import Body
 from ..equations.gravitational_force_law import GravitationalForceLaw
 from ..equations.gravitational_potential_energy_law import GravitationalPotentialEnergyLaw
+from ..equations.gravitational_field_intensity_law import GravitationalFieldIntensityLaw
+from ..equations.gravitational_potential_law import GravitationalPotentialLaw
 from ..utils import distance
 
 
@@ -21,6 +23,8 @@ class Field:
 
         self.gravitational_force_equation = GravitationalForceLaw(self)
         self.gravitational_potential_energy_equation = GravitationalPotentialEnergyLaw(self)
+        self.gravitational_field_intensity_equation = GravitationalFieldIntensityLaw(self)
+        self.gravitational_potential_equation = GravitationalPotentialLaw(self)
 
     def add_body(self, body):
 
@@ -38,46 +42,44 @@ class Field:
         
         return body[0]
 
-    def solve_gravitational_force_equation(self, name, unknown, axis='x'):
+    def solve_gravitational_force_equation(self, name, unknown):
 
         body = self.get_body(name)
 
-        return self.gravitational_force_equation.solve(body, unknown, axis)
+        return self.gravitational_force_equation.solve(body, unknown)
 
-    def solve_gravitational_potential_energy_equation(self, name, unknown, axis='x'):
+    def solve_gravitational_potential_energy_equation(self, name, unknown):
 
         body = self.get_body(name)
 
-        return self.gravitational_potential_energy_equation.solve(body, unknown, axis)
+        return self.gravitational_potential_energy_equation.solve(body, unknown)
+
+    def solve_gravitational_field_intensity_equation(self, point, unknown):
+
+        return self.gravitational_field_intensity_equation.solve(point, unknown)
+
+    def solve_gravitational_potential_equation(self, point, unknown):
+
+        return self.gravitational_potential_equation.solve(point, unknown)
 
     def get_gravitational_force_over(self, name):
 
-        foo = 0.0
-        main_body = self.get_body(name)
-        
-        for body in self.bodies:
-            if body is not main_body:
-                
-                dist = distance(main_body.position.value, body.position.value)
-                foo += body.mass.value/dist**2
+        body = self.get_body(name)
 
-        foo *= -G*main_body.mass.value
-        
-        return foo
+        return self.gravitational_force_equation.solve(body, 'Fg')[0]
 
     def get_gravitational_potential_energy_over(self, name):
 
-        foo = 0.0
-        main_body = self.get_body(name)
-        
-        for body in self.bodies:
-            if body is not main_body:
-                
-                dist = distance(main_body.position.value, body.position.value)
-                foo += body.mass.value/dist
+        body = self.get_body(name)
 
-        foo *= -G*main_body.mass.value
-        
-        return foo
+        return self.gravitational_potential_energy_equation.solve(body, 'Epg')[0]
+
+    def get_gravitational_field_intensity_in(self, point):
+
+        return self.gravitational_field_intensity_equation.solve(point, 'gg')[0]
+
+    def get_gravitational_potential_in(self, point):
+
+        return self.gravitational_potential_equation.solve(point, 'Vg')[0]
 
 

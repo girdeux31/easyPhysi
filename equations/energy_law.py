@@ -15,6 +15,7 @@ class EnergyLaw:
         foo = 0.0
 
         # equation to solve is \sum E = 0
+        
         for energy in self.body.energies:
             foo += energy.value
         

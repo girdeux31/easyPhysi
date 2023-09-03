@@ -7,17 +7,16 @@ from ..utils import distance
 
 class GravitationalPotentialEnergyLaw:
     
-    def __init__(self, filed):
+    def __init__(self, field):
 
-        self.field = filed
+        self.field = field
         self.axes = Axes(self.field.dimensions)
 
-    def _equation(self, main_body, axis):
+    def _equation(self, main_body):
 
         foo = 0.0
-        axis = self.axes.components[axis]
 
-        # equation to solve is Ep + G*M*Sum mi/d  = 0
+        # equation to solve is Ep_t + G*M*Sum_i m_i/d_i  = 0
         
         for body in self.field.bodies:
             if body is not main_body:
@@ -30,11 +29,8 @@ class GravitationalPotentialEnergyLaw:
         
         return Equation(foo)
     
-    def solve(self, main_body, unknown, axis):
+    def solve(self, main_body, unknown):
 
-        if axis not in self.axes.components.keys():
-            raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
-
-        equation = self._equation(main_body, axis)
+        equation = self._equation(main_body)
 
         return equation.solve(unknown)

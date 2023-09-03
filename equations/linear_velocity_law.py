@@ -12,9 +12,8 @@ class LinearVelocityLaw:
     
     def _equation(self, axis):
 
-        axis = self.axes.components[axis]
-
         # equation to solve is v0-v + g*t = 0
+        
         foo = self.body.initial_velocity.value[axis] - self.body.velocity.value[axis] \
                     + self.body.gravity.value[axis]*self.body.time.value
 
@@ -25,6 +24,7 @@ class LinearVelocityLaw:
         if axis not in self.axes.components.keys():
             raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
 
+        axis = self.axes.components[axis]
         equation = self._equation(axis)
 
         return equation.solve(unknown)  # TODO return for all axis as tuple?

@@ -34,10 +34,17 @@ class Body:
         self.mass = Scalar('m')
         self.time = Scalar('t')
         self.charge = Scalar('q')
-        self.gravitational_force = Scalar('Fg')  # TODO this is not scalar
         self.gravitational_potential_energy = Scalar('Epg')
-        self.electrical_force = Scalar('Fe')  # TODO this is not scalar
+        self.gravitational_potential = Scalar('Vg')
         self.electrical_potential_energy = Scalar('Epe')
+        self.electrical_potential = Scalar('Ve')
+
+        # these are tuples, but handled as scalars so far  # TODO tuples?
+        
+        self.gravitational_force = Scalar('Fg')
+        self.gravitational_field_intensity = Scalar('gg')  # this is the same as gravity 'g'
+        self.electrical_force = Scalar('Fe')
+        self.electrical_field_intensity = Scalar('Ee')
 
         # define equations
 

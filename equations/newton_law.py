@@ -13,9 +13,9 @@ class NewtonLaw:
     def _equation(self, axis):
 
         foo = 0.0
-        axis = self.axes.components[axis]
 
         # equation to solve is \sum F - m*a = 0
+        
         for force in self.body.forces:
             foo += force.value[axis]
 
@@ -28,6 +28,7 @@ class NewtonLaw:
         if axis not in self.axes.components.keys():
             raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
 
+        axis = self.axes.components[axis]
         equation = self._equation(axis)
 
         return equation.solve(unknown)
