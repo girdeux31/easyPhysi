@@ -1,20 +1,11 @@
 import math
-from scipy.constants import electron_mass, proton_mass, neutron_mass, elementary_charge
+from scipy.constants import physical_constants as pyc
 
 none_type = type(None)
 
+epsilon_0 = pyc['vacuum electric permittivity'][0]
+K = 1/4/math.pi/epsilon_0
 
-# electron = drivers.Body(name='electron')
-# electron.set('mass', electron_mass)
-# electron.set('charge', -elementary_charge)
-# 
-# proton = Body(name='proton')
-# proton.set('mass', proton_mass)
-# proton.set('charge', elementary_charge)
-# 
-# neutron = Body(name='neutron')
-# neutron.set('mass', neutron_mass)
-# neutron.set('charge', elementary_charge)
 
 def magnitude(array):
 
@@ -49,3 +40,16 @@ def compare_floats(float_ref, float_test, decimals=2):
     eps = 10**(power)
 
     return True if float_test - eps <= float_ref <= float_test + eps else False
+
+def get_positive_solution(solution_list):  # TODO use?
+
+    solutions = [sol for sol in solution_list if sol > 0.0]
+
+    if len(solutions) == 0:
+        error('No positive solutions are found')
+
+    if len(solutions) > 1:
+        warning('Several positive solutions are found')
+
+    return solutions[0]
+    
