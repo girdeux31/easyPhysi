@@ -3,7 +3,7 @@ from ..drivers.axes import Axes
 from ..drivers.equation import Equation
 
 
-class LinearVelocityLaw:
+class LinearVelocityEquation:
     
     def __init__(self, body):
 

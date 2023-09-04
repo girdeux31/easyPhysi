@@ -1,10 +1,11 @@
+from scipy.constants import electron_mass, proton_mass, neutron_mass, elementary_charge
 
 from .scalar import Scalar
 from .tuple import Tuple
-from ..equations.linear_position_law import LinearPositionLaw
-from ..equations.linear_velocity_law import LinearVelocityLaw
-from ..equations.newton_law import NewtonLaw
-from ..equations.energy_law import EnergyLaw
+from ..equations.linear_position_equation import LinearPositionEquation
+from ..equations.linear_velocity_equation import LinearVelocityEquation
+from ..equations.newton_equation import NewtonEquation
+from ..equations.energy_equation import EnergyEquation
 
 
 class Body:
@@ -48,10 +49,10 @@ class Body:
 
         # define equations
 
-        self.linear_position_equation = LinearPositionLaw(self)
-        self.linear_velocity_equation = LinearVelocityLaw(self)
-        self.newton_equation = NewtonLaw(self)
-        self.energy_equation = EnergyLaw(self)
+        self.linear_position_equation = LinearPositionEquation(self)
+        self.linear_velocity_equation = LinearVelocityEquation(self)
+        self.newton_equation = NewtonEquation(self)
+        self.energy_equation = EnergyEquation(self)
 
     def help(self):
 
@@ -112,3 +113,15 @@ class Body:
 
         energy = Scalar(name, value=value)
         self.energies.append(energy)
+
+electron = Body(name='electron')
+electron.set('mass', electron_mass)
+electron.set('charge', -elementary_charge)
+
+proton = Body(name='proton')
+proton.set('mass', proton_mass)
+proton.set('charge', +elementary_charge)
+
+neutron = Body(name='neutron')
+neutron.set('mass', neutron_mass)
+neutron.set('charge', 0.0)

@@ -1,10 +1,14 @@
 from scipy.constants import G
 
 from .body import Body
-from ..equations.gravitational_force_law import GravitationalForceLaw
-from ..equations.gravitational_potential_energy_law import GravitationalPotentialEnergyLaw
-from ..equations.gravitational_field_intensity_law import GravitationalFieldIntensityLaw
-from ..equations.gravitational_potential_law import GravitationalPotentialLaw
+from ..equations.gravitational_force_equation import GravitationalForceEquation
+from ..equations.gravitational_potential_energy_equation import GravitationalPotentialEnergyEquation
+from ..equations.gravitational_field_intensity_equation import GravitationalFieldIntensityEquation
+from ..equations.gravitational_potential_equation import GravitationalPotentialEquation
+from ..equations.electrical_force_equation import ElectricalForceEquation
+from ..equations.electrical_potential_energy_equation import ElectricalPotentialEnergyEquation
+from ..equations.electrical_field_intensity_equation import ElectricalFieldIntensityEquation
+from ..equations.electrical_potential_equation import ElectricalPotentialEquation
 from ..utils import distance
 
 
@@ -21,10 +25,14 @@ class Field:
 
         # define equations
 
-        self.gravitational_force_equation = GravitationalForceLaw(self)
-        self.gravitational_potential_energy_equation = GravitationalPotentialEnergyLaw(self)
-        self.gravitational_field_intensity_equation = GravitationalFieldIntensityLaw(self)
-        self.gravitational_potential_equation = GravitationalPotentialLaw(self)
+        self.gravitational_force_equation = GravitationalForceEquation(self)
+        self.gravitational_potential_energy_equation = GravitationalPotentialEnergyEquation(self)
+        self.gravitational_field_intensity_equation = GravitationalFieldIntensityEquation(self)
+        self.gravitational_potential_equation = GravitationalPotentialEquation(self)
+        self.electrial_force_equation = ElectricalForceEquation(self)
+        self.electrial_potential_energy_equation = ElectricalPotentialEnergyEquation(self)
+        self.electrial_field_intensity_equation = ElectricalFieldIntensityEquation(self)
+        self.electrial_potential_equation = ElectricalPotentialEquation(self)
 
     def add_body(self, body):
 
@@ -41,6 +49,10 @@ class Field:
             raise ValueError(f'Body with name {name} not found')
         
         return body[0]
+
+    #######
+    # SOLVE
+    #######
 
     def solve_gravitational_force_equation(self, name, unknown):
 
@@ -62,6 +74,30 @@ class Field:
 
         return self.gravitational_potential_equation.solve(point, unknown)
 
+    def solve_electrical_force_equation(self, name, unknown):
+
+        body = self.get_body(name)
+
+        return self.electrical_force_equation.solve(body, unknown)
+
+    def solve_electrical_potential_energy_equation(self, name, unknown):
+
+        body = self.get_body(name)
+
+        return self.electrical_potential_energy_equation.solve(body, unknown)
+
+    def solve_electrical_field_intensity_equation(self, point, unknown):
+
+        return self.electrical_field_intensity_equation.solve(point, unknown)
+
+    def solve_electrical_potential_equation(self, point, unknown):
+
+        return self.electrical_potential_equation.solve(point, unknown)
+
+    #######
+    # GET
+    #######
+
     def get_gravitational_force_over(self, name):
 
         body = self.get_body(name)
@@ -81,5 +117,25 @@ class Field:
     def get_gravitational_potential_in(self, point):
 
         return self.gravitational_potential_equation.solve(point, 'Vg')[0]
+
+    def get_electrical_force_over(self, name):
+
+        body = self.get_body(name)
+
+        return self.electrical_force_equation.solve(body, 'Fe')[0]
+
+    def get_electrical_potential_energy_over(self, name):
+
+        body = self.get_body(name)
+
+        return self.electrical_potential_energy_equation.solve(body, 'Ue')[0]
+
+    def get_electrical_field_intensity_in(self, point):
+
+        return self.electrical_field_intensity_equation.solve(point, 'Ee')[0]
+
+    def get_electrical_potential_in(self, point):
+
+        return self.electrical_potential_equation.solve(point, 'Veation:')[0]
 
 

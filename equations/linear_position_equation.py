@@ -3,7 +3,7 @@ from ..drivers.axes import Axes
 from ..drivers.equation import Equation
 
 
-class LinearPositionLaw:
+class LinearPositionEquation:
     
     def __init__(self, body):
 
@@ -28,4 +28,4 @@ class LinearPositionLaw:
         axis = self.axes.components[axis]
         equation = self._equation(axis)
 
-        return equation.solve(unknown)  # TODO return for all axis as tuple?
+        return equation.solve(unknown)  # TODO return for all axis as tuple? watch out because each axes solution is a list of roots

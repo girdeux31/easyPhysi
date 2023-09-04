@@ -43,12 +43,12 @@ def test_gravity_b1_2019_junio_b():
     field = Field()
     field.add_body(body_b)
 
-    Ep_b_solve = field.solve_gravitational_potential_energy_equation('B', 'Epg')
+    Ep_b_solve = field.solve_gravitational_potential_energy_equation('B', 'Ug')
     Ep_b_get = field.get_gravitational_potential_energy_over('B')
 
     body_b.set('position', (2, 0))
     
-    Ep_bp_solve = field.solve_gravitational_potential_energy_equation('B', 'Epg')
+    Ep_bp_solve = field.solve_gravitational_potential_energy_equation('B', 'Ug')
     Ep_bp_get = field.get_gravitational_potential_energy_over('B')
 
     assert compare_floats(Ep_b_solve[0]-Ep_bp_solve[0], 1.47E-10)

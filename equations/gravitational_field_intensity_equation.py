@@ -5,7 +5,7 @@ from ..drivers.equation import Equation
 from ..utils import distance
 
 
-class GravitationalPotentialLaw:
+class GravitationalFieldIntensityEquation:
     
     def __init__(self, field):
 
@@ -16,12 +16,12 @@ class GravitationalPotentialLaw:
 
         foo = 0.0
 
-        # equation to solve is V_t + G*Sum_i m_i/d_i  = 0
+        # equation to solve is g_t + G*Sum_i m_i/d_i**2  = 0
         
         for body in self.field.bodies:
                 
             dist = distance(body.position.value, point)
-            foo += G*body.mass.value/dist
+            foo += G*body.mass.value/dist**2
 
         foo += body.gravitational_field_intensity.value
         
@@ -31,4 +31,4 @@ class GravitationalPotentialLaw:
 
         equation = self._equation(point)
 
-        return equation.solve(unknown)
+        return equation.solve(unknown)  # TODO return for all axis as tuple?
