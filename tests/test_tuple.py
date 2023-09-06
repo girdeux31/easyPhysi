@@ -16,6 +16,11 @@ def test_iter():
     for value in tup:
         assert value.name == 'a'
 
+def test_call():
+
+    tup.define((1, 2, 3))
+    assert tup() == (1, 2, 3)
+
 def test_define():
 
     tup.define((1, 2, 3))

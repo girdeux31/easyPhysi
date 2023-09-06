@@ -54,6 +54,10 @@ class Tuple:
 
         return len(self.value)
 
+    def __call__(self):
+
+        return self.value
+
     def _get_default_value(self):
 
         output = tuple()

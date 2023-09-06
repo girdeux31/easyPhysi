@@ -23,13 +23,13 @@ class GravitationalForceEquation:
             if body is not main_body:
                 
                 # array from body to main_body since we want to measure the angle between horizontal and main body
-                alpha = angle_with_horizontal(body.position.value, main_body.position.value)
-                dist = distance(body.position.value, main_body.position.value)
-                foo += body.mass.value/dist**2
+                alpha = angle_with_horizontal(body.position(), main_body.position())
+                dist = distance(body.position(), main_body.position())
+                foo += body.mass()/dist**2
 
-        foo *= G*main_body.mass.value
+        foo *= G*main_body.mass()
         foo *= math.cos(alpha) if axis == 0 else math.sin(alpha)  # TODO what about 3D?
-        foo += main_body.gravitational_force.value[axis]
+        foo += main_body.gravitational_force[axis]
         
         return Equation(foo)
     

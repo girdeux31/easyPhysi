@@ -17,7 +17,7 @@ class EnergyEquation:
         # equation to solve is \sum E = 0
         
         for energy in body.energies:
-            foo += energy.value
+            foo += energy()
         
         return Equation(foo)
     

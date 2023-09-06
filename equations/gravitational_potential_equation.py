@@ -20,10 +20,10 @@ class GravitationalPotentialEquation:
         
         for body in self.universe.bodies:
                 
-            dist = distance(body.position.value, point)
-            foo += G*body.mass.value/dist
+            dist = distance(body.position(), point)
+            foo += G*body.mass()/dist
 
-        foo += body.gravitational_potential.value
+        foo += body.gravitational_potential()
         
         return Equation(foo)
     

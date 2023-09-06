@@ -17,9 +17,9 @@ class NewtonEquation:
         # equation to solve is \sum F - m*a = 0
         
         for force in body.forces:
-            foo += force.value[axis]
+            foo += force[axis]
 
-        foo -= body.mass.value*body.acceleration.value[axis]
+        foo -= body.mass()*body.acceleration[axis]
         
         return Equation(foo)
 

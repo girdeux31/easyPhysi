@@ -14,13 +14,12 @@ class LinearVelocityEquation:
 
         # equation to solve is v0-v + g*t = 0
         
-        foo = body.initial_velocity.value[axis] - body.velocity.value[axis] \
-                    + body.gravity.value[axis]*body.time.value
+        foo = body.initial_velocity[axis] - body.velocity[axis] \
+                    + body.gravity[axis]*body.time()
 
         return Equation(foo)
 
     def solve(self, body, unknown, axis=None, first_positive_root=False):
-        # TODO first positive root does not make sense with velocity
 
         if axis:
 

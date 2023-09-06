@@ -22,3 +22,8 @@ def test_undefine():
     scalar.undefine()
     assert hasattr(scalar, 'name')
 
+def test_call():
+
+    scalar.define(99)
+    assert scalar() == 99
+

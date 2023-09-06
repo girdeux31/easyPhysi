@@ -22,12 +22,12 @@ class GravitationalFieldIntensityEquation:
         for body in self.universe.bodies:
                 
             # array from body to point since we want to measure the angle between horizontal and point
-            alpha = angle_with_horizontal(body.position.value, point)
-            dist = distance(body.position.value, point)
-            foo += G*body.mass.value/dist**2
+            alpha = angle_with_horizontal(body.position(), point)
+            dist = distance(body.position(), point)
+            foo += G*body.mass()/dist**2
 
         foo *= math.cos(alpha) if axis == 0 else math.sin(alpha)  # TODO what about 3D?
-        foo += body.gravitational_field_intensity.value[axis]
+        foo += body.gravitational_field_intensity[axis]
         
         return Equation(foo)
        

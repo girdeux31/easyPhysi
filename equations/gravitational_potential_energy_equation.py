@@ -21,14 +21,14 @@ class GravitationalPotentialEnergyEquation:
         for idx, main_body in enumerate(self.universe.bodies[:-1]):
             for body in self.universe.bodies[idx+1:]:
                 
-                dist = distance(body.position.value, main_body.position.value)
-                foo += body.mass.value/dist
+                dist = distance(body.position(), main_body.position())
+                foo += body.mass()/dist
 
-            foo *= G*main_body.mass.value
+            foo *= G*main_body.mass()
         
         # TODO this is not the Ep of one body but the whole system
         # I could indent it once but then there will be many Ep unknowns
-        foo += main_body.gravitational_potential_energy.value
+        foo += main_body.gravitational_potential_energy()
         
         return Equation(foo)
     
