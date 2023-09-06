@@ -77,6 +77,6 @@ def test_mrua_2d_ii():
     assert compare_floats(v_x[0], 1.73)
     assert compare_floats(v_y[0], -14.04)
 
-    v = magnitude((v[0][0], v[1][0]))
+    v = magnitude((v_x[0], v_y[0]))
 
     assert compare_floats(v, 14.15)

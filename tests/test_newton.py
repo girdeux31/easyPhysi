@@ -67,7 +67,7 @@ def test_newton_ii():
     a_x = universe.solve_newton_equation('A', 'a', axis='x')
     f = m*a_x[0]
 
-    assert compare_floats(a[0], -5.03)    
+    assert compare_floats(a_x[0], -5.03)    
     assert compare_floats(f, -1258.74)
 
 def test_newton_iii():
