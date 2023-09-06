@@ -29,6 +29,10 @@ class Body:
         self.velocity = Tuple('v', self.dimensions)
         self.gravity = Tuple('g', self.dimensions)
         self.acceleration = Tuple('a', self.dimensions)
+        self.gravitational_force = Tuple('Fg', self.dimensions)
+        self.gravitational_field_intensity = Tuple('gg', self.dimensions)  # this is the same as gravity 'g'
+        self.electrical_force = Tuple('Fe', self.dimensions)
+        self.electrical_field_intensity = Tuple('Ee', self.dimensions)
 
         # initialize scalars
 
@@ -39,13 +43,6 @@ class Body:
         self.gravitational_potential = Scalar('Vg')
         self.electrical_potential_energy = Scalar('Ue')
         self.electrical_potential = Scalar('Ve')
-
-        # these are tuples, but handled as scalars so far  # TODO tuples?
-        
-        self.gravitational_force = Scalar('Fg')
-        self.gravitational_field_intensity = Scalar('gg')  # this is the same as gravity 'g'
-        self.electrical_force = Scalar('Fe')
-        self.electrical_field_intensity = Scalar('Ee')
 
         # define equations
 
@@ -64,6 +61,8 @@ class Body:
             if isinstance(value, (Tuple, Scalar)):
                 print(f'{key:20s} {value.name:8s} {value.value}')
 
+    # TODO move all solve_ to universe?
+    
     def solve_linear_position_equation(self, unknown, axis='x'):
 
         return self.linear_position_equation.solve(unknown, axis)

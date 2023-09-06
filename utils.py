@@ -33,6 +33,15 @@ def angle(array_u, array_v):
     
     return math.acos(inner_product(array_u, array_v)/magnitude(array_u)/magnitude(array_v))
 
+def angle_with_horizontal(point_a, point_b):
+
+    if len(point_a) != len(point_b):
+        raise ValueError('Lengths of points mismatch')
+
+    point_c = tuple([b-a for a, b in zip(point_a, point_b)])
+
+    return math.atan2(point_c[1], point_c[0])
+
 def compare_floats(float_ref, float_test, decimals=2):
     
     power = round(math.log10(abs(float_ref))) if float_ref != 0.0 else 0.0

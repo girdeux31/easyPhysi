@@ -1,3 +1,4 @@
+import math
 from scipy.constants import G
 
 from .body import Body
@@ -12,7 +13,7 @@ from ..equations.electrical_potential_equation import ElectricalPotentialEquatio
 from ..utils import distance
 
 
-class Field:
+class Universe:
 
     def __init__(self, dimensions=2):
 
@@ -54,41 +55,41 @@ class Field:
     # SOLVE
     #######
 
-    def solve_gravitational_force_equation(self, name, unknown):
+    def solve_gravitational_force_equation(self, name, unknown, axis='x'):  # TODO None as axis default
 
         body = self.get_body(name)
 
-        return self.gravitational_force_equation.solve(body, unknown)
+        return self.gravitational_force_equation.solve(body, unknown, axis)
 
     def solve_gravitational_potential_energy_equation(self, name, unknown):
 
-        body = self.get_body(name)
+        body = self.get_body(name)  # TODO do i need this?
 
         return self.gravitational_potential_energy_equation.solve(body, unknown)
 
-    def solve_gravitational_field_intensity_equation(self, point, unknown):
+    def solve_gravitational_field_intensity_equation(self, point, unknown, axis='x'):
 
-        return self.gravitational_field_intensity_equation.solve(point, unknown)
+        return self.gravitational_field_intensity_equation.solve(point, unknown, axis)
 
     def solve_gravitational_potential_equation(self, point, unknown):
 
         return self.gravitational_potential_equation.solve(point, unknown)
 
-    def solve_electrical_force_equation(self, name, unknown):
+    def solve_electrical_force_equation(self, name, unknown, axis='x'):
 
         body = self.get_body(name)
 
-        return self.electrical_force_equation.solve(body, unknown)
+        return self.electrical_force_equation.solve(body, unknown, axis)
 
     def solve_electrical_potential_energy_equation(self, name, unknown):
 
-        body = self.get_body(name)
+        body = self.get_body(name)  # TODO do i need this?
 
         return self.electrical_potential_energy_equation.solve(body, unknown)
 
-    def solve_electrical_field_intensity_equation(self, point, unknown):
+    def solve_electrical_field_intensity_equation(self, point, unknown, axis='x'):
 
-        return self.electrical_field_intensity_equation.solve(point, unknown)
+        return self.electrical_field_intensity_equation.solve(point, unknown, axis)
 
     def solve_electrical_potential_equation(self, point, unknown):
 
@@ -98,44 +99,56 @@ class Field:
     # GET
     #######
 
-    def get_gravitational_force_over(self, name):
+    def get_gravitational_force_over(self, name, axis='x'):
 
         body = self.get_body(name)
+        foo = self.gravitational_force_equation.solve(body, 'Fg', axis)
 
-        return self.gravitational_force_equation.solve(body, 'Fg')[0]
+        return foo[0]
 
     def get_gravitational_potential_energy_over(self, name):
 
         body = self.get_body(name)
+        foo = self.gravitational_potential_energy_equation.solve(body, 'Ug')
 
-        return self.gravitational_potential_energy_equation.solve(body, 'Ug')[0]
+        return foo[0]
 
-    def get_gravitational_field_intensity_in(self, point):
+    def get_gravitational_field_intensity_in(self, point, axis='x'):
 
-        return self.gravitational_field_intensity_equation.solve(point, 'gg')[0]
+        foo = self.gravitational_field_intensity_equation.solve(point, 'gg', axis)
+
+        return foo[0]
 
     def get_gravitational_potential_in(self, point):
 
-        return self.gravitational_potential_equation.solve(point, 'Vg')[0]
+        foo = self.gravitational_potential_equation.solve(point, 'Vg')
 
-    def get_electrical_force_over(self, name):
+        return foo[0]
+
+    def get_electrical_force_over(self, name, axis='x'):
 
         body = self.get_body(name)
-
-        return self.electrical_force_equation.solve(body, 'Fe')[0]
+        foo = self.electrical_force_equation.solve(body, 'Fe', axis)
+        
+        return foo[0]
 
     def get_electrical_potential_energy_over(self, name):
 
         body = self.get_body(name)
+        foo = self.electrical_potential_energy_equation.solve(body, 'Ue')
 
-        return self.electrical_potential_energy_equation.solve(body, 'Ue')[0]
+        return foo[0]
 
-    def get_electrical_field_intensity_in(self, point):
+    def get_electrical_field_intensity_in(self, point, axis='x'):
 
-        return self.electrical_field_intensity_equation.solve(point, 'Ee')[0]
+        foo = self.electrical_field_intensity_equation.solve(point, 'Ee', axis)
+
+        return foo[0]
 
     def get_electrical_potential_in(self, point):
 
-        return self.electrical_potential_equation.solve(point, 'Veation:')[0]
+        foo = self.electrical_potential_equation.solve(point, 'Ve')
+
+        return foo[0]
 
 
