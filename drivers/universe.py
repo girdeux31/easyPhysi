@@ -141,7 +141,9 @@ class Universe:
     # GET
     #######
 
-    # TODO get for position, velocity, acceleration and force and W=-AEp between points
+    # TODO get for position, velocity, acceleration and force
+
+    # Gravitational Field
 
     def get_gravitational_force_over(self, name, axis=None, first_positive_root=False):
 
@@ -163,6 +165,29 @@ class Universe:
 
         return self.gravitational_potential_equation.solve(point, 'Vg', first_positive_root)
 
+    def get_gravitational_work_between(self, name, point_0, point_1, first_positive_root=False):
+
+        # W = -AEp = Ep_0 - Ep_1
+
+        if not hasattr(point_0, '__len__') or len(point_0) != self.dimensions:
+            raise ValueError(f'Parameter \'point_0\' must have length {self.dimensions}')
+
+        if not hasattr(point_1, '__len__') or len(point_1) != self.dimensions:
+            raise ValueError(f'Parameter \'point_1\' must have length {self.dimensions}')
+
+        body = self.get_body(name)
+        body.set('position', point_0)
+
+        Ep_0 = self.gravitational_potential_energy_equation.solve(body, 'Ug', first_positive_root)
+
+        body.set('position', point_1)
+        
+        Ep_1 = self.gravitational_potential_energy_equation.solve(body, 'Ug', first_positive_root)
+
+        return Ep_0[0] - Ep_1[0]
+
+    # Electrical Field
+
     def get_electrical_force_over(self, name, axis=None, first_positive_root=False):
 
         body = self.get_body(name)
@@ -182,3 +207,24 @@ class Universe:
     def get_electrical_potential_in(self, point, first_positive_root=False):
 
         return self.electrical_potential_equation.solve(point, 'Ve', first_positive_root)
+
+    def get_electrical_work_between(self, name, point_0, point_1, first_positive_root=False):
+
+        # W = -AEp = Ep_0 - Ep_1
+
+        if not hasattr(point_0, '__len__') or len(point_0) != self.dimensions:
+            raise ValueError(f'Parameter \'point_0\' must have length {self.dimensions}')
+
+        if not hasattr(point_1, '__len__') or len(point_1) != self.dimensions:
+            raise ValueError(f'Parameter \'point_1\' must have length {self.dimensions}')
+
+        body = self.get_body(name)
+        body.set('position', point_0)
+
+        Ep_0 = self.electrical_potential_energy_equation.solve(body, 'Ug', first_positive_root)
+
+        body.set('position', point_1)
+        
+        Ep_1 = self.electrical_potential_energy_equation.solve(body, 'Ug', first_positive_root)
+
+        return Ep_0[0] - Ep_1[0]
