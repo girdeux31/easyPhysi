@@ -103,7 +103,7 @@ class Universe:
 
     def solve_gravitational_potential_energy_equation(self, name, unknown, first_positive_root=False):
 
-        body = self.get_body(name)  # TODO do i need this?
+        body = self.get_body(name)
 
         return self.gravitational_potential_energy_equation.solve(body, unknown, first_positive_root)  # scalar equation
 
@@ -125,7 +125,7 @@ class Universe:
 
     def solve_electrical_potential_energy_equation(self, name, unknown, first_positive_root=False):
 
-        body = self.get_body(name)  # TODO do i need this?
+        body = self.get_body(name)
 
         return self.electrical_potential_energy_equation.solve(body, unknown, first_positive_root)  # scalar equation
 
@@ -165,7 +165,7 @@ class Universe:
 
         return self.gravitational_potential_equation.solve(point, 'Vg', first_positive_root)
 
-    def get_gravitational_work_between(self, name, point_0, point_1, first_positive_root=False):
+    def get_gravitational_work_over(self, name, point_0, point_1, first_positive_root=False):
 
         # W = -AEp = Ep_0 - Ep_1
 
@@ -208,7 +208,7 @@ class Universe:
 
         return self.electrical_potential_equation.solve(point, 'Ve', first_positive_root)
 
-    def get_electrical_work_between(self, name, point_0, point_1, first_positive_root=False):
+    def get_electrical_work_over(self, name, point_0, point_1, first_positive_root=False):
 
         # W = -AEp = Ep_0 - Ep_1
 

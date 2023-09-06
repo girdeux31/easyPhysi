@@ -44,16 +44,22 @@ def test_gravity_b1_2019_junio_b():
     F2-PAU-Gravitation
     B1.b 2019 junio
     """
-    p0 = (2, -2)
-    p1 = (2, 0)
+    pa = (0, 0)
+    pb_0 = (2, -2)
+    pb_1 = (2, 0)
+
+    body_a = Body(name='A')
+    body_a.set('mass', 3)
+    body_a.set('position', pa)
 
     body_b = Body(name='B')
     body_b.set('mass', 5)
 
     universe = Universe()
+    universe.add_body(body_a)
     universe.add_body(body_b)
 
-    W = universe.get_gravitational_work_between('B', p0, p1)
+    W = universe.get_gravitational_work_over('B', pb_0, pb_1)
 
     assert compare_floats(W, 1.47E-10)
 
