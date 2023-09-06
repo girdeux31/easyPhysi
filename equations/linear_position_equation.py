@@ -5,27 +5,51 @@ from ..drivers.equation import Equation
 
 class LinearPositionEquation:
     
-    def __init__(self, body):
+    def __init__(self, universe):
 
-        self.body = body
-        self.axes = Axes(self.body.dimensions)
+        self.universe = universe
+        self.axes = Axes(self.universe.dimensions)
 
-    def _equation(self, axis):
+    def _equation(self, body, axis):
 
         # equation to solve is p0-p + v0*t + 1/2*g*t**2 = 0
         
-        foo = self.body.initial_position.value[axis] - self.body.position.value[axis] \
-                    + self.body.initial_velocity.value[axis]*self.body.time.value \
-                    + self.body.gravity.value[axis]/2*self.body.time.value**2
+        foo = body.initial_position.value[axis] - body.position.value[axis] \
+                    + body.initial_velocity.value[axis]*body.time.value \
+                    + body.gravity.value[axis]/2*body.time.value**2
         
         return Equation(foo)
     
-    def solve(self, unknown, axis):
+    def solve(self, body, unknown, axis=None, first_positive_root=False):
 
-        if axis not in self.axes.components.keys():
-            raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
+        if axis:
+
+            if axis not in self.axes.components.keys():
+                raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
+
+            root = self._solve_one_axis(body, unknown, axis, first_positive_root)
+
+        else:
+
+            root = self._solve_all_axes(body, unknown, first_positive_root)
+
+        return root
+
+    def _solve_one_axis(self, body, unknown, axis, first_positive_root):
 
         axis = self.axes.components[axis]
-        equation = self._equation(axis)
+        equation = self._equation(body, axis)
+        root = equation.solve(unknown, first_positive_root)
 
-        return equation.solve(unknown)  # TODO return for all axis as tuple? watch out because each axes solution is a list of roots
+        return root
+
+    def _solve_all_axes(self, body, unknown, first_positive_root):
+
+        roots = list()
+
+        for axis in self.axes.components.keys():
+
+            root = self._solve_one_axis(body, unknown, axis, first_positive_root)
+            roots.append(root)
+
+        return tuple(roots)

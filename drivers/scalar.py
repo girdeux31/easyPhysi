@@ -16,6 +16,8 @@ class Scalar:
 
         return self.name
 
+    # TODO def __call__
+
     def __getitem__(self, idx):
 
         return self.value

@@ -32,8 +32,9 @@ class GravitationalPotentialEnergyEquation:
         
         return Equation(foo)
     
-    def solve(self, main_body, unknown):
+    def solve(self, body, unknown, first_positive_root=False):
 
-        equation = self._equation(main_body)
+        equation = self._equation(body)
+        root = equation.solve(unknown, first_positive_root)
 
-        return equation.solve(unknown)
+        return root

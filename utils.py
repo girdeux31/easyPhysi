@@ -44,21 +44,12 @@ def angle_with_horizontal(point_a, point_b):
 
 def compare_floats(float_ref, float_test, decimals=2):
     
+    if not hasattr(float_ref, '__float__') or not hasattr(float_test, '__float__'):
+        raise ValueError('Arguments \'float_ref\' and \'float_test\' must be convertible to floats')
+
     power = round(math.log10(abs(float_ref))) if float_ref != 0.0 else 0.0
     power = power - decimals
     eps = 10**(power)
 
     return True if float_test - eps <= float_ref <= float_test + eps else False
-
-def get_positive_solution(solution_list):  # TODO use?
-
-    solutions = [sol for sol in solution_list if sol > 0.0]
-
-    if len(solutions) == 0:
-        error('No positive solutions are found')
-
-    if len(solutions) > 1:
-        warning('Several positive solutions are found')
-
-    return solutions[0]
     

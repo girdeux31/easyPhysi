@@ -2,21 +2,17 @@ from scipy.constants import electron_mass, proton_mass, neutron_mass, elementary
 
 from .scalar import Scalar
 from .tuple import Tuple
-from ..equations.linear_position_equation import LinearPositionEquation
-from ..equations.linear_velocity_equation import LinearVelocityEquation
-from ..equations.newton_equation import NewtonEquation
-from ..equations.energy_equation import EnergyEquation
 
 
 class Body:
 
-    def __init__(self, dimensions=2, name=None):
+    def __init__(self, name, dimensions=2):
 
         if dimensions < 1 or dimensions > 3:
             raise ValueError('Parameter \'dimensions\' must be between 1 and 3')
         
-        self.dimensions = dimensions
         self.name = name
+        self.dimensions = dimensions
         
         self.forces = list()
         self.energies = list()
@@ -44,13 +40,6 @@ class Body:
         self.electrical_potential_energy = Scalar('Ue')
         self.electrical_potential = Scalar('Ve')
 
-        # define equations
-
-        self.linear_position_equation = LinearPositionEquation(self)
-        self.linear_velocity_equation = LinearVelocityEquation(self)
-        self.newton_equation = NewtonEquation(self)
-        self.energy_equation = EnergyEquation(self)
-
     def help(self):
 
         print('{:20s} {:8s} {:10s}'.format('Long', 'Short', 'Value'))
@@ -60,24 +49,6 @@ class Body:
 
             if isinstance(value, (Tuple, Scalar)):
                 print(f'{key:20s} {value.name:8s} {value.value}')
-
-    # TODO move all solve_ to universe?
-    
-    def solve_linear_position_equation(self, unknown, axis='x'):
-
-        return self.linear_position_equation.solve(unknown, axis)
-    
-    def solve_linear_velocity_equation(self, unknown, axis='x'):
-
-        return self.linear_velocity_equation.solve(unknown, axis)
-
-    def solve_newton_equation(self, unknown, axis='x'):
-
-        return self.newton_equation.solve(unknown, axis)
-
-    def solve_energy_equation(self, unknown):
-
-        return self.energy_equation.solve(unknown)
 
     def set(self, parameter, value, axis=None):
 
@@ -112,6 +83,7 @@ class Body:
 
         energy = Scalar(name, value=value)
         self.energies.append(energy)
+
 
 electron = Body(name='electron')
 electron.set('mass', electron_mass)

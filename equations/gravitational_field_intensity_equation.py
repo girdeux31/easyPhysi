@@ -30,8 +30,8 @@ class GravitationalFieldIntensityEquation:
         foo += body.gravitational_field_intensity.value[axis]
         
         return Equation(foo)
-    
-    def solve(self, point, unknown, axis):
+       
+    def solve(self, point, unknown, axis=None, first_positive_root=False):
 
         if not hasattr(point, '__len__') or len(point) != self.universe.dimensions:
             raise ValueError(f'Parameter \'point\' must have length {self.universe.dimensions}')
@@ -39,10 +39,34 @@ class GravitationalFieldIntensityEquation:
         if unknown == 'p':
             raise RuntimeError(f'Equation cannot be solved for unknown \'p\'')
 
-        if axis not in self.axes.components.keys():
-            raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
+        if axis:
+
+            if axis not in self.axes.components.keys():
+                raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
+
+            root = self._solve_one_axis(point, unknown, axis, first_positive_root)
+
+        else:
+
+            root = self._solve_all_axes(point, unknown, first_positive_root)
+
+        return root
+
+    def _solve_one_axis(self, point, unknown, axis, first_positive_root):
 
         axis = self.axes.components[axis]
         equation = self._equation(point, axis)
+        root = equation.solve(unknown, first_positive_root)
 
-        return equation.solve(unknown)  # TODO return for all axis as tuple?
+        return root
+
+    def _solve_all_axes(self, point, unknown, first_positive_root):
+
+        roots = list()
+
+        for axis in self.axes.components.keys():
+
+            root = self._solve_one_axis(point, unknown, axis, first_positive_root)
+            roots.append(root)
+
+        return tuple(roots)

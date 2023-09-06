@@ -5,26 +5,51 @@ from ..drivers.equation import Equation
 
 class LinearVelocityEquation:
     
-    def __init__(self, body):
+    def __init__(self, universe):
 
-        self.body = body
-        self.axes = Axes(self.body.dimensions)
+        self.universe = universe
+        self.axes = Axes(self.universe.dimensions)
     
-    def _equation(self, axis):
+    def _equation(self, body, axis):
 
         # equation to solve is v0-v + g*t = 0
         
-        foo = self.body.initial_velocity.value[axis] - self.body.velocity.value[axis] \
-                    + self.body.gravity.value[axis]*self.body.time.value
+        foo = body.initial_velocity.value[axis] - body.velocity.value[axis] \
+                    + body.gravity.value[axis]*body.time.value
 
         return Equation(foo)
 
-    def solve(self, unknown, axis):
+    def solve(self, body, unknown, axis=None, first_positive_root=False):
+        # TODO first positive root does not make sense with velocity
 
-        if axis not in self.axes.components.keys():
-            raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
+        if axis:
+
+            if axis not in self.axes.components.keys():
+                raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
+
+            root = self._solve_one_axis(body, unknown, axis, first_positive_root)
+
+        else:
+
+            root = self._solve_all_axes(body, unknown, first_positive_root)
+
+        return root
+
+    def _solve_one_axis(self, body, unknown, axis, first_positive_root):
 
         axis = self.axes.components[axis]
-        equation = self._equation(axis)
+        equation = self._equation(body, axis)
+        root = equation.solve(unknown, first_positive_root)
 
-        return equation.solve(unknown)  # TODO return for all axis as tuple?
+        return root
+
+    def _solve_all_axes(self, body, unknown, first_positive_root):
+
+        roots = list()
+
+        for axis in self.axes.components.keys():
+
+            root = self._solve_one_axis(body, unknown, axis, first_positive_root)
+            roots.append(root)
+
+        return tuple(roots)

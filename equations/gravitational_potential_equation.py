@@ -27,11 +27,12 @@ class GravitationalPotentialEquation:
         
         return Equation(foo)
     
-    def solve(self, point, unknown):
+    def solve(self, point, unknown, first_positive_root=False):
 
         if not hasattr(point, '__len__') or len(point) != self.universe.dimensions:
             raise ValueError(f'Parameter \'point\' must have length {self.universe.dimensions}')
-            
-        equation = self._equation(point)
 
-        return equation.solve(unknown)
+        equation = self._equation(point)
+        root = equation.solve(unknown, first_positive_root)
+
+        return root

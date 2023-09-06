@@ -3,9 +3,9 @@ import sys
 import math
 
 sys.path.append(r'/home/cmesado/Dropbox/dev')
-sys.path.append(r'C:\Users\cmem\onedrive_cmem\OneDrive - ENUSA Industrias Avanzadas, S.A., S.M.E\python')
 
 from physics.drivers.body import Body
+from physics.drivers.universe import Universe
 from physics.utils import compare_floats, magnitude
 
 
@@ -20,22 +20,26 @@ def test_mrua_2d_i():
     v0 = (22.22*math.cos(alpha), 22.22*math.sin(alpha))
     y = 0.0
 
-    body = Body(dimensions=2)
+    body = Body('A', dimensions=2)
 
     body.set('gravity', g)
     body.set('initial_position', p0)
     body.set('initial_velocity', v0)
     body.set('position', y, axis='y')
 
-    t = body.solve_linear_position_equation('t', axis='y')
-    assert t
+    universe = Universe()
+    universe.add_body(body)
+
+    t = universe.solve_linear_position_equation('A', 't', axis='y')
+    
     assert compare_floats(t[0], 0.0)
     assert compare_floats(t[1], 3.20)
 
     body.set('time', t[1])
-    x = body.solve_linear_position_equation('p', axis='x')
-    assert x
-    assert compare_floats(x[0], 50.33)
+
+    x = universe.solve_linear_position_equation('A', 'p', axis='x', first_positive_root=True)
+    
+    assert compare_floats(x, 50.33)
 
 def test_mrua_2d_ii():
     """
@@ -46,32 +50,33 @@ def test_mrua_2d_ii():
     g = (0.0, -9.81)
     p0 = (0.0, 10.0)
     v0 = (2.0*math.cos(alpha), 2.0*math.sin(alpha))
-    y = 0.0
+    py = 0.0
 
-    body = Body(dimensions=2)
+    body = Body('A', dimensions=2)
 
     body.set('gravity', g)
     body.set('initial_position', p0)
     body.set('initial_velocity', v0)
-    body.set('position', y, axis='y')
+    body.set('position', py, axis='y')
 
-    t = body.solve_linear_position_equation('t', axis='y')
-    assert t
-    assert compare_floats(t[0], -1.53)
-    assert compare_floats(t[1], 1.33)
+    universe = Universe()
+    universe.add_body(body)
 
-    body.set('time', t[1])
-    x = body.solve_linear_position_equation('p', axis='x')
-    assert x
-    assert compare_floats(x[0], 2.30)
+    t = universe.solve_linear_position_equation('A', 't', axis='y', first_positive_root=True)
+    
+    assert compare_floats(t, 1.33)
 
-    vx = body.solve_linear_velocity_equation('v', axis='x')
-    assert vx
-    assert compare_floats(vx[0], 1.73)
+    body.set('time', t)
 
-    vy = body.solve_linear_velocity_equation('v', axis='y')
-    assert vy
-    assert compare_floats(vy[0], -14.04)
+    p = universe.solve_linear_position_equation('A', 'p', axis='x', first_positive_root=True)
+    
+    assert compare_floats(p, 2.30)
 
-    v = magnitude((vx[0], vy[0]))
+    v = universe.solve_linear_velocity_equation('A', 'v')
+    
+    assert compare_floats(v[0][0], 1.73)  # TODO simplify
+    assert compare_floats(v[1][0], -14.04)
+
+    v = magnitude((v[0][0], v[1][0]))
+
     assert compare_floats(v, 14.15)
