@@ -25,7 +25,7 @@ def test_gravity_b1_2019_junio_a():
     universe.add_body(body_a)
     universe.add_body(body_b)
 
-    Fg_x, Fg_y = universe.solve_gravitational_force_equation('B', 'Fg')  # TODO simplify
+    Fg_x, Fg_y = universe.solve_gravitational_force_equation('B', 'Fg')
     Fg = magnitude((Fg_x[0], Fg_y[0]))  # always positive value
 
     assert compare_floats(Fg_x[0], -8.84E-11)
@@ -44,25 +44,18 @@ def test_gravity_b1_2019_junio_b():
     F2-PAU-Gravitation
     B1.b 2019 junio
     """
+    p0 = (2, -2)
+    p1 = (2, 0)
+
     body_b = Body(name='B')
     body_b.set('mass', 5)
-    body_b.set('position', (2, -2))
 
     universe = Universe()
     universe.add_body(body_b)
 
-    # TODO method to calculate W between points
+    W = universe.get_gravitational_work_between('B', p0, p1)
 
-    Ep_b_solve = universe.solve_gravitational_potential_energy_equation('B', 'Ug')
-    Ep_b_get = universe.get_gravitational_potential_energy_over('B')
-
-    body_b.set('position', (2, 0))
-    
-    Ep_bp_solve = universe.solve_gravitational_potential_energy_equation('B', 'Ug')
-    Ep_bp_get = universe.get_gravitational_potential_energy_over('B')
-
-    assert compare_floats(Ep_b_solve[0]-Ep_bp_solve[0], 1.47E-10)
-    assert compare_floats(Ep_b_get[0]-Ep_bp_get[0], 1.47E-10)
+    assert compare_floats(W, 1.47E-10)
 
 def test_gravity_a1_2019_junio_a1():
     """

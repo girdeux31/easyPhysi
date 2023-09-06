@@ -37,9 +37,9 @@ def test_mrua_2d_i():
 
     body.set('time', t[1])
 
-    x = universe.solve_linear_position_equation('A', 'p', axis='x', first_positive_root=True)
+    p_x = universe.solve_linear_position_equation('A', 'p', axis='x', first_positive_root=True)
     
-    assert compare_floats(x, 50.33)
+    assert compare_floats(p_x, 50.33)
 
 def test_mrua_2d_ii():
     """
@@ -68,14 +68,14 @@ def test_mrua_2d_ii():
 
     body.set('time', t)
 
-    p = universe.solve_linear_position_equation('A', 'p', axis='x', first_positive_root=True)
+    p_x = universe.solve_linear_position_equation('A', 'p', axis='x', first_positive_root=True)
     
-    assert compare_floats(p, 2.30)
+    assert compare_floats(p_x, 2.30)
 
-    v = universe.solve_linear_velocity_equation('A', 'v')
+    v_x, v_y = universe.solve_linear_velocity_equation('A', 'v')
     
-    assert compare_floats(v[0][0], 1.73)  # TODO simplify
-    assert compare_floats(v[1][0], -14.04)
+    assert compare_floats(v_x[0], 1.73)
+    assert compare_floats(v_y[0], -14.04)
 
     v = magnitude((v[0][0], v[1][0]))
 
