@@ -3,7 +3,7 @@ from scipy.constants import G
 
 from ..drivers.axes import Axes
 from ..drivers.equation import Equation
-from ..utils import distance, angle_with_horizontal
+from ..utils import distance, angle_with_horizontal_2d
 
 
 class GravitationalForceEquation:
@@ -22,13 +22,18 @@ class GravitationalForceEquation:
         for body in self.universe.bodies:
             if body is not main_body:
                 
-                # array from body to main_body since we want to measure the angle between horizontal and main body
-                alpha = angle_with_horizontal(body.position(), main_body.position())
+                # array from body to main_body since we want to measure the angle between horizontal axis and main body
+
+                if self.universe.dimensions == 2:
+                    alpha = angle_with_horizontal_2d(body.position(), main_body.position())
+                else:  # 3D
+                    alpha, beta = alpha = angle_with_horizontal_3d(body.position(), main_body.position())
+
                 dist = distance(body.position(), main_body.position())
                 foo += body.mass()/dist**2
 
         foo *= G*main_body.mass()
-        foo *= math.cos(alpha) if axis == 0 else math.sin(alpha)  # TODO what about 3D?
+        foo *= math.cos(alpha) if axis == 0 else math.sin(alpha) if axis == 1 else math.sin(beta)
         foo += main_body.gravitational_force[axis]
         
         return Equation(foo)
@@ -55,13 +60,13 @@ class GravitationalForceEquation:
 
         axis = self.axes.components[axis]
         equation = self._equation(body, axis)
-        root = equation.solve(unknown, first_positive_root)
+        root = equation.solve(unknown, first_positive_root) # TODO as a dict root[axis]
 
         return root
 
     def _solve_all_axes(self, body, unknown, first_positive_root):
 
-        roots = list()
+        roots = list() # TODO as a dict root[axis]
 
         for axis in self.axes.components.keys():
 

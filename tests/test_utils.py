@@ -2,7 +2,7 @@ import sys
 
 sys.path.append(r'/home/cmesado/Dropbox/dev')
 
-from physics.utils import compare_floats, magnitude, distance, inner_product, angle, angle_with_horizontal
+from physics.utils import compare_floats, magnitude, distance, inner_product, angle, angle_with_horizontal_2d, angle_with_horizontal_3d
 
 
 def test_compare_floats_small():
@@ -54,7 +54,7 @@ def test_angle():
 
     assert compare_floats(angle(u, v), 1.37)
 
-def test_angle_with_horizontal():
+def test_angle_with_horizontal_2d():
 
     p0 = (0, 0)
     p1 = (5, 5)
@@ -62,21 +62,30 @@ def test_angle_with_horizontal():
     p3 = (-5, -5)
     p4 = (5, -5)
 
-    assert compare_floats(angle_with_horizontal(p0, p1), +0.79)
-    assert compare_floats(angle_with_horizontal(p0, p2), +2.36)
-    assert compare_floats(angle_with_horizontal(p0, p3), -2.36)
-    assert compare_floats(angle_with_horizontal(p0, p4), -0.79)
-    assert compare_floats(angle_with_horizontal(p1, p0), -2.36)
-    assert compare_floats(angle_with_horizontal(p2, p0), -0.79)
-    assert compare_floats(angle_with_horizontal(p3, p0), +0.79)
-    assert compare_floats(angle_with_horizontal(p4, p0), +2.36)
-    assert compare_floats(angle_with_horizontal(p1, p2), +3.14)
-    assert compare_floats(angle_with_horizontal(p2, p3), -1.57)
-    assert compare_floats(angle_with_horizontal(p3, p4), 0.0)
-    assert compare_floats(angle_with_horizontal(p4, p1), +1.57)
+    assert compare_floats(angle_with_horizontal_2d(p0, p1), +0.79)
+    assert compare_floats(angle_with_horizontal_2d(p0, p2), +2.36)
+    assert compare_floats(angle_with_horizontal_2d(p0, p3), -2.36)
+    assert compare_floats(angle_with_horizontal_2d(p0, p4), -0.79)
+    assert compare_floats(angle_with_horizontal_2d(p1, p0), -2.36)
+    assert compare_floats(angle_with_horizontal_2d(p2, p0), -0.79)
+    assert compare_floats(angle_with_horizontal_2d(p3, p0), +0.79)
+    assert compare_floats(angle_with_horizontal_2d(p4, p0), +2.36)
+    assert compare_floats(angle_with_horizontal_2d(p1, p2), +3.14)
+    assert compare_floats(angle_with_horizontal_2d(p2, p3), -1.57)
+    assert compare_floats(angle_with_horizontal_2d(p3, p4), 0.0)
+    assert compare_floats(angle_with_horizontal_2d(p4, p1), +1.57)
 
     pa = (0, -3)
     pb = (4, 0)
 
-    assert compare_floats(angle_with_horizontal(pa, pb), 0.64)
+    assert compare_floats(angle_with_horizontal_2d(pa, pb), 0.64)
 
+def test_angle_with_horizontal_3d():
+
+    pa = (0, -3, 0)
+    pb = (4, 0, 5)
+
+    alpha, beta = angle_with_horizontal_3d(pa, pb)
+
+    assert compare_floats(alpha, 0.64)
+    assert compare_floats(beta, 0.79)

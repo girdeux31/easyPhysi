@@ -3,7 +3,7 @@ from scipy.constants import G
 
 from ..drivers.axes import Axes
 from ..drivers.equation import Equation
-from ..utils import distance, angle_with_horizontal
+from ..utils import distance, angle_with_horizontal_2d
 
 
 class GravitationalFieldIntensityEquation:
@@ -21,12 +21,17 @@ class GravitationalFieldIntensityEquation:
         
         for body in self.universe.bodies:
                 
-            # array from body to point since we want to measure the angle between horizontal and point
-            alpha = angle_with_horizontal(body.position(), point)
+            # array from body to point since we want to measure the angle between horizontal axis and point
+
+            if self.universe.dimensions == 2:
+                alpha = angle_with_horizontal_2d(body.position(), point)
+            else:  # 3D
+                alpha, beta = angle_with_horizontal_3d(body.position(), point)
+
             dist = distance(body.position(), point)
             foo += G*body.mass()/dist**2
 
-        foo *= math.cos(alpha) if axis == 0 else math.sin(alpha)  # TODO what about 3D?
+        foo *= math.cos(alpha) if axis == 0 else math.sin(alpha) if axis == 1 else math.sin(beta)
         foo += body.gravitational_field_intensity[axis]
         
         return Equation(foo)

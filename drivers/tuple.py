@@ -14,7 +14,7 @@ class Tuple:
         self.dimensions = dimensions
 
         self.axes = Axes(self.dimensions)
-        self.value = value if value else self._get_default_value()
+        self.value = value if value else self._get_default_value() # TODO as a dict value = {'x', 'y', 'z'}
 
     def __str__(self):
 
