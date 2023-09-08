@@ -85,14 +85,14 @@ class Body:
         self.energies.append(energy)
 
 
-electron = Body(name='electron')
+electron = Body('electron')
 electron.set('mass', electron_mass)
 electron.set('charge', -elementary_charge)
 
-proton = Body(name='proton')
+proton = Body('proton')
 proton.set('mass', proton_mass)
 proton.set('charge', +elementary_charge)
 
-neutron = Body(name='neutron')
+neutron = Body('neutron')
 neutron.set('mass', neutron_mass)
 neutron.set('charge', 0.0)

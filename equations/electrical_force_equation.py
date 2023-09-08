@@ -1,12 +1,11 @@
 import math
-from scipy.constants import G
 
 from ..drivers.axes import Axes
 from ..drivers.equation import Equation
-from ..utils import distance, angle_with_horizontal_2d
+from ..utils import distance, angle_with_horizontal_2d, K
 
 
-class GravitationalForceEquation:
+class ElectricalForceEquation:
     
     def __init__(self, universe):
 
@@ -17,7 +16,7 @@ class GravitationalForceEquation:
 
         foo = 0.0
 
-        # equation to solve is Fg_t + G*M*Sum_i m_i/d_i**2  = 0
+        # equation to solve is Fe_t - K*Q*Sum_i q_i/d_i**2  = 0
         
         for body in self.universe.bodies:
             if body is not main_body:
@@ -31,9 +30,9 @@ class GravitationalForceEquation:
 
                 dist = distance(body.position(), main_body.position())
                 factor = math.cos(alpha) if axis == 0 else math.sin(alpha) if axis == 1 else math.sin(beta)
-                foo += G*main_body.mass()*body.mass()/dist**2 * factor
-                
-        foo += main_body.gravitational_force[axis]
+                foo -= K*main_body.charge()*body.charge()/dist**2 * factor
+
+        foo += main_body.electrical_force[axis]
         
         return Equation(foo)
     

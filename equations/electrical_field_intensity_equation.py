@@ -1,12 +1,11 @@
 import math
-from scipy.constants import G
 
 from ..drivers.axes import Axes
 from ..drivers.equation import Equation
-from ..utils import distance, angle_with_horizontal_2d
+from ..utils import distance, angle_with_horizontal_2d, K
 
 
-class GravitationalFieldIntensityEquation:
+class ElectricalFieldIntensityEquation:
     
     def __init__(self, universe):
 
@@ -17,7 +16,7 @@ class GravitationalFieldIntensityEquation:
 
         foo = 0.0
 
-        # equation to solve is gg_t + G*Sum_i m_i/d_i**2  = 0
+        # equation to solve is Ee_t - K*Sum_i q_i/d_i**2  = 0
         
         for body in self.universe.bodies:
                 
@@ -30,9 +29,9 @@ class GravitationalFieldIntensityEquation:
 
             dist = distance(body.position(), point)
             factor = math.cos(alpha) if axis == 0 else math.sin(alpha) if axis == 1 else math.sin(beta)
-            foo += G*body.mass()/dist**2 * factor
+            foo -= K*body.charge()/dist**2 * factor
             
-        foo += body.gravitational_field_intensity[axis]
+        foo += body.electrical_field_intensity[axis]
         
         return Equation(foo)
        

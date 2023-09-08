@@ -10,10 +10,10 @@ from ..equations.gravitational_force_equation import GravitationalForceEquation
 from ..equations.gravitational_potential_energy_equation import GravitationalPotentialEnergyEquation
 from ..equations.gravitational_field_intensity_equation import GravitationalFieldIntensityEquation
 from ..equations.gravitational_potential_equation import GravitationalPotentialEquation
-# from ..equations.electrical_force_equation import ElectricalForceEquation
-# from ..equations.electrical_potential_energy_equation import ElectricalPotentialEnergyEquation
-# from ..equations.electrical_field_intensity_equation import ElectricalFieldIntensityEquation
-# from ..equations.electrical_potential_equation import ElectricalPotentialEquation
+from ..equations.electrical_force_equation import ElectricalForceEquation
+from ..equations.electrical_potential_energy_equation import ElectricalPotentialEnergyEquation
+from ..equations.electrical_field_intensity_equation import ElectricalFieldIntensityEquation
+from ..equations.electrical_potential_equation import ElectricalPotentialEquation
 from ..utils import distance
 
 
@@ -38,15 +38,18 @@ class Universe:
         self.gravitational_potential_energy_equation = GravitationalPotentialEnergyEquation(self)
         self.gravitational_field_intensity_equation = GravitationalFieldIntensityEquation(self)
         self.gravitational_potential_equation = GravitationalPotentialEquation(self)
-        # self.electrial_force_equation = ElectricalForceEquation(self)
-        # self.electrial_potential_energy_equation = ElectricalPotentialEnergyEquation(self)
-        # self.electrial_field_intensity_equation = ElectricalFieldIntensityEquation(self)
-        # self.electrial_potential_equation = ElectricalPotentialEquation(self)
+        self.electrical_force_equation = ElectricalForceEquation(self)
+        self.electrical_potential_energy_equation = ElectricalPotentialEnergyEquation(self)
+        self.electrical_field_intensity_equation = ElectricalFieldIntensityEquation(self)
+        self.electrical_potential_equation = ElectricalPotentialEquation(self)
 
     def add_body(self, body):
 
         if not isinstance(body, Body):
             raise ValueError(f'Cannot add object of type {type(body)}')
+
+        if body.dimensions != self.dimensions:
+            raise ValueError(f'Body dimensions {body.dimensions} and universe dimensions {self.dimensions} mismatch')
         
         self.bodies.append(body)
 
@@ -221,10 +224,10 @@ class Universe:
         body = self.get_body(name)
         body.set('position', point_0)
 
-        Ep_0 = self.electrical_potential_energy_equation.solve(body, 'Ug', first_positive_root)
+        Ep_0 = self.electrical_potential_energy_equation.solve(body, 'Ue', first_positive_root)
 
         body.set('position', point_1)
         
-        Ep_1 = self.electrical_potential_energy_equation.solve(body, 'Ug', first_positive_root)
+        Ep_1 = self.electrical_potential_energy_equation.solve(body, 'Ue', first_positive_root)
 
         return Ep_0[0] - Ep_1[0]

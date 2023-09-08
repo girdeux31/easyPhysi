@@ -13,11 +13,11 @@ def test_gravity_b1_2019_junio_a():
     F2-PAU-Gravitation
     B1.a 2019 junio
     """
-    body_a = Body(name='A')
+    body_a = Body('A')
     body_a.set('mass', 3)
     body_a.set('position', (0, 0))
 
-    body_b = Body(name='B')
+    body_b = Body('B')
     body_b.set('mass', 5)
     body_b.set('position', (2, -2))
 
@@ -48,11 +48,11 @@ def test_gravity_b1_2019_junio_b():
     pb_0 = (2, -2)
     pb_1 = (2, 0)
 
-    body_a = Body(name='A')
+    body_a = Body('A')
     body_a.set('mass', 3)
     body_a.set('position', pa)
 
-    body_b = Body(name='B')
+    body_b = Body('B')
     body_b.set('mass', 5)
 
     universe = Universe()
@@ -68,7 +68,7 @@ def test_gravity_a1_2019_junio_a1():
     F2-PAU-Gravitation
     A1.a1 2019 junio
     """
-    body_a = Body(name='A')
+    body_a = Body('A')
     body_a.set('mass', 5)
     body_a.set('position', (4, 3))
     point = (0, 0)

@@ -1,11 +1,9 @@
-from scipy.constants import G
-
 from ..drivers.axes import Axes
 from ..drivers.equation import Equation
-from ..utils import distance
+from ..utils import distance, K
 
 
-class GravitationalPotentialEquation:
+class ElectricalPotentialEquation:
     
     def __init__(self, universe):
 
@@ -16,14 +14,14 @@ class GravitationalPotentialEquation:
 
         foo = 0.0
 
-        # equation to solve is Vg_t + G*Sum_i m_i/d_i  = 0
+        # equation to solve is Ve_t - K*Sum_i q_i/d_i  = 0
         
         for body in self.universe.bodies:
                 
             dist = distance(body.position(), point)
-            foo += G*body.mass()/dist
+            foo -= K*body.charge()/dist
 
-        foo += body.gravitational_potential()
+        foo += body.electrical_potential()
         
         return Equation(foo)
     
