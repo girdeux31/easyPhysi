@@ -30,7 +30,7 @@ def test_electrical_b1_2019_junio_a():
     Ee_x, Ee_y = universe.solve_electrical_field_intensity_equation(point, 'Ee')
     Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
 
-    assert compare_floats(Ee_x[0], 2.88)  # TODO switch
+    assert compare_floats(Ee_x[0], 2.88)
     assert compare_floats(Ee_y[0], 0.0)
     assert compare_floats(Ee, 2.88)
 

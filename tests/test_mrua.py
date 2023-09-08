@@ -20,7 +20,7 @@ def test_mrua_2d_i():
     v0 = (22.22*math.cos(alpha), 22.22*math.sin(alpha))
     y = 0.0
 
-    body = Body('A', dimensions=2)
+    body = Body('body', dimensions=2)
 
     body.set('gravity', g)
     body.set('initial_position', p0)
@@ -30,14 +30,17 @@ def test_mrua_2d_i():
     universe = Universe()
     universe.add_body(body)
 
-    t = universe.solve_linear_position_equation('A', 't', axis='y')
+    t = universe.solve_linear_position_equation('body', 't', axis='y', first_positive_root=True)
     
-    assert compare_floats(t[0], 0.0)
-    assert compare_floats(t[1], 3.20)
+    assert compare_floats(t, 3.20)
 
-    body.set('time', t[1])
+    body.set('time', t)
 
-    p_x = universe.solve_linear_position_equation('A', 'p', axis='x', first_positive_root=True)
+    p_x = universe.solve_linear_position_equation('body', 'p', axis='x', first_positive_root=True)
+    
+    assert compare_floats(p_x, 50.33)
+
+    p_x = universe.get_linear_position_over('body', axis='x', first_positive_root=True)
     
     assert compare_floats(p_x, 50.33)
 
@@ -52,7 +55,7 @@ def test_mrua_2d_ii():
     v0 = (2.0*math.cos(alpha), 2.0*math.sin(alpha))
     py = 0.0
 
-    body = Body('A', dimensions=2)
+    body = Body('body', dimensions=2)
 
     body.set('gravity', g)
     body.set('initial_position', p0)
@@ -62,21 +65,26 @@ def test_mrua_2d_ii():
     universe = Universe()
     universe.add_body(body)
 
-    t = universe.solve_linear_position_equation('A', 't', axis='y', first_positive_root=True)
+    t = universe.solve_linear_position_equation('body', 't', axis='y', first_positive_root=True)
     
     assert compare_floats(t, 1.33)
 
     body.set('time', t)
 
-    p_x = universe.solve_linear_position_equation('A', 'p', axis='x', first_positive_root=True)
+    p_x = universe.solve_linear_position_equation('body', 'p', axis='x', first_positive_root=True)
     
     assert compare_floats(p_x, 2.30)
 
-    v_x, v_y = universe.solve_linear_velocity_equation('A', 'v')
+    v_x, v_y = universe.solve_linear_velocity_equation('body', 'v')
+    v = magnitude((v_x[0], v_y[0]))
     
     assert compare_floats(v_x[0], 1.73)
     assert compare_floats(v_y[0], -14.04)
+    assert compare_floats(v, 14.15)
 
+    v_x, v_y = universe.get_linear_velocity_over('body')
     v = magnitude((v_x[0], v_y[0]))
-
+    
+    assert compare_floats(v_x[0], 1.73)
+    assert compare_floats(v_y[0], -14.04)
     assert compare_floats(v, 14.15)

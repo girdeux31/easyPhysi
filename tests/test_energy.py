@@ -29,7 +29,7 @@ def test_energy_15a():
     Epf = -m*g*hf
     Ekf = -1/2*m*vf**2
 
-    body = Body('A', dimensions=2)
+    body = Body('body', dimensions=2)
 
     body.add_energy('Ep0', Ep0)
     body.add_energy('Ek0', Ek0)
@@ -39,11 +39,11 @@ def test_energy_15a():
     universe = Universe()
     universe.add_body(body)
 
-    vf = universe.solve_energy_equation('A', 'vf', first_positive_root=True)
+    vf = universe.solve_energy_equation('body', 'vf', first_positive_root=True)
 
     assert compare_floats(vf, 4.54)
 
-    vf = universe.solve_energy_equation('A', 'vf')
+    vf = universe.solve_energy_equation('body', 'vf')
 
     assert compare_floats(vf[0], -4.54)
     assert compare_floats(vf[1], 4.54)
@@ -70,7 +70,7 @@ def test_energy_15b():
     Ekf = -1/2*m*vf**2
     Epe = -1/2*k*dx**2
 
-    body = Body('A', dimensions=2)
+    body = Body('body', dimensions=2)
 
     body.add_energy('Ep0', Ep0)
     body.add_energy('Ek0', Ek0)
@@ -81,11 +81,11 @@ def test_energy_15b():
     universe = Universe()
     universe.add_body(body)
 
-    dx = universe.solve_energy_equation('A', 'dx', first_positive_root=True)
+    dx = universe.solve_energy_equation('body', 'dx', first_positive_root=True)
 
     assert compare_floats(dx, 0.227, decimals=3)
 
-    dx = universe.solve_energy_equation('A', 'dx')
+    dx = universe.solve_energy_equation('body', 'dx')
 
     assert compare_floats(dx[0], -0.227, decimals=3)
     assert compare_floats(dx[1], 0.227, decimals=3)
@@ -112,7 +112,7 @@ def test_energy_15c():
     Ekf = -1/2*m*vf**2
     Wfr = -mu*m*g*math.cos(alpha)*length
 
-    body = Body('A', dimensions=2)
+    body = Body('body', dimensions=2)
 
     body.add_energy('Ep0', Ep0)
     body.add_energy('Ek0', Ek0)
@@ -123,11 +123,11 @@ def test_energy_15c():
     universe = Universe()
     universe.add_body(body)
 
-    vf = universe.solve_energy_equation('A', 'vf', first_positive_root=True)
+    vf = universe.solve_energy_equation('body', 'vf', first_positive_root=True)
 
     assert compare_floats(vf, 3.72)
 
-    vf = universe.solve_energy_equation('A', 'vf')
+    vf = universe.solve_energy_equation('body', 'vf')
 
     assert compare_floats(vf[0], -3.72)
     assert compare_floats(vf[1], 3.72)
@@ -149,7 +149,7 @@ def test_energy_20a():
     Epb = -m*g*hb
     Ekb = -1/2*m*vb**2
 
-    body = Body('A', dimensions=2)
+    body = Body('body', dimensions=2)
 
     body.add_energy('Epa', Epa)
     body.add_energy('Eka', Eka)
@@ -159,15 +159,14 @@ def test_energy_20a():
     universe = Universe()
     universe.add_body(body)
 
-    vb = universe.solve_energy_equation('A', 'vb', first_positive_root=True)
+    vb = universe.solve_energy_equation('body', 'vb', first_positive_root=True)
 
     assert compare_floats(vb, 8.86)
 
-    vb = universe.solve_energy_equation('A', 'vb')
+    vb = universe.solve_energy_equation('body', 'vb')
 
     assert compare_floats(vb[0], -8.86)
     assert compare_floats(vb[1], 8.86)
-
 
 def test_energy_20c():
     """
@@ -189,7 +188,7 @@ def test_energy_20c():
     Ekc = -1/2*m*vc**2
     Wfr = -mu*m*g*x
 
-    body = Body('A', dimensions=2)
+    body = Body('body', dimensions=2)
 
     body.add_energy('Epb', Epb)
     body.add_energy('Ekb', Ekb)
@@ -200,6 +199,6 @@ def test_energy_20c():
     universe = Universe()
     universe.add_body(body)
 
-    mu = universe.solve_energy_equation('A', 'mu', first_positive_root=True)
+    mu = universe.solve_energy_equation('body', 'mu', first_positive_root=True)
 
     assert compare_floats(mu, 0.40)

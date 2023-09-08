@@ -1,8 +1,9 @@
 import sys
+from sympy import Symbol
 
 sys.path.append(r'/home/cmesado/Dropbox/dev')
 
-from physics.utils import compare_floats, magnitude, distance, inner_product, angle, angle_with_horizontal_2d, angle_with_horizontal_3d
+from physics.utils import compare_floats, magnitude, distance, inner_product, angle, angle_with_horizontal_2d, angle_with_horizontal_3d, solve_system
 
 
 def test_compare_floats_small():
@@ -89,3 +90,20 @@ def test_angle_with_horizontal_3d():
 
     assert compare_floats(alpha, 0.64)
     assert compare_floats(beta, 0.79)
+
+def test_solve_system():
+
+    n = Symbol('n')
+    y1 = Symbol('y1')
+    y2 = Symbol('y2')
+
+    equations = [165*y1 - 0.310*n - 0.517*n,
+                    165*y2 - 0.173*n - 0.517*n,
+                    y1 + y2 - 1.0]
+    unknowns = ['n', 'y1', 'y2']
+
+    n, y1, y2 = solve_system(equations, unknowns)
+
+    assert compare_floats(n, 108.77)
+    assert compare_floats(y1, 0.55)
+    assert compare_floats(y2, 0.45)
