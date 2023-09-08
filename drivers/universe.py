@@ -46,7 +46,7 @@ class Universe:
     def add_body(self, body):
 
         if not isinstance(body, Body):
-            raise ValueError(f'Cannot add object of type {type(body)}')
+            raise TypeError(f'Cannot add object of type {type(body).__name__}')
 
         if body.dimensions != self.dimensions:
             raise ValueError(f'Body dimensions {body.dimensions} and universe dimensions {self.dimensions} mismatch')
@@ -144,7 +144,34 @@ class Universe:
     # GET
     #######
 
-    # TODO get for position, velocity, acceleration and force
+    # Uniformly Accelerated Rectilinear Motion (UARM)
+
+    def get_linear_position_over(self, name, axis=None, first_positive_root=False):
+
+        body = self.get_body(name)
+
+        return self.linear_position_equation.solve(body, 'p', axis, first_positive_root)
+    
+    def get_linear_velocity_over(self, name, axis=None, first_positive_root=False):
+
+        body = self.get_body(name)
+
+        return self.linear_velocity_equation.solve(body, 'v', axis, first_positive_root)
+
+    # Dynamics (Newton's equation)
+
+    def get_newton_acceleration_over(self, name, axis=None, first_positive_root=False):
+
+        body = self.get_body(name)
+
+        return self.newton_equation.solve(body, 'a', axis, first_positive_root)
+
+    def get_newton_force_over(self, name, axis=None, first_positive_root=False):
+
+        body = self.get_body(name)
+        acceleration = self.newton_equation.solve(body, 'a', axis, first_positive_root)
+
+        return body.mass()*acceleration[0]
 
     # Gravitational Field
 
