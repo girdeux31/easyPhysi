@@ -12,6 +12,10 @@ class Equation:
     def _get_first_positive_root(self, roots):
 
         for root in roots:
+
+            if root.free_symbols:
+                raise ValueError('Roots must be numeric not expressions, try setting argument \'first_positive_root=False\'')
+
             if not hasattr(root, '__float__'):
                 raise ValueError('Roots must be convertible to float, try setting argument \'first_positive_root=False\'')
         
