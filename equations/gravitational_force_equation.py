@@ -59,13 +59,13 @@ class GravitationalForceEquation:
 
         axis = self.axes.components[axis]
         equation = self._equation(body, axis)
-        root = equation.solve(unknown, first_positive_root) # TODO as a dict root[axis]
+        root = equation.solve(unknown, first_positive_root)
 
         return root
 
     def _solve_all_axes(self, body, unknown, first_positive_root):
 
-        roots = list() # TODO as a dict root[axis]
+        roots = list()
 
         for axis in self.axes.components.keys():
 

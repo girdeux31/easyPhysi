@@ -23,7 +23,7 @@ class GravitationalPotentialEquation:
             dist = distance(body.position(), point)
             foo += G*body.mass()/dist
 
-        foo += body.gravitational_potential()
+        foo += body.gravitational_potential()  # TODO whole system, not only body
         
         return Equation(foo)
     
