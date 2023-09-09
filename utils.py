@@ -76,37 +76,3 @@ def compare_floats(float_ref, float_test, decimals=2):
     eps = 10**(power)
 
     return True if float_test - eps <= float_ref <= float_test + eps else False
-    
-def solve_system(equations, unknowns):
-
-    for equation in equations:
-        if not hasattr(equation, 'free_symbols'):
-            raise TypeError(f'Equation must be a sympy expressions not {type(equation).__name__}')
-
-    for unknown in unknowns:
-        if not isinstance(unknown, str):
-            raise TypeError(f'Unknown must be str not {type(unknown).__name__}')
-
-    for equation in equations:
-        eq_unknowns = [str(unknown) for unknown in equation.free_symbols]
-        for eq_unknown in eq_unknowns:
-            if eq_unknown not in unknowns:
-                raise RuntimeError(f'Unknwon {eq_unknown} not in system unkowns {unknowns}')
-
-    unknowns = [Symbol(unknown) for unknown in unknowns]
-    solution = solve(equations, unknowns, dict=True)
-
-    if not solution:
-        raise ValueError('System solution not found')
-
-    if len(solution) == 1:
-        solution = solution[0]
-    else:
-        raise ValueError('System has several solution')
-
-    outputs = list()
-
-    for unkown in unknowns:
-        outputs.append(solution[unkown])
-
-    return outputs
