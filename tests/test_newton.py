@@ -7,7 +7,8 @@ sys.path.append(r'/home/cmesado/Dropbox/dev')
 
 from physics.drivers.body import Body
 from physics.drivers.universe import Universe
-from physics.utils import compare_floats, solve_system
+from physics.drivers.system import System
+from physics.utils import compare_floats
 
 
 def test_newton_i():
@@ -33,7 +34,7 @@ def test_newton_i():
     universe = Universe()
     universe.add_body(body)
 
-    a_x = universe.solve_newton_equation('body', 'a', axis='x')
+    a_x = universe.newton_equation('body', axis='x').solve('a')  # TODO not nice
     f_00 = m*a_x[0].subs('mu', 0.0)
     f_01 = m*a_x[0].subs('mu', 0.1)
 
@@ -63,16 +64,11 @@ def test_newton_ii():
     universe = Universe()
     universe.add_body(body)
 
-    a_x = universe.solve_newton_equation('body', 'a', axis='x')
+    a_x = universe.newton_equation('body', axis='x').solve('a')
+    f_x = m*a_x[0]
 
     assert compare_floats(a_x[0], -5.03)
-
-    a_x = universe.get_newton_acceleration_over('body', axis='x')
-    f_x = universe.get_newton_force_over('body', axis='x')
-
-    assert compare_floats(a_x[0], -5.03)
-    assert compare_floats(f_x, -1258.74)  # TODO not nice
-
+    assert compare_floats(f_x, -1258.74)
 
 def test_newton_iii():
     """
@@ -120,20 +116,20 @@ def test_newton_iii():
     universe.add_body(body_b)
     universe.add_body(body_c)
 
-    # Solve a for each body as a function of T1 and T2
-    eq_aa_x = universe.solve_newton_equation('A', 'a', axis='x')
-    eq_ab_x = universe.solve_newton_equation('B', 'a', axis='x')
-    eq_ac_x = universe.solve_newton_equation('C', 'a', axis='x')
+    # Get newton equation for each body
+
+    eq_a_x = universe.newton_equation('A', axis='x')
+    eq_b_x = universe.newton_equation('B', axis='x')
+    eq_c_x = universe.newton_equation('C', axis='x')
 
     # Then solve system:
-    #  T2 - 6.8 - a = 0
-    #  0.5 T1 - 0.5 T2 - 2.19 - a = 0
-    #  9.81 - 0.67 T1 - a = 0
 
-    a = Symbol('a')
-    equations = [eq_aa_x[0]-a, eq_ab_x[0]-a, eq_ac_x[0]-a]
     unkowns = ['T1', 'T2', 'a']
-    T1, T2, a = solve_system(equations, unkowns)
+    system = System()
+    system.add_equation(eq_a_x)
+    system.add_equation(eq_b_x)
+    system.add_equation(eq_c_x)
+    T1, T2, a = system.solve(unkowns)
     
     assert compare_floats(T1, 13.54)
     assert compare_floats(T2, 7.59)
@@ -180,10 +176,6 @@ def test_newton_iv():
     universe.add_body(body)
 
     # Solve for a
-    a_x = universe.solve_newton_equation('body', 'a', axis='x', first_positive_root=True)
-    
-    assert compare_floats(a_x, 0.79)
-
-    a_x = universe.get_newton_acceleration_over('body', axis='x', first_positive_root=True)
+    a_x = universe.newton_equation('body', axis='x').solve('a', first_positive_root=True)
     
     assert compare_floats(a_x, 0.79)

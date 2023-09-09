@@ -29,7 +29,7 @@ class Equation:
 
         return positive_roots[0]
 
-    def solve(self, unknown, first_positive_root):
+    def solve(self, unknown, first_positive_root=False):
 
         if unknown not in self.unknowns:
             raise ValueError(f'Unknown \'{unknown}\' not found')

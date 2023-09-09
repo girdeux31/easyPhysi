@@ -10,6 +10,10 @@ class EnergyEquation:
         self.universe = universe
         self.axes = Axes(self.universe.dimensions)
 
+    def __call__(self, name):
+
+        return self.equation(name)
+
     def _equation(self, body):
 
         foo = 0.0
@@ -21,9 +25,9 @@ class EnergyEquation:
         
         return Equation(foo)
     
-    def solve(self, body, unknown, first_positive_root=False):
+    def equation(self, name):
 
+        body = self.universe.get_body(name)
         equation = self._equation(body)
-        root = equation.solve(unknown, first_positive_root)
 
-        return root
+        return equation

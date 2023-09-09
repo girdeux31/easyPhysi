@@ -27,14 +27,8 @@ def test_electrical_b1_2019_junio_a():
     universe.add_body(body_1)
     universe.add_body(body_2)
 
-    Ee_x, Ee_y = universe.solve_electrical_field_intensity_equation(point, 'Ee')
-    Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
-
-    assert compare_floats(Ee_x[0], 2.88)
-    assert compare_floats(Ee_y[0], 0.0)
-    assert compare_floats(Ee, 2.88)
-
-    Ee_x, Ee_y = universe.get_electrical_field_intensity_in(point)
+    eq_x, eq_y = universe.electrical_field_intensity_equation(point)
+    Ee_x, Ee_y = eq_x.solve('Ee'), eq_y.solve('Ee')
     Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
 
     assert compare_floats(Ee_x[0], 2.88)
@@ -61,14 +55,8 @@ def test_electrical_b1_2019_junio_b():
     universe.add_body(body_1)
     universe.add_body(body_2)
 
-    Ve_0 = universe.solve_electrical_potential_equation(point_0, 'Ve')
-    Ve_1 = universe.solve_electrical_potential_equation(point_1, 'Ve')
-
-    assert compare_floats(Ve_0[0], 30)
-    assert compare_floats(Ve_1[0], 18)
-
-    Ve_0 = universe.get_electrical_potential_in(point_0)
-    Ve_1 = universe.get_electrical_potential_in(point_1)
+    Ve_0 = universe.electrical_potential_equation(point_0).solve('Ve')
+    Ve_1 = universe.electrical_potential_equation(point_1).solve('Ve')
 
     assert compare_floats(Ve_0[0], 30)
     assert compare_floats(Ve_1[0], 18)
@@ -92,14 +80,8 @@ def test_electrical_AP3_2019_junio_a():
     universe.add_body(body_1)
     universe.add_body(body_2)
 
-    Ee_x, Ee_y = universe.solve_electrical_field_intensity_equation(point, 'Ee')
-    Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
-
-    assert compare_floats(Ee_x[0], -1.73)
-    assert compare_floats(Ee_y[0], 0.0)
-    assert compare_floats(Ee, 1.73)
-
-    Ee_x, Ee_y = universe.get_electrical_field_intensity_in(point)
+    eq_x, eq_y = universe.electrical_field_intensity_equation(point)
+    Ee_x, Ee_y = eq_x.solve('Ee'), eq_y.solve('Ee')
     Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
 
     assert compare_floats(Ee_x[0], -1.73)
@@ -126,14 +108,8 @@ def test_electrical_AP3_2019_junio_b():
     universe.add_body(body_1)
     universe.add_body(body_2)
 
-    Ve_0 = universe.solve_electrical_potential_equation(point_0, 'Ve')
-    Ve_1 = universe.solve_electrical_potential_equation(point_1, 'Ve')
-
-    assert compare_floats(Ve_0[0], -18)
-    assert compare_floats(Ve_1[0], -10.8)
-
-    Ve_0 = universe.get_electrical_potential_in(point_0)
-    Ve_1 = universe.get_electrical_potential_in(point_1)
+    Ve_0 = universe.electrical_potential_equation(point_0).solve('Ve')
+    Ve_1 = universe.electrical_potential_equation(point_1).solve('Ve')
 
     assert compare_floats(Ve_0[0], -18)
     assert compare_floats(Ve_1[0], -10.8)
@@ -167,14 +143,8 @@ def test_electrical_A3_2021_junio_coincidentes_a():
     universe.add_body(body_3)
     universe.add_body(body_4)
 
-    Ee_x, Ee_y = universe.solve_electrical_field_intensity_equation(point, 'Ee')
-    Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
-
-    assert compare_floats(0.0, Ee_x[0])
-    assert compare_floats(-12.72, Ee_y[0])
-    assert compare_floats(12.72, Ee)
-
-    Ee_x, Ee_y = universe.get_electrical_field_intensity_in(point)
+    eq_x, eq_y = universe.electrical_field_intensity_equation(point)
+    Ee_x, Ee_y = eq_x.solve('Ee'), eq_y.solve('Ee')
     Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
 
     assert compare_floats(0.0, Ee_x[0])
@@ -212,7 +182,15 @@ def test_electrical_A3_2021_junio_coincidentes_b():
     universe.add_body(body_4)
     universe.add_body(electron)
 
-    W = universe.get_electrical_work_over('electron', point_0, point_1)
+    electron.set('position', point_0)
+
+    Ep_0 = universe.electrical_potential_energy_equation('electron').solve('Ue')
+
+    electron.set('position', point_1)
+    
+    Ep_1 = universe.electrical_potential_energy_equation('electron').solve('Ue')
+
+    W = Ep_0[0] - Ep_1[0] # W = -AEp = Ep_0 - Ep_1
 
     assert compare_floats(1.97E-18, W)
 
@@ -235,6 +213,14 @@ def test_electrical_A3_2023_modelo_b():
     universe.add_body(sphere)
     universe.add_body(point)
 
-    W = universe.get_electrical_work_over('point', point_0, point_1)
+    point.set('position', point_0)
+
+    Ep_0 = universe.electrical_potential_energy_equation('point').solve('Ue')
+
+    point.set('position', point_1)
+    
+    Ep_1 = universe.electrical_potential_energy_equation('point').solve('Ue')
+
+    W = Ep_0[0] - Ep_1[0] # W = -AEp = Ep_0 - Ep_1
 
     assert compare_floats(3.393E-8, W)

@@ -12,6 +12,10 @@ class ElectricalFieldIntensityEquation:
         self.universe = universe
         self.axes = Axes(self.universe.dimensions)
 
+    def __call__(self, point, axis=None):
+
+        return self.equation(point, axis=axis)
+
     def _equation(self, point, axis):
 
         foo = 0.0
@@ -35,42 +39,41 @@ class ElectricalFieldIntensityEquation:
         
         return Equation(foo)
        
-    def solve(self, point, unknown, axis=None, first_positive_root=False):
+    def equation(self, point, axis=None):
 
         if not hasattr(point, '__len__') or len(point) != self.universe.dimensions:
             raise ValueError(f'Parameter \'point\' must have length {self.universe.dimensions}')
 
-        if unknown == 'p':
-            raise RuntimeError(f'Equation cannot be solved for unknown \'p\'')
+        # if unknown == 'p':  # TODO move where to?
+        #     raise RuntimeError(f'Equation cannot be solved for unknown \'p\'')
 
         if axis:
 
             if axis not in self.axes.components.keys():
                 raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
 
-            root = self._solve_one_axis(point, unknown, axis, first_positive_root)
+            equation = self._equation_for_one_axis(point, axis)
 
         else:
 
-            root = self._solve_all_axes(point, unknown, first_positive_root)
+            equation = self._equations_for_all_axes(point)
 
-        return root
+        return equation
 
-    def _solve_one_axis(self, point, unknown, axis, first_positive_root):
+    def _equation_for_one_axis(self, point, axis):
 
         axis = self.axes.components[axis]
         equation = self._equation(point, axis)
-        root = equation.solve(unknown, first_positive_root)
 
-        return root
+        return equation
 
-    def _solve_all_axes(self, point, unknown, first_positive_root):
+    def _equations_for_all_axes(self, point):
 
-        roots = list()
+        equations = list()
 
         for axis in self.axes.components.keys():
 
-            root = self._solve_one_axis(point, unknown, axis, first_positive_root)
-            roots.append(root)
+            equation = self._equation_for_one_axis(point, axis)
+            equations.append(equation)
 
-        return tuple(roots)
+        return tuple(equations)

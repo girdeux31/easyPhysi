@@ -12,6 +12,10 @@ class ElectricalForceEquation:
         self.universe = universe
         self.axes = Axes(self.universe.dimensions)
 
+    def __call__(self, name, axis=None):
+
+        return self.equation(name, axis=axis)
+
     def _equation(self, main_body, axis):
 
         foo = 0.0
@@ -35,40 +39,41 @@ class ElectricalForceEquation:
         foo += main_body.electrical_force[axis]
         
         return Equation(foo)
-    
-    def solve(self, body, unknown, axis=None, first_positive_root=False):
 
-        if unknown == 'p':
-            raise RuntimeError(f'Equation cannot be solved for unknown \'p\'')
+    def equation(self, name, axis=None):
+
+        # if unknown == 'p':  # TODO move where to?
+        #     raise RuntimeError(f'Equation cannot be solved for unknown \'p\'')
+
+        body = self.universe.get_body(name)
 
         if axis:
 
             if axis not in self.axes.components.keys():
                 raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
 
-            root = self._solve_one_axis(body, unknown, axis, first_positive_root)
+            equation = self._equation_for_one_axis(body, axis)
 
         else:
 
-            root = self._solve_all_axes(body, unknown, first_positive_root)
+            equation = self._equations_for_all_axes(body)
 
-        return root
+        return equation
 
-    def _solve_one_axis(self, body, unknown, axis, first_positive_root):
+    def _equation_for_one_axis(self, body, axis):
 
         axis = self.axes.components[axis]
         equation = self._equation(body, axis)
-        root = equation.solve(unknown, first_positive_root)
 
-        return root
+        return equation
 
-    def _solve_all_axes(self, body, unknown, first_positive_root):
+    def _equations_for_all_axes(self, body):
 
-        roots = list()
+        equations = list()
 
         for axis in self.axes.components.keys():
 
-            root = self._solve_one_axis(body, unknown, axis, first_positive_root)
-            roots.append(root)
+            equation = self._equation_for_one_axis(body, axis)
+            equations.append(equation)
 
-        return tuple(roots)
+        return tuple(equations)
