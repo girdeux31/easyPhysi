@@ -1,5 +1,4 @@
 import math
-from sympy import solve, Symbol
 from scipy.constants import physical_constants as pyc
 
 none_type = type(None)
