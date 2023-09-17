@@ -44,8 +44,7 @@ class GravitationalForceEquation:
     
     def system(self, name):
 
-        # if unknown == 'p':  # TODO move where to?
-        #     raise RuntimeError(f'Equation cannot be solved for unknown \'p\'')
+        # INFO System / Equation cannot be solved for unknown 'p'
 
         body = self.universe.get_body(name)
 

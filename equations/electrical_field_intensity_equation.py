@@ -42,11 +42,10 @@ class ElectricalFieldIntensityEquation:
        
     def system(self, point):
 
+        # INFO System / Equation cannot be solved for unknown 'p'
+
         if not hasattr(point, '__len__') or len(point) != self.universe.dimensions:
             raise ValueError(f'Parameter \'point\' must have length {self.universe.dimensions}')
-
-        # if unknown == 'p':  # TODO move where to?
-        #     raise RuntimeError(f'Equation cannot be solved for unknown \'p\'')
 
         system = System()
 
