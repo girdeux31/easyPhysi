@@ -36,6 +36,6 @@ def test_equation_i():
     if os.path.exists(file):
         os.remove(file)
 
-    universe.newton_equation('body', axis='x').plot('a', 'mu', [0, 1], points=200, path=file, show=False)
+    universe.newton_equation('body')['x'].plot('a_x', 'mu', [0, 1], points=200, path=file, show=False)
 
     assert os.path.exists(file)

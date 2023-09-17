@@ -9,12 +9,14 @@ tup = Tuple('a', dimensions=3)
 def test_item():
 
     assert len(tup) == 3
-    assert tup[0].name == 'a'
+    assert tup[0].name == 'a_x'
+    assert tup[1].name == 'a_y'
+    assert tup[2].name == 'a_z'
 
 def test_iter():
 
     for value in tup:
-        assert value.name == 'a'
+        assert value.name in ['a_x', 'a_y', 'a_z']
 
 def test_call():
 

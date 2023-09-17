@@ -25,12 +25,11 @@ def test_gravity_b1_2019_junio_a():
     universe.add_body(body_a)
     universe.add_body(body_b)
 
-    eq_x, eq_y = universe.gravitational_force_equation('B')
-    Fg_x, Fg_y = eq_x.solve('Fg'), eq_y.solve('Fg')
-    Fg = magnitude((Fg_x[0], Fg_y[0]))  # always positive value
+    Fg_x, Fg_y = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y'])
+    Fg = magnitude((Fg_x, Fg_y))  # always positive value
 
-    assert compare_floats(Fg_x[0], -8.84E-11)
-    assert compare_floats(Fg_y[0], +8.84E-11)
+    assert compare_floats(Fg_x, -8.84E-11)
+    assert compare_floats(Fg_y, +8.84E-11)
     assert compare_floats(Fg, +1.25E-10)
 
 def test_gravity_b1_2019_junio_b():
@@ -78,11 +77,10 @@ def test_gravity_a1_2019_junio_a1():
     universe = Universe()
     universe.add_body(body_a)
 
-    eq_x, eq_y = universe.gravitational_field_intensity_equation(point)
-    g_x, g_y = eq_x.solve('gg'), eq_y.solve('gg')
-    g = magnitude((g_x[0], g_y[0]))  # always positive value
+    g_x, g_y = universe.gravitational_field_intensity_equation(point).solve(['gg_x', 'gg_y'])
+    g = magnitude((g_x, g_y))  # always positive value
     
-    assert compare_floats(g_x[0], +1.06E-11)
-    assert compare_floats(g_y[0], +7.99E-12)
+    assert compare_floats(g_x, +1.06E-11)
+    assert compare_floats(g_y, +7.99E-12)
     assert compare_floats(g, +1.33E-11)
 

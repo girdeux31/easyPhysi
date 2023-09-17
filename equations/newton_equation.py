@@ -1,6 +1,7 @@
 
 from ..drivers.axes import Axes
 from ..drivers.equation import Equation
+from ..drivers.system import System
 
 
 class NewtonEquation:
@@ -10,9 +11,9 @@ class NewtonEquation:
         self.universe = universe
         self.axes = Axes(self.universe.dimensions)
 
-    def __call__(self, name, axis=None):
+    def __call__(self, name):
 
-        return self.equation(name, axis=axis)
+        return self.system(name)
 
     def _equation(self, body, axis):
 
@@ -27,37 +28,14 @@ class NewtonEquation:
         
         return Equation(foo)
 
-    def equation(self, name, axis=None):
+    def system(self, name):
 
+        system = System()
         body = self.universe.get_body(name)
 
-        if axis:
+        for axis, idx in self.axes.components.items():
 
-            if axis not in self.axes.components.keys():
-                raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
+            equation = self._equation(body, idx)
+            system.add_equation(equation, key=axis)
 
-            equation = self._equation_for_one_axis(body, axis)
-
-        else:
-
-            equation = self._equations_for_all_axes(body)
-
-        return equation
-
-    def _equation_for_one_axis(self, body, axis):
-
-        axis = self.axes.components[axis]
-        equation = self._equation(body, axis)
-
-        return equation
-
-    def _equations_for_all_axes(self, body):
-
-        equations = list()
-
-        for axis in self.axes.components.keys():
-
-            equation = self._equation_for_one_axis(body, axis)
-            equations.append(equation)
-
-        return tuple(equations)
+        return system

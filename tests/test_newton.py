@@ -34,9 +34,9 @@ def test_newton_i():
     universe = Universe()
     universe.add_body(body)
 
-    a_x = universe.newton_equation('body', axis='x').solve('a')  # TODO not nice
-    f_00 = m*a_x[0].subs('mu', 0.0)
-    f_01 = m*a_x[0].subs('mu', 0.1)
+    a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
+    f_00 = m*a_x.subs('mu', 0.0)
+    f_01 = m*a_x.subs('mu', 0.1)
 
     assert compare_floats(f_00, -1036.47)
     assert compare_floats(f_01, -1258.74)
@@ -64,10 +64,11 @@ def test_newton_ii():
     universe = Universe()
     universe.add_body(body)
 
-    a_x = universe.newton_equation('body', axis='x').solve('a')
-    f_x = m*a_x[0]
+    a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
+    f_x = m*a_x
 
-    assert compare_floats(a_x[0], -5.03)
+    assert compare_floats(a_x, -5.03)
+    assert compare_floats(a_y, -4.74)
     assert compare_floats(f_x, -1258.74)
 
 def test_newton_iii():
@@ -118,22 +119,22 @@ def test_newton_iii():
 
     # Get newton equation for each body
 
-    eq_a_x = universe.newton_equation('A', axis='x')
-    eq_b_x = universe.newton_equation('B', axis='x')
-    eq_c_x = universe.newton_equation('C', axis='x')
+    eq_a = universe.newton_equation('A')['x']
+    eq_b = universe.newton_equation('B')['x']
+    eq_c = universe.newton_equation('C')['x']
 
     # Then solve system:
 
-    unkowns = ['T1', 'T2', 'a']
+    unkowns = ['T1', 'T2', 'a_x']
     system = System()
-    system.add_equation(eq_a_x)
-    system.add_equation(eq_b_x)
-    system.add_equation(eq_c_x)
-    T1, T2, a = system.solve(unkowns)
+    system.add_equation(eq_a)
+    system.add_equation(eq_b)
+    system.add_equation(eq_c)
+    T1, T2, a_x = system.solve(unkowns)
     
     assert compare_floats(T1, 13.54)
     assert compare_floats(T2, 7.59)
-    assert compare_floats(a, 0.79)
+    assert compare_floats(a_x, 0.79)
 
 def test_newton_iv():
     """
@@ -176,6 +177,7 @@ def test_newton_iv():
     universe.add_body(body)
 
     # Solve for a
-    a_x = universe.newton_equation('body', axis='x').solve('a', first_positive_root=True)
+    a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
     
     assert compare_floats(a_x, 0.79)
+    assert compare_floats(a_y, -1.89)

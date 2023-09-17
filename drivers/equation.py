@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 
-from sympy import Eq
-from sympy import solve
+from sympy import Eq, solve
 
 
 class Equation:
@@ -32,9 +31,9 @@ class Equation:
         return positive_roots[0]
 
     def solve(self, unknown, first_positive_root=False):
-
+        
         if unknown not in self.unknowns:
-            raise ValueError(f'Unknown \'{unknown}\' not found')
+            raise ValueError(f'Unknown \'{unknown}\' not in equation unkowns {self.unknowns}')
 
         roots = solve(self.function, unknown)
 

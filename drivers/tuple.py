@@ -39,7 +39,7 @@ class Tuple:
     def __getitem__(self, idx):
 
         if idx >= self.dimensions:
-            raise ValueError(f'Index {idx} out of range for Tuple of length {len(self)}')
+            raise ValueError(f'Index {idx} out of range for tuple of length {len(self)}')
 
         return self.value[idx]
     
@@ -62,8 +62,8 @@ class Tuple:
 
         output = tuple()
         
-        for _ in self.axes.components:
-            output += (Symbol(self.name),)
+        for axis in self.axes.components.keys():
+            output += (Symbol(self.name + '_' + axis),)
 
         return output
 
@@ -74,15 +74,15 @@ class Tuple:
             if axis not in self.axes.components.keys():
                 raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
             
-            axis = self.axes.components[axis]
-            self[axis] = Symbol(self.name)
+            idx = self.axes.components[axis]
+            self[idx] = Symbol(self.name + '_' + axis)
 
         else:
 
             self.value = tuple()
         
-            for _ in self.axes.components.keys():
-                self.value += (Symbol(self.name),)
+            for axis in self.axes.components.keys():
+                self.value += (Symbol(self.name + '_' + axis),)
     
     def define(self, value, axis=None):
 
@@ -91,8 +91,8 @@ class Tuple:
             if axis not in self.axes.components.keys():
                 raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
             
-            axis = self.axes.components[axis]
-            self[axis] = value
+            idx = self.axes.components[axis]
+            self[idx] = value
 
         else:
 

@@ -27,12 +27,11 @@ def test_electrical_b1_2019_junio_a():
     universe.add_body(body_1)
     universe.add_body(body_2)
 
-    eq_x, eq_y = universe.electrical_field_intensity_equation(point)
-    Ee_x, Ee_y = eq_x.solve('Ee'), eq_y.solve('Ee')
-    Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
+    Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 'Ee_y'])
+    Ee = magnitude((Ee_x, Ee_y))  # always positive value
 
-    assert compare_floats(Ee_x[0], 2.88)
-    assert compare_floats(Ee_y[0], 0.0)
+    assert compare_floats(Ee_x, 2.88)
+    assert compare_floats(Ee_y, 0.0)
     assert compare_floats(Ee, 2.88)
 
 def test_electrical_b1_2019_junio_b():
@@ -80,12 +79,11 @@ def test_electrical_AP3_2019_junio_a():
     universe.add_body(body_1)
     universe.add_body(body_2)
 
-    eq_x, eq_y = universe.electrical_field_intensity_equation(point)
-    Ee_x, Ee_y = eq_x.solve('Ee'), eq_y.solve('Ee')
-    Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
+    Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 'Ee_y'])
+    Ee = magnitude((Ee_x, Ee_y))  # always positive value
 
-    assert compare_floats(Ee_x[0], -1.73)
-    assert compare_floats(Ee_y[0], 0.0)
+    assert compare_floats(Ee_x, -1.73)
+    assert compare_floats(Ee_y, 0.0)
     assert compare_floats(Ee, 1.73)
 
 def test_electrical_AP3_2019_junio_b():
@@ -143,12 +141,11 @@ def test_electrical_A3_2021_junio_coincidentes_a():
     universe.add_body(body_3)
     universe.add_body(body_4)
 
-    eq_x, eq_y = universe.electrical_field_intensity_equation(point)
-    Ee_x, Ee_y = eq_x.solve('Ee'), eq_y.solve('Ee')
-    Ee = magnitude((Ee_x[0], Ee_y[0]))  # always positive value
+    Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 'Ee_y'])
+    Ee = magnitude((Ee_x, Ee_y))  # always positive value
 
-    assert compare_floats(0.0, Ee_x[0])
-    assert compare_floats(-12.72, Ee_y[0])
+    assert compare_floats(0.0, Ee_x)
+    assert compare_floats(-12.72, Ee_y)
     assert compare_floats(12.72, Ee)
 
 def test_electrical_A3_2021_junio_coincidentes_b():

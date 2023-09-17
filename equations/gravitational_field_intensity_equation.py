@@ -3,6 +3,7 @@ from scipy.constants import G
 
 from ..drivers.axes import Axes
 from ..drivers.equation import Equation
+from ..drivers.system import System
 from ..utils import distance, angle_with_horizontal_2d
 
 
@@ -13,9 +14,9 @@ class GravitationalFieldIntensityEquation:
         self.universe = universe
         self.axes = Axes(self.universe.dimensions)
 
-    def __call__(self, point, axis=None):
+    def __call__(self, name):
 
-        return self.equation(point, axis=axis)
+        return self.system(name)
 
     def _equation(self, point, axis):
 
@@ -40,7 +41,7 @@ class GravitationalFieldIntensityEquation:
         
         return Equation(foo)
 
-    def equation(self, point, axis=None):
+    def system(self, point):
 
         if not hasattr(point, '__len__') or len(point) != self.universe.dimensions:
             raise ValueError(f'Parameter \'point\' must have length {self.universe.dimensions}')
@@ -48,33 +49,11 @@ class GravitationalFieldIntensityEquation:
         # if unknown == 'p':  # TODO move where to?
         #     raise RuntimeError(f'Equation cannot be solved for unknown \'p\'')
 
-        if axis:
+        system = System()
 
-            if axis not in self.axes.components.keys():
-                raise ValueError(f'Parameter \'axis\' must be one of these {self.axes.components.keys()}')
+        for axis, idx in self.axes.components.items():
 
-            equation = self._equation_for_one_axis(point, axis)
+            equation = self._equation(point, idx)
+            system.add_equation(equation, key=axis)
 
-        else:
-
-            equation = self._equations_for_all_axes(point)
-
-        return equation
-
-    def _equation_for_one_axis(self, point, axis):
-
-        axis = self.axes.components[axis]
-        equation = self._equation(point, axis)
-
-        return equation
-
-    def _equations_for_all_axes(self, point):
-
-        equations = list()
-
-        for axis in self.axes.components.keys():
-
-            equation = self._equation_for_one_axis(point, axis)
-            equations.append(equation)
-
-        return tuple(equations)
+        return system
