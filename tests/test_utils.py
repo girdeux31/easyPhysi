@@ -1,9 +1,9 @@
 import sys
 from sympy import Symbol
 
-sys.path.append(r'/home/cmesado/Dropbox/dev')
+sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
-from physics.utils import compare_floats, magnitude, distance, inner_product, angle, angle_with_horizontal_2d, angle_with_horizontal_3d
+from pyphysics.utils import compare_floats, magnitude, distance, inner_product, angle, angle_with_horizontal_2d, angle_with_horizontal_3d
 
 
 def test_compare_floats_small():

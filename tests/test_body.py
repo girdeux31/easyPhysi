@@ -1,9 +1,9 @@
 
 import sys
 
-sys.path.append(r'/home/cmesado/Dropbox/dev')
+sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
-from physics.drivers.body import Body
+from pyphysics.drivers.body import Body
 
 
 def test_body_2d():

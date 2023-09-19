@@ -1,11 +1,11 @@
 
 import sys
 
-sys.path.append(r'/home/cmesado/Dropbox/dev')
+sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
-from physics.drivers.body import Body
-from physics.drivers.universe import Universe
-from physics.utils import compare_floats, magnitude
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.utils import compare_floats, magnitude
 
 
 def test_gravity_b1_2019_junio_a():

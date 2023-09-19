@@ -1,8 +1,8 @@
 import sys
 
-sys.path.append(r'/home/cmesado/Dropbox/dev')
+sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
-from physics.drivers.tuple import Tuple
+from pyphysics.drivers.tuple import Tuple
 
 tup = Tuple('a', dimensions=3)
 

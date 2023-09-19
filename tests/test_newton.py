@@ -3,12 +3,12 @@ import sys
 import math
 from sympy import Symbol, solve
 
-sys.path.append(r'/home/cmesado/Dropbox/dev')
+sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
-from physics.drivers.body import Body
-from physics.drivers.universe import Universe
-from physics.drivers.system import System
-from physics.utils import compare_floats
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.drivers.system import System
+from pyphysics.utils import compare_floats
 
 
 def test_newton_i():

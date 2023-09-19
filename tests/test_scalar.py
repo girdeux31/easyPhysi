@@ -1,8 +1,8 @@
 import sys
 
-sys.path.append(r'/home/cmesado/Dropbox/dev')
+sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
-from physics.drivers.scalar import Scalar
+from pyphysics.drivers.scalar import Scalar
 
 scalar = Scalar('a')
 

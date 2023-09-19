@@ -3,11 +3,11 @@ import sys
 import math
 from sympy import Symbol
 
-sys.path.append(r'/home/cmesado/Dropbox/dev')
+sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
-from physics.drivers.body import Body
-from physics.drivers.universe import Universe
-from physics.utils import compare_floats
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.utils import compare_floats
 
 
 def test_energy_15a():

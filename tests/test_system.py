@@ -2,11 +2,11 @@ import sys
 import math
 from sympy import Symbol
 
-sys.path.append(r'/home/cmesado/Dropbox/dev')
+sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
-from physics.utils import compare_floats
-from physics.drivers.equation import Equation
-from physics.drivers.system import System
+from pyphysics.utils import compare_floats
+from pyphysics.drivers.equation import Equation
+from pyphysics.drivers.system import System
 
 
 def test_system():
