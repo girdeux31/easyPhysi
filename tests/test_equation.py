@@ -13,7 +13,7 @@ from pyphysics.drivers.universe import Universe
 def test_equation_i():
     """
     """
-    file = './tests/a_f_mu.png'
+    file = './tests/ref/a_f_mu.png'
 
     mu = Symbol('mu')
     alpha = math.radians(25)
