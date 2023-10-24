@@ -49,7 +49,14 @@ class GravitationalPotentialEnergyEquation:
         foo += main_body.gravitational_potential_energy()
         
         return Equation(foo)
-    
+
+    @property
+    def parameters(self):
+
+        parameters = ['Ug', 'm', 'p']
+
+        return ', '.join(sorted(parameters))
+
     def equation(self, name):
 
         body = self.universe.get_body(name)

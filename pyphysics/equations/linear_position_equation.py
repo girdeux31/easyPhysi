@@ -24,7 +24,14 @@ class LinearPositionEquation:
                     + body.gravity[axis]/2*body.time()**2
         
         return Equation(foo)
-    
+
+    @property
+    def parameters(self):
+
+        parameters = ['p0','p', 'v0', 'g', 't']
+
+        return ', '.join(sorted(parameters))
+
     def system(self, name):
 
         system = System()

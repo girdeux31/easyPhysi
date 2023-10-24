@@ -41,7 +41,14 @@ class GravitationalForceEquation:
         foo += main_body.gravitational_force[axis]
         
         return Equation(foo)
-    
+
+    @property
+    def parameters(self):
+
+        parameters = ['Fg', 'm', 'p']
+
+        return ', '.join(sorted(parameters))
+
     def system(self, name):
 
         # INFO System / Equation cannot be solved for unknown 'p'

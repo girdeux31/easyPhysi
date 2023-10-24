@@ -46,7 +46,7 @@ class System:
                 raise RuntimeError(f'Unknwon \'{unknown}\' not in system unkowns {self.unknowns}')
 
         unknowns = [Symbol(unknown) for unknown in unknowns]
-        functions = [equation.function for equation in self.equations.values()]  # TODO is the order kept?
+        functions = [equation.function for equation in self.equations.values()]  # dict order is preserved in python 3.6+
         solution = solve(functions, unknowns, dict=True)
 
         if not solution:
@@ -55,4 +55,4 @@ class System:
         if len(solution) != 1:
             raise ValueError('System has several solution')
 
-        return solution[0].values()  # TODO return as dict?
+        return solution[0].values()

@@ -29,6 +29,13 @@ class ElectricalPotentialEquation:
         
         return Equation(foo)
 
+    @property
+    def parameters(self):
+
+        parameters = ['Ve', 'q', 'p']
+
+        return ', '.join(sorted(parameters))
+
     def equation(self, point):
 
         if not hasattr(point, '__len__') or len(point) != self.universe.dimensions:

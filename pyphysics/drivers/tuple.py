@@ -3,18 +3,26 @@ from sympy import Symbol
 from .axes import Axes
 
 
-class Tuple:
+class Tuple:  # TODO change name to Vector
 
     def __init__(self, name, dimensions=2, value=None):
 
         if dimensions != 2 and dimensions != 3:
             raise ValueError('Parameter \'dimensions\' must be 2 or 3')
 
+        if value:
+
+            if isinstance(value, (list, tuple)):
+                if len(value) != self.dimensions:
+                    raise ValueError(f'Value must have length \'{self.dimensions}\'')
+            else:
+                raise ValueError('Parameter \'value\' must be a list or tuple')
+
         self.name = name
         self.dimensions = dimensions
 
         self.axes = Axes(self.dimensions)
-        self.value = value if value else self._get_default_value() # TODO as a dict value = {'x', 'y', 'z'}
+        self.value = tuple(value) if value else self._get_default_value()
 
     def __str__(self):
 

@@ -41,6 +41,13 @@ class GravitationalFieldIntensityEquation:
         
         return Equation(foo)
 
+    @property
+    def parameters(self):
+
+        parameters = ['gg', 'm', 'p']
+
+        return ', '.join(sorted(parameters))
+
     def system(self, point):
 
         # INFO System / Equation cannot be solved for unknown 'p'

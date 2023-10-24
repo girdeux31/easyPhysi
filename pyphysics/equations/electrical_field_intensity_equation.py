@@ -39,7 +39,14 @@ class ElectricalFieldIntensityEquation:
         foo += body.electrical_field_intensity[axis]  # TODO whole system, not only body
         
         return Equation(foo)
-       
+
+    @property
+    def parameters(self):
+
+        parameters = ['Ee', 'q', 'p']
+
+        return ', '.join(sorted(parameters))
+
     def system(self, point):
 
         # INFO System / Equation cannot be solved for unknown 'p'

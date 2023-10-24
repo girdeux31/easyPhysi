@@ -48,6 +48,13 @@ class ElectricalPotentialEnergyEquation:
         
         return Equation(foo)
 
+    @property
+    def parameters(self):
+
+        parameters = ['Ue', 'q', 'p']
+
+        return ', '.join(sorted(parameters))
+
     def equation(self, name):
 
         body = self.universe.get_body(name)

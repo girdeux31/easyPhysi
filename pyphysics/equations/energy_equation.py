@@ -24,7 +24,14 @@ class EnergyEquation:
             foo += energy()
         
         return Equation(foo)
-    
+
+    @property
+    def parameters(self):
+
+        parameters = ['E']
+
+        return ', '.join(sorted(parameters))
+
     def equation(self, name):
 
         body = self.universe.get_body(name)

@@ -30,7 +30,14 @@ class GravitationalPotentialEquation:
         foo += body.gravitational_potential()  # TODO whole system, not only body
         
         return Equation(foo)
-    
+
+    @property
+    def parameters(self):
+
+        parameters = ['Vg', 'm', 'p']
+
+        return ', '.join(sorted(parameters))
+
     def equation(self, point):
 
         if not hasattr(point, '__len__') or len(point) != self.universe.dimensions:

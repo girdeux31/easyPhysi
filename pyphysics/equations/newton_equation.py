@@ -5,7 +5,7 @@ from ..drivers.system import System
 
 
 class NewtonEquation:
-    
+
     def __init__(self, universe):
 
         self.universe = universe
@@ -27,6 +27,13 @@ class NewtonEquation:
         foo -= body.mass()*body.acceleration[axis]
         
         return Equation(foo)
+
+    @property
+    def parameters(self):
+
+        parameters = ['F', 'm', 'a']
+
+        return ', '.join(sorted(parameters))
 
     def system(self, name):
 

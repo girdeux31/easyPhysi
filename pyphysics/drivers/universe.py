@@ -30,18 +30,18 @@ class Universe:
 
         # define equations
 
+        self.electrical_field_intensity_equation = ElectricalFieldIntensityEquation(self)
+        self.electrical_force_equation = ElectricalForceEquation(self)
+        self.electrical_potential_energy_equation = ElectricalPotentialEnergyEquation(self)
+        self.electrical_potential_equation = ElectricalPotentialEquation(self)
+        self.energy_equation = EnergyEquation(self)
+        self.gravitational_field_intensity_equation = GravitationalFieldIntensityEquation(self)
+        self.gravitational_force_equation = GravitationalForceEquation(self)
+        self.gravitational_potential_energy_equation = GravitationalPotentialEnergyEquation(self)
+        self.gravitational_potential_equation = GravitationalPotentialEquation(self)
         self.linear_position_equation = LinearPositionEquation(self)
         self.linear_velocity_equation = LinearVelocityEquation(self)
         self.newton_equation = NewtonEquation(self)
-        self.energy_equation = EnergyEquation(self)
-        self.gravitational_force_equation = GravitationalForceEquation(self)
-        self.gravitational_potential_energy_equation = GravitationalPotentialEnergyEquation(self)
-        self.gravitational_field_intensity_equation = GravitationalFieldIntensityEquation(self)
-        self.gravitational_potential_equation = GravitationalPotentialEquation(self)
-        self.electrical_force_equation = ElectricalForceEquation(self)
-        self.electrical_potential_energy_equation = ElectricalPotentialEnergyEquation(self)
-        self.electrical_field_intensity_equation = ElectricalFieldIntensityEquation(self)
-        self.electrical_potential_equation = ElectricalPotentialEquation(self)
 
     def add_body(self, body):
 
@@ -61,3 +61,18 @@ class Universe:
             raise ValueError(f'Body with name {name} not found')
         
         return body[0]
+
+    def help(self):  #TODO what about force and energy?
+
+        print('The following equations are recognized:')
+        print('')
+        print(' {:40s} {:10s} {:16s}'.format('Equation', 'Type', 'Parameters'))
+        print(' ' + '='*40 + ' ' + '='*10 + ' '+ '='*16)
+
+        for key, value in self.__dict__.items():
+
+            if hasattr(value, '_equation'):
+                type_ = 'Scalar' if hasattr(value, 'equation') else 'Vectorial'
+                print(f' {key:40s} {type_:10s} {value.parameters}')
+
+        print('')

@@ -24,6 +24,13 @@ class LinearVelocityEquation:
 
         return Equation(foo)
 
+    @property
+    def parameters(self):
+
+        parameters = ['v0', 'v', 'g', 't']
+
+        return ', '.join(sorted(parameters))
+
     def system(self, name):
 
         system = System()
