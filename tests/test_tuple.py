@@ -2,9 +2,9 @@ import sys
 
 sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
-from pyphysics.drivers.tuple import Tuple
+from pyphysics.drivers.vector import Vector
 
-tup = Tuple('a', dimensions=3)
+tup = Vector('a', dimensions=3)
 
 def test_item():
 

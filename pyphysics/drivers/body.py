@@ -1,7 +1,7 @@
 from scipy.constants import electron_mass, proton_mass, neutron_mass, elementary_charge
 
 from .scalar import Scalar
-from .tuple import Tuple
+from .vector import Vector
 
 
 class Body:
@@ -19,23 +19,23 @@ class Body:
 
         # initialize parameters
 
-        self.acceleration = Tuple('a', self.dimensions)
+        self.acceleration = Vector('a', self.dimensions)
         self.charge = Scalar('q')
-        self.electrical_field_intensity = Tuple('Ee', self.dimensions)
-        self.electrical_force = Tuple('Fe', self.dimensions)
+        self.electrical_field_intensity = Vector('Ee', self.dimensions)
+        self.electrical_force = Vector('Fe', self.dimensions)
         self.electrical_potential_energy = Scalar('Ue')
         self.electrical_potential = Scalar('Ve')
-        self.gravitational_field_intensity = Tuple('gg', self.dimensions)  # this is the same as gravity 'g'
-        self.gravitational_force = Tuple('Fg', self.dimensions)
+        self.gravitational_field_intensity = Vector('gg', self.dimensions)  # this is the same as gravity 'g'
+        self.gravitational_force = Vector('Fg', self.dimensions)
         self.gravitational_potential_energy = Scalar('Ug')
         self.gravitational_potential = Scalar('Vg')
-        self.gravity = Tuple('g', self.dimensions)
-        self.initial_position = Tuple('p0', self.dimensions)
-        self.initial_velocity = Tuple('v0', self.dimensions)
+        self.gravity = Vector('g', self.dimensions)
+        self.initial_position = Vector('p0', self.dimensions)
+        self.initial_velocity = Vector('v0', self.dimensions)
         self.mass = Scalar('m')
-        self.position = Tuple('p', self.dimensions)
+        self.position = Vector('p', self.dimensions)
         self.time = Scalar('t')
-        self.velocity = Tuple('v', self.dimensions)
+        self.velocity = Vector('v', self.dimensions)
 
     def set(self, parameter, value, axis=None):
 
@@ -46,7 +46,7 @@ class Body:
         
         unknown = getattr(self, parameter)
 
-        if isinstance(unknown, Tuple):
+        if isinstance(unknown, Vector):
             unknown.define(value, axis=axis)
         else:
             unknown.define(value)
@@ -60,14 +60,14 @@ class Body:
         
         unknown = getattr(self, parameter)
         
-        if isinstance(unknown, Tuple):
+        if isinstance(unknown, Vector):
             unknown.undefine(axis=axis)
         else:
             unknown.undefine()
 
     def apply_force(self, name, value):
 
-        force = Tuple(name, dimensions=self.dimensions, value=value)
+        force = Vector(name, dimensions=self.dimensions, value=value)
         self.forces.append(force)
 
     def add_energy(self, name, value):
@@ -85,35 +85,10 @@ class Body:
 
         for key, value in self.__dict__.items():
 
-            if isinstance(value, (Tuple, Scalar)):
+            if isinstance(value, (Vector, Scalar)):
                 print(f' {key:32s} {value.name:8s} {type(value).__name__:10s} {value.value}')
 
         print('')
-
-    # def help(self):
-
-    #     print('The following parameters are recognized:')
-    #     print('')
-    #     print('Parameter                        Unknown Type')
-    #     print('================================ ======= ======')
-    #     print('acceleration                     a       tuple')
-    #     print('charge                           q       scalar')
-    #     print('electrical_field_intensity       Ee      tuple')
-    #     print('electrical_force                 Fe      tuple')
-    #     print('electrical_potential             Ve      scalar')
-    #     print('electrical_potential_energy      Ue      scalar')
-    #     print('gravitational_field_intensity    gg      tuple')  # this is the same as gravity 'g'
-    #     print('gravitational_force              Fg      tuple')
-    #     print('gravitational_potential          Vg      scalar')
-    #     print('gravitational_potential_energy   Ug      scalar')
-    #     print('gravity                          g       tuple')
-    #     print('initial_position                 p0      tuple')
-    #     print('initial_velocity                 v0      tuple')
-    #     print('mass                             m       scalar')
-    #     print('position                         p       tuple')
-    #     print('time                             t       scalar')
-    #     print('velocity                         v       tuple')
-    #     print('')
 
 
 electron = Body('electron')

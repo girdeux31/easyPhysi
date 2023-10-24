@@ -3,9 +3,12 @@ from sympy import Symbol
 from .axes import Axes
 
 
-class Tuple:  # TODO change name to Vector
+class Vector:
 
     def __init__(self, name, dimensions=2, value=None):
+
+        self.name = name
+        self.dimensions = dimensions
 
         if dimensions != 2 and dimensions != 3:
             raise ValueError('Parameter \'dimensions\' must be 2 or 3')
@@ -17,9 +20,6 @@ class Tuple:  # TODO change name to Vector
                     raise ValueError(f'Value must have length \'{self.dimensions}\'')
             else:
                 raise ValueError('Parameter \'value\' must be a list or tuple')
-
-        self.name = name
-        self.dimensions = dimensions
 
         self.axes = Axes(self.dimensions)
         self.value = tuple(value) if value else self._get_default_value()
@@ -47,14 +47,14 @@ class Tuple:  # TODO change name to Vector
     def __getitem__(self, idx):
 
         if idx >= self.dimensions:
-            raise ValueError(f'Index {idx} out of range for tuple of length {len(self)}')
+            raise ValueError(f'Index {idx} out of range for Vector of length {len(self)}')
 
         return self.value[idx]
     
     def __setitem__(self, idx, value):
 
         if idx >= self.dimensions:
-            raise ValueError(f'Index {idx} out of range for Tuple of length {len(self)}')
+            raise ValueError(f'Index {idx} out of range for Vector of length {len(self)}')
 
         self.value = self.value[:idx] + (value,) + self.value[idx+1:]
 
