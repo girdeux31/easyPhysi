@@ -1,3 +1,4 @@
+import os
 import sys
 import math
 from sympy import Symbol
@@ -7,6 +8,8 @@ sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 from pyphysics.utils import compare_floats
 from pyphysics.drivers.equation import Equation
 from pyphysics.drivers.system import System
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
 
 
 def test_system():
@@ -31,3 +34,30 @@ def test_system():
     assert compare_floats(n, 108.77)
     assert compare_floats(y1, 0.55)
     assert compare_floats(y2, 0.45)
+
+def test_plot_system():
+    """
+    F2-PAU-Gravitation
+    B1.a 2019 junio
+    """
+    file = './tests/ref/F_f_ma.png'
+    ma = Symbol('ma')
+
+    body_a = Body('A')
+    body_a.set('mass', ma)
+    body_a.set('position', (0, 0))
+
+    body_b = Body('B')
+    body_b.set('mass', 5)
+    body_b.set('position', (2, -2))
+
+    universe = Universe()
+    universe.add_body(body_a)
+    universe.add_body(body_b)
+
+    if os.path.exists(file):
+        os.remove(file)
+
+    universe.gravitational_force_equation('B').plot(['Fg_x', 'Fg_y'], 'ma', [0, 5], points=200, path=file, show=False)
+
+    assert os.path.exists(file)

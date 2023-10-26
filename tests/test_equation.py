@@ -10,25 +10,31 @@ from pyphysics.drivers.body import Body
 from pyphysics.drivers.universe import Universe
 
 
-def test_equation_i():
+def test_plot_scalar_equation():
     """
     """
-    file = './tests/ref/a_f_mu.png'
+    file = './tests/ref/vf_f_v0.png'
 
-    mu = Symbol('mu')
-    alpha = math.radians(25)
-    m = 250
+    m = 1.0
+    v0 = Symbol('v0')
+    alpha = math.radians(30)
+    length = 2.0
     g = 9.81
-    W = (-m*g*math.sin(alpha), -m*g*math.cos(alpha))
-    N = (0.0, m*g*math.sin(alpha))
-    Fr = (-mu*m*g*math.cos(alpha), 0.0)
+    h0 = length*math.sin(alpha)
+    hf = 0.0
+    vf = Symbol('vf')
+
+    Ep0 = m*g*h0
+    Ek0 = 1/2*m*v0**2
+    Epf = -m*g*hf
+    Ekf = -1/2*m*vf**2
 
     body = Body('body', dimensions=2)
 
-    body.set('mass', m)
-    body.apply_force('W', W)
-    body.apply_force('Fr', Fr)
-    body.apply_force('N', N)
+    body.add_energy('Ep0', Ep0)
+    body.add_energy('Ek0', Ek0)
+    body.add_energy('Epf', Epf)
+    body.add_energy('Ekf', Ekf)
 
     universe = Universe()
     universe.add_body(body)
@@ -36,6 +42,6 @@ def test_equation_i():
     if os.path.exists(file):
         os.remove(file)
 
-    universe.newton_equation('body')['x'].plot('a_x', 'mu', [0, 1], points=200, path=file, show=False)
+    universe.energy_equation('body').plot('vf', 'v0', [0, 4], points=200, path=file, show=False)
 
     assert os.path.exists(file)
