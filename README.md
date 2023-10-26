@@ -1,8 +1,11 @@
 # <a name="sec:top"></a>pyPhysics
 
+**Library under development yet**
+
 pyPhysics is a physics library to solve pre-universitary physics problems. The physics areas that are covered in the library, along with some examples, are summarized in the following [table](#tab:areas).
 
-<p style="text-align: center;"><a name="tab:areas"></a>Physics areas in library</p>
+<a name="tab:areas"></a>
+
  | Area                 | Examples                                          |
  |----------------------|---------------------------------------------------|
  | Kinematics           | [K-examples](#sec:example-kinematics)             |
@@ -13,11 +16,15 @@ pyPhysics is a physics library to solve pre-universitary physics problems. The p
 
 ## <a name="sec:characteristics"></a>Characteristics
 
- - Program: pyPhysics
- - Version: 1.0
- - Author: Carles Mesado
- - Date: 31/10/2023
- - Size: ~ 18 KiB
+<a name="tab:characteristics"></a>
+
+ | Characteristic   | Value         |
+ |------------------|---------------|
+ | Program          | pyPhysics     |
+ | Version          | 1.0           |
+ | Author           | Carles Mesado |
+ | Date             | 31/10/2023    |
+ | Size             | ~ 18 KiB      |
  
 ## <a name="sec:requirementes"></a>Requirements
 
@@ -29,7 +36,15 @@ Python 3.10 and the following third-party modules:
 
 ## <a name="sec:installation"></a>Installation
 
-``pip install pyphysics``
+**Package not in pypi yet**
+
+Install the package with pip,
+
+`pip install pyphysics`
+
+or clone the GitHub repository.
+
+`gh repo clone girdeux31/pyPhysics`
 
 ## <a name="sec:usage"></a>Usage
 
@@ -40,7 +55,6 @@ Most pre-university physics problems can be solved following this structure comp
 ```
 from pyphysics.drivers.universe import Universe
 from pyphysics.drivers.body import Body
-
 
 universe = Universe(dimensions=2)  # 2 o 3 dimensions
 
@@ -69,7 +83,8 @@ Let's take the code apart line by line.
 
 The following properties can be defined in any body. Property names are case sensitive.
 
-<p style="text-align: center;"><a name="tab:properties"></a>Properties allowed for bodies</p>
+<a name="tab:properties"></a>
+
  |Property |Description                     |Type      |Components    |           
  |---------|--------------------------------|----------|--------------|
  |a        |Acceleration                    |Vector    |(a_x, a_y)    |
@@ -104,7 +119,7 @@ They are integers of floats, examples follow.
 
 ```
 body.set('prop', 250)       # int
-body.set('prop', 5.0E-9)  # float
+body.set('prop', 5.0E-9)    # float
 ```
 
 ##### <a name="sec:property-type-vectors"></a>Vectors
@@ -113,7 +128,7 @@ They are list or tuples, examples follow.
 
 ```
 body.set('prop', [0.0, -9.81])  # list
-body.set('prop', (0, +3))      # tuple
+body.set('prop', (0, +3))       # tuple
 ```
 
 The length of `value` (components) must be the same as defined in the instance of universe.
