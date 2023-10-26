@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 from sympy import solve, Symbol
 
 
@@ -56,3 +58,64 @@ class System:
             raise ValueError('System has several solution')
 
         return solution[0].values()
+
+    def plot(self, independents, dependent, x_range, points=100, path=None, show=True):
+
+        # Checks
+
+        if not self.equations:
+            raise RuntimeError('Before plotting system you must add equations with \'add_equation\' method')
+
+        if len(independents) != len(self.equations):
+            raise ValueError(f'Parameter \'independents\' must have length {len(self.equations)}, this is a vectorial equation')
+
+        for axis, independent in zip(self.equations.keys(), independents):
+
+            if len(self.equations[axis].unknowns) != 2:
+                raise ValueError(f'Equation in axis \'{axis}\' must have exactly two unknowns, but it has ({self.equations[axis].unknowns})')
+            
+            if independent not in self.equations[axis].unknowns:
+                raise ValueError(f'Independent unknown ({independent}) is not in equation in axis \'{axis}\' with unknowns ({self.equations[axis].unknowns})')
+
+            if dependent not in self.equations[axis].unknowns:
+                raise ValueError(f'Dependent unknown ({dependent}) is not in equation in axis \'{axis}\' with unknowns ({self.equations[axis].unknowns})')
+
+        if len(x_range) != 2:
+            raise ValueError('Parameter \'x_range\' must have length 2')
+
+        # Solve for independent unknown
+
+        functions = list()
+
+        for axis, independent in zip(self.equations.keys(), independents):
+
+            function = self.equations[axis].solve(independent)
+
+            if not function:
+                raise RuntimeError(f'Equation solution not found for {independent} unkown')
+
+            if len(function) > 1:
+                raise Warning(f'Several solutions found for {independent} unkown')
+
+            functions.append(str(function[0]))
+
+            # Get x,y points and plot
+
+            dx = (x_range[1]-x_range[0]) / points
+            x_list = [x_range[0]+dx*i for i in range(points)]
+            y_list = [function[0].subs(dependent, x) for x in x_list]
+
+            plt.plot(x_list, y_list)
+
+        legend = [f'{independent} = {function}' for independent, function in zip(independents, functions)]
+
+        plt.legend(legend)
+        plt.xlabel(dependent)
+        plt.ylabel(', '.join(independents))
+        plt.grid()
+
+        if path:
+            plt.savefig(path)
+
+        if show:
+            plt.show()
