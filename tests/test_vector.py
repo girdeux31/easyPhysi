@@ -25,7 +25,7 @@ def test_call():
 
 def test_define():
 
-    tup.define((1, 2, 3))
+    tup.define([1, 2, 3])
     assert tup[2] == 3
 
     tup.define(99, 'z')
