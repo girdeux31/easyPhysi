@@ -104,7 +104,6 @@ class Body:
         self.energies.append(energy)
 
     def help(self):
-        #TODO what about force and energy?
 
         print('')
         print('The following properties are allowed:')
@@ -121,9 +120,11 @@ class Body:
         print('')
 
 
+# Special bodies
+
 electron = Body('electron')
-electron.set('m', electron_mass)
-electron.set('q', -elementary_charge)
+electron.set('m', electron_mass)  # kg
+electron.set('q', -elementary_charge)  # C
 
 proton = Body('proton')
 proton.set('m', proton_mass)
@@ -133,4 +134,38 @@ neutron = Body('neutron')
 neutron.set('m', neutron_mass)
 neutron.set('q', 0.0)
 
-# TODO include earth moon jupiter etc
+mercury = Body('mercury')
+mercury.set('m', 3.301e23)  # kg
+mercury.set('p', (57900000, 0))  # km
+
+venus = Body('venus')
+venus.set('m', 4.867e24)
+venus.set('p', (108200000, 0))
+
+earth = Body('earth')
+earth.set('m', 5.972e24)
+earth.set('p', (149600000, 0))
+
+moon = Body('moon')
+moon.set('m', 7.348e229)
+mars.set('p', (384400, 0))
+
+mars = Body('mars')
+mars.set('m', 6.417e23)
+mars.set('p', (227900000, 0))
+
+jupiter = Body('jupiter')
+jupiter.set('m', 1.899e27)
+jupiter.set('p', (778600000, 0))
+
+saturn = Body('saturn')
+saturn.set('m', 5.685e26)
+saturn.set('p', (1433500000, 0))
+
+uranus = Body('uranus')
+uranus.set('m', 8.682e259)
+uranus.set('p', (2872500000, 0))
+
+neptune = Body('neptune')
+neptune.set('m', 1.024e26)
+neptune.set('p', (4495100000, 0))
