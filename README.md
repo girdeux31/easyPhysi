@@ -10,7 +10,7 @@ pyPhysics is a physics library to solve pre-universitary physics problems. The p
  
 See examples for all of them in Section XXX.
 
-## Characteristics {#sec:characteristics}
+## Characteristics
 
  - Program: pyPhysics
  - Version: 1.0
@@ -60,11 +60,11 @@ Let's take the code apart line by line.
  - Line 1 and 2: import `Universe` and `Body`, objects that are needed in every single problem solved with this library.
  - Line 5: define a universe instance with `Universe` class and include the dimensions of it, only 2 o 3 dimensions are allowed.
  - Line 7: define a body instance with `Body` class, we include its name and dimensions. Define as many bodies as needed provided that they have different names.
- - Line 8: define a property for the body created in previous line, property name and value. See a list of allowed properties in Section \@ref(sec:properties). Define as many properties as needed provided they are listed in Section \@ref(sec:properties) and follow its type, see Section \@ref(sec:property_types).
+ - Line 8: define a property for the body created in previous line, property name and value. See a list of allowed properties in [Section](#properties). Define as many properties as needed provided they are listed in Section \@ref(sec:properties) and follow its type, see Section \@ref(sec:property_types).
  - Line 12: add all defined bodies to the universe.
  - Line 16: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations in Section XXX.
 
-### Properties {#sec:properties}
+### <a name="properties"></a>Properties
 
 The following properties can be defined in any body.
 
@@ -92,7 +92,7 @@ Use `set` method in a body instance to define a parameter in a body and define i
 
 `body.set('my_param', value)`
 
-### Parameter types {#sec:property_types}
+### Parameter types
 
 There are two types of parameters: scalars (`mass` for instance) and vectors (`gravity` for instance).
 
