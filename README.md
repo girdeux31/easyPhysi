@@ -1,16 +1,19 @@
-# pyPhysics
+# <a name="sec:top"></a>pyPhysics
 
-pyPhysics is a physics library to solve pre-universitary physics problems. The physics areas that are covered are:
+pyPhysics is a physics library to solve pre-universitary physics problems. The physics areas that are covered in the library, along with some examples, are summarized in the following [table](#tab:areas).
 
- - Kinematics
- - Dinamics
- - Energy conservation
- - Gravitational field
- - Electrical field
+<p style="text-align: center;"><a name="tab:areas"></a>Physics areas in library</p>
+ | Area                 | Examples                                          |
+ |----------------------|---------------------------------------------------|
+ | Kinematics           | [K-examples](#sec:example-kinematics)             |
+ | Dinamics             | [D-examples](#sec:example-dinamics)               |
+ | Energy conservation  | [EC-examples](#sec:example-energy-conservation)   |
+ | Gravitational field  | [GF-examples](#sec:example-gravitational-field)   |
+ | Electrical field     | [EF-examples](#sec:example-electrical-field)      |
  
 See examples for all of them in Section XXX.
 
-## Characteristics
+## <a name="sec:characteristics"></a>Characteristics
 
  - Program: pyPhysics
  - Version: 1.0
@@ -18,7 +21,7 @@ See examples for all of them in Section XXX.
  - Date: 31/10/2023
  - Size: ~ 18 KiB
  
-## Requirements
+## <a name="sec:requirementes"></a>Requirements
 
 Python 3.10 and the following third-party modules:
 
@@ -26,13 +29,13 @@ Python 3.10 and the following third-party modules:
  - scipy>=1.11.0
  - sympy==1.12
 
-## Installation
+## <a name="sec:installation"></a>Installation
 
 ``pip install pyphysics``
 
-## Usage
+## <a name="sec:usage"></a>Usage
 
-### Main structure
+### <a name="sec:main-structure"></a>Main structure
 
 Most pre-university physics problems can be solved following this structure composed of a few lines.
 
@@ -44,7 +47,7 @@ from pyphysics.drivers.body import Body
 universe = Universe(dimensions=2)  # 2 o 3 dimensions
 
 body = Body('my_body', dimensions=2)
-body.set('my_param', value)
+body.set('my_prop', value)
 
 # define more properties or more bodies as needed
 
@@ -60,15 +63,16 @@ Let's take the code apart line by line.
  - Line 1 and 2: import `Universe` and `Body`, objects that are needed in every single problem solved with this library.
  - Line 5: define a universe instance with `Universe` class and include the dimensions of it, only 2 o 3 dimensions are allowed.
  - Line 7: define a body instance with `Body` class, we include its name and dimensions. Define as many bodies as needed provided that they have different names.
- - Line 8: define a property for the body created in previous line, property name and value. See a list of allowed properties in [Section](#properties). Define as many properties as needed provided they are listed in Section \@ref(sec:properties) and follow its type, see Section \@ref(sec:property_types).
+ - Line 8: define a property name and its value for the body instanciated in previous line. Define as many properties as needed provided they are listed in [Table](#tab:properties). Property can be specified using long or short name according to the same table and they must fulfill its type, see [Section](#sec:property-types).
  - Line 12: add all defined bodies to the universe.
- - Line 16: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations in Section XXX.
+ - Line 16: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations in [Table](#tab:equations).
 
-### <a name="properties"></a>Properties
+### <a name="sec:properties"></a>Properties
 
 The following properties can be defined in any body.
 
- |Properties                      |Unknown |Type      |  Value   	|
+<p style="text-align: center;"><a name="tab:properties"></a>Properties allowed for bodies</p>
+ |Long                            |Short   |Type      |  Value   	|
  |--------------------------------|--------|----------|-------------|
  |acceleration                    |a       |Vector    |(a_x, a_y)	|
  |charge                          |q       |Scalar    |q			|
@@ -88,15 +92,15 @@ The following properties can be defined in any body.
  |time                            |t       |Scalar    |t			|
  |velocity                        |v       |Vector    |(v_x, v_y)	|
  
-Use `set` method in a body instance to define a parameter in a body and define its value according to its type. See value types in Section XXX.
+Use `set` method in a body instance to define a body property (use either long or short name) and define its value according to its type. See value types in [Section](#sec:property-types).
 
-`body.set('my_param', value)`
+`body.set('my_prop', value)`
 
-### Parameter types
+### <a name="sec:property-types"></a>Property types
 
-There are two types of parameters: scalars (`mass` for instance) and vectors (`gravity` for instance).
+There are two types of properties: **scalars** (`mass` for instance) and **vectors** (`gravity` for instance).
 
-#### Scalars
+#### <a name="sec:property-type-scalar"></a>Scalars
 
 They are integers of floats, examples follow.
 
@@ -105,7 +109,7 @@ body.set('mass', 250)       # int
 body.set('charge', 5.0E-9)  # float
 ```
 
-#### Vectors
+#### <a name="sec:property-type-vectors"></a>Vectors
 
 They are list or tuples, examples follow.
 
@@ -122,9 +126,11 @@ It is also possible to define only one component in a vector parameter (the othe
 body.set('position', 0, axis='x')
 ```
 
-### Equations
+### <a name="sec:equations"></a>Equations
 
 The following equations can be solved.
+
+<p style="text-align: center;"><a name="tab:equations"></a>Equations allowed for universe</p>
 
  |Equation                                |Type      |Parameters      |
  |----------------------------------------|----------|--------------- |
@@ -147,11 +153,11 @@ Use any above equation in an instance of a universe and include the body the equ
 
 Units are up to the user. SI is recommended but other systems can be used provided that different units are consistent.
 
-### Equation types
+### <a name="sec:equation-types"></a>Equation types
 
 There are two types of equations: scalar (`energy_equation` for instance) and vectorial (`newton_equation` for instance).
 
-#### Scalar
+#### <a name="sec:equation-type-scalar"></a>Scalar
 
 Only one input/output unknown is accepted.
 
@@ -159,55 +165,140 @@ Only one input/output unknown is accepted.
 vf = universe.energy_equation('body').solve('vf')
 ```
 
-#### Vectorial
+#### <a name="sec:equation-type-vectorial"></a>Vectorial
 
-As many input/output unknowns as dimensions defined in the instance of universe are accepted. Specific vector component must be append to input unknowns, such as `a_x` and `a_y` for acceleration, see forth column in Table XXX. No name restriction apply for output unkonowns.
+As many input/output unknowns as dimensions defined in the instance of universe are accepted. Specific vector component must be append to input unknowns, such as `a_x` and `a_y` for acceleration, see forth column in [Table](#tab:properties). No name restriction apply for output unkonowns.
 
 ```
 a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
 ```
 
-### Other features
+### <a name="sec:advance-features"></a>Advance features
 
-## Examples
+Library most useful features are already defined. However, for the sake of completeness, a few more features for the advance user are defined in this section.
 
-### Kinematics
+#### <a name="sec:other-feature-functions"></a>Working with functions
 
-#### K-1
+Equations return numerical values if there is only one unknown, but return functions if there is more than one unknown. Then, \'subs\' method can be used to replace an unknown by a specified numerical value. See example in [example XX](#sec:).
 
-**Technical description**
+`a_x.subs('my_unknown', value)`
+
+#### <a name="sec:other-feature-systems"></a>Solving system of equations
+
+System of equations can be defined -with `System` class- and solved with `solve` method. The `solve` method accepts a list with as many unknowns as equations defined in the system. See example in [example XX](#sec:).
+
+```
+from sympy import Symbol
+from pyphysics.drivers.equation import Equation
+from pyphysics.drivers.system import System
+
+
+x = Symbol('x')
+
+# define as many unknowns as needed
+
+equation = Equation(a*x+...)
+
+# define as many equations as needed
+
+system = System()
+system.add_equation(equation)
+
+# add as meny equations as needed
+
+x, y, z = system.solve(['x', 'y', 'z'])
+```
+
+#### <a name="sec:other-feature-plot"></a>Plotting equations
+
+Method `plot` can be used over any equation to plot unknowns in the form of function `independent = f(dependent)`.
+
+`universe.physics_equation('my_body').plot(independent, dependent, x_range, points=100, path=None, show=True)`
+
+Arguments are described hereafter.
+
+ - `independent`: if equation is [scalar](#sec:equation-type-scalar), then only one independent unknown is expected. If equation is [vectorial](#sec:equation-type-vectorial), then exactly the same number of universe dimensions are expected as independent unknowns (as a list). See examples below.
+ - `dependent`: exactle one unknown is expected.
+ - `x_range`: range to plot for dependent unknown (x-axis).
+ - `points`: number of points to plot, optional argument, default is 100.
+ - `path`: path to save image as file, optional argument, by default it is not saved.
+ - `show`: if `True` the plot is shown on screen, optional argument, by default it is `True`.
+
+See examples for scalar equation in [example XX](#sec:) and vectorial equation in [example XX](#sec:).
+
+## <a name="sec:examples"></a>Examples
+
+### <a name="sec:example-kinematics"></a>Kinematics
+
+#### <a name="sec:example-k1"></a>K-1
 
 **Statement**
+
+**Technical description**
 
 **Code**
 
 **Result**
 
-### Dinamics
+### <a name="sec:example-dinamics"></a>Dinamics
 
 #### D-1
 
-### Energy conservation
+**Statement**
+
+**Technical description**
+
+**Code**
+
+**Result**
+
+### <a name="sec:example-energy-conservation"></a>Energy conservation
 
 #### EC-1
 
-### Gravitational field
+### <a name="sec:example-gravity-field"></a>Gravitational field
 
 #### GF-1
 
-### Electrical field
+**Statement**
+
+**Technical description**
+
+**Code**
+
+**Result**
+
+### <a name="sec:example-electrical-field"></a>Electrical field
 
 #### EF-1
 
-## Bugs
+**Statement**
 
- - 
+**Technical description**
+
+**Code**
+
+**Result**
+
+### <a name="sec:example-advance-features"></a>Advance features
+
+#### AF-1
+
+**Statement**
+
+**Technical description**
+
+**Code**
+
+**Result**
+
+## <a name="sec:bugs-limitations"></a>Bugs and limitations
    
-## License
+## <a name="sec:licence"></a>License
 
 This project includes MIT License. A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
 
-## Contact
+## <a name="sec:contact"></a>Contact
 
 Visit GitHub page at https://github.com/girdeux31/pyPhysics
 
