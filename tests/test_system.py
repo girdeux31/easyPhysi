@@ -44,12 +44,12 @@ def test_plot_system():
     ma = Symbol('ma')
 
     body_a = Body('A')
-    body_a.set('mass', ma)
-    body_a.set('position', (0, 0))
+    body_a.set('m', ma)
+    body_a.set('p', (0, 0))
 
     body_b = Body('B')
-    body_b.set('mass', 5)
-    body_b.set('position', (2, -2))
+    body_b.set('m', 5)
+    body_b.set('p', (2, -2))
 
     universe = Universe()
     universe.add_body(body_a)

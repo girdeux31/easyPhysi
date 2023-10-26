@@ -1,5 +1,6 @@
-
+import os
 import sys
+from contextlib import redirect_stdout
 
 sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
@@ -13,9 +14,9 @@ def test_body_2d():
 
     body = Body('A')
 
-    body.set('gravity', g)
-    body.set('position', p[0], axis='x')
-    body.set('position', p[1], axis='y')
+    body.set('g', g)
+    body.set('p_x', p[0])
+    body.set('p_y', p[1])
     body.help()
 
 def test_body_3d():
@@ -25,8 +26,23 @@ def test_body_3d():
 
     body = Body('A', dimensions=3)
 
-    body.set('gravity', g)
-    body.set('position', p[0], axis='x')
-    body.set('position', p[1], axis='y')
-    body.set('position', p[2], axis='z')
+    body.set('g', g)
+    body.set('p_x', p[0])
+    body.set('p_y', p[1])
+    body.set('p_z', p[2])
     body.help()
+
+def test_body_help():
+
+    file = r'tests/ref/properties.txt'
+
+    if os.path.exists(file):
+        os.remove(file)
+
+    with open(file, 'w') as f:
+        with redirect_stdout(f):
+    
+            body = Body('A')
+            body.help()
+
+    assert os.path.exists(file)

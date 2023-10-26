@@ -42,6 +42,6 @@ def test_plot_scalar_equation():
     if os.path.exists(file):
         os.remove(file)
 
-    universe.energy_equation('body').plot('vf', 'v0', [0, 4], points=200, path=file, show=False)
+    universe.energy_conservation_equation('body').plot('vf', 'v0', [0, 4], points=200, path=file, show=False)
 
     assert os.path.exists(file)

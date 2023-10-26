@@ -22,10 +22,10 @@ def test_mrua_2d_i():
 
     body = Body('body', dimensions=2)
 
-    body.set('gravity', g)
-    body.set('initial_position', p0)
-    body.set('initial_velocity', v0)
-    body.set('position', y, axis='y')
+    body.set('g', g)
+    body.set('p0', p0)
+    body.set('v0', v0)
+    body.set('p_y', y)
 
     universe = Universe()
     universe.add_body(body)
@@ -34,7 +34,7 @@ def test_mrua_2d_i():
     
     assert compare_floats(t, 3.20)
 
-    body.set('time', t)
+    body.set('t', t)
 
     p_x = universe.linear_position_equation('body')['x'].solve('p_x', first_positive_root=True)
     
@@ -53,10 +53,10 @@ def test_mrua_2d_ii():
 
     body = Body('body', dimensions=2)
 
-    body.set('gravity', g)
-    body.set('initial_position', p0)
-    body.set('initial_velocity', v0)
-    body.set('position', py, axis='y')
+    body.set('g', g)
+    body.set('p0', p0)
+    body.set('v0', v0)
+    body.set('p_y', py)
 
     universe = Universe()
     universe.add_body(body)
@@ -65,7 +65,7 @@ def test_mrua_2d_ii():
     
     assert compare_floats(t, 1.33)
 
-    body.set('time', t)
+    body.set('t', t)
 
     p_x = universe.linear_position_equation('body')['x'].solve('p_x', first_positive_root=True)
     
@@ -91,10 +91,10 @@ def test_mrua_2d_iii():
 
     body = Body('body', dimensions=2)
 
-    body.set('gravity', g)
-    body.set('initial_position', p0)
-    body.set('initial_velocity', v0)
-    body.set('position', py, axis='y')
+    body.set('g', g)
+    body.set('p0', p0)
+    body.set('v0', v0)
+    body.set('p_y', py)
 
     universe = Universe()
     universe.add_body(body)
@@ -103,7 +103,7 @@ def test_mrua_2d_iii():
     
     assert compare_floats(t, 1.33)
 
-    body.set('time', t)
+    body.set('t', t)
 
     p_x = universe.linear_position_equation('body')['x'].solve('p_x', first_positive_root=True)
     

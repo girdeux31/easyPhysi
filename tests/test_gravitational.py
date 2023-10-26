@@ -14,12 +14,12 @@ def test_gravity_b1_2019_junio_a():
     B1.a 2019 junio
     """
     body_a = Body('A')
-    body_a.set('mass', 3)
-    body_a.set('position', (0, 0))
+    body_a.set('m', 3)
+    body_a.set('p', (0, 0))
 
     body_b = Body('B')
-    body_b.set('mass', 5)
-    body_b.set('position', (2, -2))
+    body_b.set('m', 5)
+    body_b.set('p', (2, -2))
 
     universe = Universe()
     universe.add_body(body_a)
@@ -42,21 +42,21 @@ def test_gravity_b1_2019_junio_b():
     pb_1 = (2, 0)
 
     body_a = Body('A')
-    body_a.set('mass', 3)
-    body_a.set('position', pa)
+    body_a.set('m', 3)
+    body_a.set('p', pa)
 
     body_b = Body('B')
-    body_b.set('mass', 5)
+    body_b.set('m', 5)
 
     universe = Universe()
     universe.add_body(body_a)
     universe.add_body(body_b)
 
-    body_b.set('position', pb_0)
+    body_b.set('p', pb_0)
 
     Ep_0 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 
-    body_b.set('position', pb_1)
+    body_b.set('p', pb_1)
     
     Ep_1 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 
@@ -70,8 +70,8 @@ def test_gravity_a1_2019_junio_a1():
     A1.a1 2019 junio
     """
     body_a = Body('A')
-    body_a.set('mass', 5)
-    body_a.set('position', (4, 3))
+    body_a.set('m', 5)
+    body_a.set('p', (4, 3))
     point = (0, 0)
 
     universe = Universe()

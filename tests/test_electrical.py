@@ -16,12 +16,12 @@ def test_electrical_b1_2019_junio_a():
     point = (4, 0)
 
     body_1 = Body('1')
-    body_1.set('charge', 5E-9)
-    body_1.set('position', (0, +3))
+    body_1.set('q', 5E-9)
+    body_1.set('p', (0, +3))
 
     body_2 = Body('2')
-    body_2.set('charge', 5E-9)
-    body_2.set('position', (0, -3))
+    body_2.set('q', 5E-9)
+    body_2.set('p', (0, -3))
 
     universe = Universe()
     universe.add_body(body_1)
@@ -43,12 +43,12 @@ def test_electrical_b1_2019_junio_b():
     point_1 = (4, 0)
 
     body_1 = Body('1')
-    body_1.set('charge', 5E-9)
-    body_1.set('position', (0, +3))
+    body_1.set('q', 5E-9)
+    body_1.set('p', (0, +3))
 
     body_2 = Body('2')
-    body_2.set('charge', 5E-9)
-    body_2.set('position', (0, -3))
+    body_2.set('q', 5E-9)
+    body_2.set('p', (0, -3))
 
     universe = Universe()
     universe.add_body(body_1)
@@ -68,12 +68,12 @@ def test_electrical_AP3_2019_junio_a():
     point = (4, 0)
 
     body_1 = Body('1')
-    body_1.set('charge', -3E-9)
-    body_1.set('position', (0, +3))
+    body_1.set('q', -3E-9)
+    body_1.set('p', (0, +3))
 
     body_2 = Body('2')
-    body_2.set('charge', -3E-9)
-    body_2.set('position', (0, -3))
+    body_2.set('q', -3E-9)
+    body_2.set('p', (0, -3))
 
     universe = Universe()
     universe.add_body(body_1)
@@ -95,12 +95,12 @@ def test_electrical_AP3_2019_junio_b():
     point_1 = (4, 0)
 
     body_1 = Body('1')
-    body_1.set('charge', -3E-9)
-    body_1.set('position', (0, +3))
+    body_1.set('q', -3E-9)
+    body_1.set('p', (0, +3))
 
     body_2 = Body('2')
-    body_2.set('charge', -3E-9)
-    body_2.set('position', (0, -3))
+    body_2.set('q', -3E-9)
+    body_2.set('p', (0, -3))
 
     universe = Universe()
     universe.add_body(body_1)
@@ -120,20 +120,20 @@ def test_electrical_A3_2021_junio_coincidentes_a():
     point = (0, 0)
 
     body_1 = Body('1')
-    body_1.set('charge', 5E-9)
-    body_1.set('position', (-1, +1))
+    body_1.set('q', 5E-9)
+    body_1.set('p', (-1, +1))
 
     body_2 = Body('2')
-    body_2.set('charge', 5E-9)
-    body_2.set('position', (+1, +1))
+    body_2.set('q', 5E-9)
+    body_2.set('p', (+1, +1))
 
     body_3 = Body('3')
-    body_3.set('charge', 3E-9)
-    body_3.set('position', (+1, -1))
+    body_3.set('q', 3E-9)
+    body_3.set('p', (+1, -1))
 
     body_4 = Body('4')
-    body_4.set('charge', 3E-9)
-    body_4.set('position', (-1, -1))
+    body_4.set('q', 3E-9)
+    body_4.set('p', (-1, -1))
 
     universe = Universe()
     universe.add_body(body_1)
@@ -157,20 +157,20 @@ def test_electrical_A3_2021_junio_coincidentes_b():
     point_1 = (0, 1)
 
     body_1 = Body('1')
-    body_1.set('charge', 5E-9)
-    body_1.set('position', (-1, +1))
+    body_1.set('q', 5E-9)
+    body_1.set('p', (-1, +1))
 
     body_2 = Body('2')
-    body_2.set('charge', 5E-9)
-    body_2.set('position', (+1, +1))
+    body_2.set('q', 5E-9)
+    body_2.set('p', (+1, +1))
 
     body_3 = Body('3')
-    body_3.set('charge', 3E-9)
-    body_3.set('position', (+1, -1))
+    body_3.set('q', 3E-9)
+    body_3.set('p', (+1, -1))
 
     body_4 = Body('4')
-    body_4.set('charge', 3E-9)
-    body_4.set('position', (-1, -1))
+    body_4.set('q', 3E-9)
+    body_4.set('p', (-1, -1))
 
     universe = Universe()
     universe.add_body(body_1)
@@ -179,11 +179,11 @@ def test_electrical_A3_2021_junio_coincidentes_b():
     universe.add_body(body_4)
     universe.add_body(electron)
 
-    electron.set('position', point_0)
+    electron.set('p', point_0)
 
     Ep_0 = universe.electrical_potential_energy_equation('electron').solve('Ue')
 
-    electron.set('position', point_1)
+    electron.set('p', point_1)
     
     Ep_1 = universe.electrical_potential_energy_equation('electron').solve('Ue')
 
@@ -200,21 +200,21 @@ def test_electrical_A3_2023_modelo_b():
     point_1 = (3, 0, 0)
 
     sphere = Body('sphere', dimensions=3)
-    sphere.set('charge', 22.62E-9)
-    sphere.set('position', (0, 0, 0))
+    sphere.set('q', 22.62E-9)
+    sphere.set('p', (0, 0, 0))
 
     point = Body('point', dimensions=3)
-    point.set('charge', 1E-9)
+    point.set('q', 1E-9)
 
     universe = Universe(dimensions=3)
     universe.add_body(sphere)
     universe.add_body(point)
 
-    point.set('position', point_0)
+    point.set('p', point_0)
 
     Ep_0 = universe.electrical_potential_energy_equation('point').solve('Ue')
 
-    point.set('position', point_1)
+    point.set('p', point_1)
     
     Ep_1 = universe.electrical_potential_energy_equation('point').solve('Ue')
 

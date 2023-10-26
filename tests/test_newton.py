@@ -1,7 +1,7 @@
 
 import sys
 import math
-from sympy import Symbol, solve
+from sympy import Symbol
 
 sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 
@@ -26,7 +26,7 @@ def test_newton_i():
 
     body = Body('body', dimensions=2)
 
-    body.set('mass', m)
+    body.set('m', m)
     body.apply_force('W', W)
     body.apply_force('Fr', Fr)
     body.apply_force('N', N)
@@ -56,7 +56,7 @@ def test_newton_ii():
 
     body = Body('body', dimensions=2)
 
-    body.set('mass', m)
+    body.set('m', m)
     body.apply_force('W', W)
     body.apply_force('Fr', Fr)
     body.apply_force('N', N)
@@ -96,19 +96,19 @@ def test_newton_iii():
     
     # define bodies and apply forces
     body_a = Body('A')
-    body_a.set('mass', ma)
+    body_a.set('m', ma)
     body_a.apply_force('T2', Tab)
     body_a.apply_force('Fra', Fra)
     body_a.apply_force('Wa', Wa)
 
     body_b = Body('B')
-    body_b.set('mass', mb)
+    body_b.set('m', mb)
     body_b.apply_force('T1', Tbc)
     body_b.apply_force('T2', Tba)
     body_b.apply_force('Frb', Frb)
 
     body_c = Body('C')
-    body_c.set('mass', mc)
+    body_c.set('m', mc)
     body_c.apply_force('Wc', Wc)
     body_c.apply_force('T1', Tcb)
 
@@ -163,7 +163,7 @@ def test_newton_iv():
     
     # define bodies and apply forces
     body = Body('body')
-    body.set('mass', ma+mb+mc)
+    body.set('m', ma+mb+mc)
     body.apply_force('T2', Tab)
     body.apply_force('Fra', Fra)
     body.apply_force('Wa', Wa)
