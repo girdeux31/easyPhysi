@@ -3,7 +3,7 @@ from ..drivers.axes import Axes
 from ..drivers.equation import Equation
 
 
-class EnergyEquation:
+class EnergyConservationEquation:
     
     def __init__(self, universe):
 

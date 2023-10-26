@@ -5,7 +5,7 @@ from .body import Body
 from ..equations.linear_position_equation import LinearPositionEquation
 from ..equations.linear_velocity_equation import LinearVelocityEquation
 from ..equations.newton_equation import NewtonEquation
-from ..equations.energy_equation import EnergyEquation
+from ..equations.energy_conservation_equation import EnergyConservationEquation
 from ..equations.gravitational_force_equation import GravitationalForceEquation
 from ..equations.gravitational_potential_energy_equation import GravitationalPotentialEnergyEquation
 from ..equations.gravitational_field_intensity_equation import GravitationalFieldIntensityEquation
@@ -34,7 +34,7 @@ class Universe:
         self.electrical_force_equation = ElectricalForceEquation(self)
         self.electrical_potential_energy_equation = ElectricalPotentialEnergyEquation(self)
         self.electrical_potential_equation = ElectricalPotentialEquation(self)
-        self.energy_equation = EnergyEquation(self)
+        self.energy_conservation_equation = EnergyConservationEquation(self)
         self.gravitational_field_intensity_equation = GravitationalFieldIntensityEquation(self)
         self.gravitational_force_equation = GravitationalForceEquation(self)
         self.gravitational_potential_energy_equation = GravitationalPotentialEnergyEquation(self)
@@ -62,7 +62,7 @@ class Universe:
         
         return body[0]
 
-    def help(self):  #TODO what about force and energy?
+    def help(self):
 
         print('')
         print('The following equations are allowed:')
