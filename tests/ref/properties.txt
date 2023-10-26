@@ -1,0 +1,23 @@
+
+The following properties are allowed:
+
+ Property   Description                      Type       Value           
+ ========== ================================ ========== ================
+ a          Acceleration                     Vector     (a_x, a_y)
+ q          Charge                           Scalar     q
+ Ee         Electrical field intensity       Vector     (Ee_x, Ee_y)
+ Fe         Electrical force                 Vector     (Fe_x, Fe_y)
+ Ue         Electrical potential energy      Scalar     Ue
+ Ve         Electrical potential             Scalar     Ve
+ gg         Gravitational field intensity    Vector     (gg_x, gg_y)
+ Fg         Gravitational force              Vector     (Fg_x, Fg_y)
+ Ug         Gravitational potential energy   Scalar     Ug
+ Vg         Gravitational potential          Scalar     Vg
+ g          Gravity                          Vector     (g_x, g_y)
+ p0         Initial position                 Vector     (p0_x, p0_y)
+ v0         Initial velocity                 Vector     (v0_x, v0_y)
+ m          Mass                             Scalar     m
+ p          Position                         Vector     (p_x, p_y)
+ t          Time                             Scalar     t
+ v          Velocity                         Vector     (v_x, v_y)
+
