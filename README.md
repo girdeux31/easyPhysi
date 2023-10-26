@@ -154,6 +154,17 @@ This is designed on purpose because many different forces and energies can be ap
 
 See examples for Newton equation and energy conservation equation in [D-examples](#sec:example-dinamics) and [E-examples](#sec:example-energy-conservation) respectively.
 
+### <a name="sec:special-bodies"></a>Special bodies
+
+Special bodies are pre-defined to be used. There are two types: particles and celestial bodies.
+
+ - Particles: `electron`, `proton`, `neutron`
+ - Celestial bodies: `sun`, `mercury`, `venus`, `earth`, `moon`, `mars`, `jupiter`, `saturn`, `uranus`, `neptune`
+
+`from pyphysics.drivers.body import special_body`
+
+See example in [EF-examples](#sec:example-electrical-field).
+ 
 ### <a name="sec:equations"></a>Equations
 
 The following equations can be solved. Equation names are case sensitive.
