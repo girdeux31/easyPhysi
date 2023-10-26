@@ -47,13 +47,13 @@ class Equation:
         # Checks
         
         if len(self.unknowns) != 2:
-            raise RuntimeError(f'Equation must have exactly two unknowns, but it has ({self.unknowns})')
+            raise ValueError(f'Equation must have exactly two unknowns, but it has ({self.unknowns})')
 
         if independent not in self.unknowns:
-            raise RuntimeError(f'Independent unknown ({independent}) is not in equation unknowns ({self.unknowns})')
+            raise ValueError(f'Independent unknown ({independent}) is not in equation unknowns ({self.unknowns})')
 
         if dependent not in self.unknowns:
-            raise RuntimeError(f'Dependent unknown ({dependent}) is not in equation unknowns ({self.unknowns})')
+            raise ValueError(f'Dependent unknown ({dependent}) is not in equation unknowns ({self.unknowns})')
 
         if len(x_range) != 2:
             raise ValueError('Parameter \'x_range\' must have length 2')
@@ -62,8 +62,11 @@ class Equation:
 
         function = self.solve(independent)
 
-        if not function or len(function) != 1:
-            raise RuntimeError(f'Equation solution not found or several solutions found for {independent} unkown')
+        if not function:
+            raise RuntimeError(f'Equation solution not found for {independent} unkown')
+
+        if len(function) > 1:
+            Warning(f'Several solutions found for {independent} unkown')
 
         # Get x,y points and plot
 

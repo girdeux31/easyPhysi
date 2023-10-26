@@ -40,7 +40,7 @@ def angle_with_horizontal_2d(point_a, point_b):
     # and it is negative -pi <= alpha <= 0.0 for the third and forth quadrants
 
     if len(point_a) != 2 or len(point_b) != 2:
-        raise ValueError('Lengths of parameters \'point_a\' and \'point_b\' must be 2')
+        raise ValueError('Lengths of arguments \'point_a\' and \'point_b\' must be 2')
 
     point_c = tuple([b-a for a, b in zip(point_a, point_b)])
     alpha = math.atan2(point_c[1], point_c[0])
@@ -56,7 +56,7 @@ def angle_with_horizontal_3d(point_a, point_b):
     # length_xy is the length of the projection of the vector formed by point_a and point_b over the x,y plane
 
     if len(point_a) != 3 or len(point_b) != 3:
-        raise ValueError('Lengths of parameters \'point_a\' and \'point_b\' must be 3')
+        raise ValueError('Lengths of arguments \'point_a\' and \'point_b\' must be 3')
 
     point_c = tuple([b-a for a, b in zip(point_a, point_b)])
     length_xy = math.sqrt(point_c[0]**2 + point_c[1]**2)

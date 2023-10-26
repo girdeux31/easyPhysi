@@ -64,7 +64,8 @@ class Universe:
 
     def help(self):  #TODO what about force and energy?
 
-        print('The following equations are recognized:')
+        print('')
+        print('The following equations are allowed:')
         print('')
         print(' {:40s} {:10s} {:16s}'.format('Equation', 'Type', 'Parameters'))
         print(' ' + '='*40 + ' ' + '='*10 + ' '+ '='*16)

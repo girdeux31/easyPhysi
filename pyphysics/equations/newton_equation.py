@@ -40,6 +40,9 @@ class NewtonEquation:
         system = System()
         body = self.universe.get_body(name)
 
+        if not body.forces:
+            raise ValueError('Before solving the equation you must add force(s) over body with \'apply_force\' method')
+
         for axis, idx in self.axes.components.items():
 
             equation = self._equation(body, idx)

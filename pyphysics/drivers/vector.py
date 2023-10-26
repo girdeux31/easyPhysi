@@ -107,6 +107,6 @@ class Vector:
             if not hasattr(value, '__len__') or len(value) != self.dimensions:
                 raise ValueError(f'Parameter \'value\' must be of length {self.dimensions}')
 
-            self.value = value
+            self.value = tuple(value)
         
 

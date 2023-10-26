@@ -35,6 +35,10 @@ class EnergyEquation:
     def equation(self, name):
 
         body = self.universe.get_body(name)
+
+        if not body.energies:
+            raise ValueError('Before solving the equation you must add energy(ies) over body with \'add_energy\' method')
+
         equation = self._equation(body)
 
         return equation
