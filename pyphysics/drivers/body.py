@@ -120,7 +120,7 @@ class Body:
         print('')
 
 
-# Special bodies
+# Special bodies: particles
 
 electron = Body('electron')
 electron.set('m', electron_mass)  # kg
@@ -134,9 +134,15 @@ neutron = Body('neutron')
 neutron.set('m', neutron_mass)
 neutron.set('q', 0.0)
 
+# Special bodies: celestial bodies
+
+sun = Body('sun')
+sun.set('m', 1.98847e30)  # kg
+sun.set('p', (0, 0))  # km, relative to the sun
+
 mercury = Body('mercury')
-mercury.set('m', 3.301e23)  # kg
-mercury.set('p', (57900000, 0))  # km
+mercury.set('m', 3.301e23)
+mercury.set('p', (57900000, 0))
 
 venus = Body('venus')
 venus.set('m', 4.867e24)
@@ -148,7 +154,7 @@ earth.set('p', (149600000, 0))
 
 moon = Body('moon')
 moon.set('m', 7.348e229)
-mars.set('p', (384400, 0))
+mars.set('p', (384400, 0))  # relative to the Earth
 
 mars = Body('mars')
 mars.set('m', 6.417e23)
