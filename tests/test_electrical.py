@@ -8,10 +8,12 @@ from pyphysics.drivers.universe import Universe
 from pyphysics.utils import compare_floats, magnitude
 
 
-def test_electrical_b1_2019_junio_a():
+def test_electrical_a3a_2021_modelo():
     """
-    F4.1-PAU-Electric Field
-    A3.a 2021 modelo
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+    Problem: A3.a 2021 modelo
+    Statement: Two equal point charges of 5 nC are located on the (x, y) plane at points (0, 3) m and (0, -3) m.
+    a) Determine the electric field created by both charges at the point (4, 0) m.
     """
     point = (4, 0)
 
@@ -34,10 +36,12 @@ def test_electrical_b1_2019_junio_a():
     assert compare_floats(Ee_y, 0.0)
     assert compare_floats(Ee, 2.88)
 
-def test_electrical_b1_2019_junio_b():
+def test_electrical_a3a_2021_modelo_bis():
     """
-    F4.1-PAU-Electric Field
-    A3.b 2021 modelo
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+    Problem: A3.a 2021 modelo
+    Statement: Two equal point charges of 5 nC are located on the (x, y) plane at points (0, 3) m and (0, -3) m.
+    a) Determine the electric field created by both charges at the point (4, 0) m.
     """
     point_0 = (0, 0)
     point_1 = (4, 0)
@@ -60,10 +64,12 @@ def test_electrical_b1_2019_junio_b():
     assert compare_floats(Ve_0[0], 30)
     assert compare_floats(Ve_1[0], 18)
 
-def test_electrical_AP3_2019_junio_a():
+def test_electrical_a3a_2019_junio_coincidentes():
     """
-    F4.1-PAU-Electric Field
-    AP3.a 2019 junio coincidentes
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+    Problem: A3.a 2019 junio coincidentes
+    Statement: Two identical particles with a charge Q = -3 nC are fixed at the points (0, 3) and (0, -3) m in the xy-plane.
+    a) Determine the electric field created by both charges at the point (4, 0) m.
     """
     point = (4, 0)
 
@@ -86,10 +92,12 @@ def test_electrical_AP3_2019_junio_a():
     assert compare_floats(Ee_y, 0.0)
     assert compare_floats(Ee, 1.73)
 
-def test_electrical_AP3_2019_junio_b():
+def test_electrical_a3a_2019_junio_coincidentes_bis():
     """
-    F4.1-PAU-Electric Field
-    AP3.b 2019 junio coincidentes
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+    Problem: A3.b 2019 junio coincidentes
+    Statement: Two identical particles with a charge Q = -3 nC are fixed at the points (0, 3) and (0, -3) m in the xy-plane.
+    a) Determine the electric field created by both charges at the point (4, 0) m.
     """
     point_0 = (0, 0)
     point_1 = (4, 0)
@@ -112,10 +120,12 @@ def test_electrical_AP3_2019_junio_b():
     assert compare_floats(Ve_0[0], -18)
     assert compare_floats(Ve_1[0], -10.8)
 
-def test_electrical_A3_2021_junio_coincidentes_a():
+def test_electrical_a3a_2021_junio_coincidentes_a():
     """
-    F4.1-PAU-Electric Field
-    A3.a 2021 junio coincidentes
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+    Problem: A3.a 2021 junio coincidentes
+    Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure.
+    a) Obtain the electric field created by the charges at the center of the square.
     """
     point = (0, 0)
 
@@ -148,10 +158,11 @@ def test_electrical_A3_2021_junio_coincidentes_a():
     assert compare_floats(-12.72, Ee_y)
     assert compare_floats(12.72, Ee)
 
-def test_electrical_A3_2021_junio_coincidentes_b():
+def test_electrical_a3b_2021_junio_coincidentes():
     """
-    F4.1-PAU-Electric Field
-    A3.b 2021 junio coincidentes
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+    Problem: A3.b 2021 junio coincidentes
+    Statement: b) If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, calculate the speed at which the electron will leave the square through the midpoint of the top side.
     """
     point_0 = (0, 0)
     point_1 = (0, 1)
@@ -181,20 +192,22 @@ def test_electrical_A3_2021_junio_coincidentes_b():
 
     electron.set('p', point_0)
 
-    Ep_0 = universe.electrical_potential_energy_equation('electron').solve('Ue')
+    Ue_0 = universe.electrical_potential_energy_equation('electron').solve('Ue')
 
     electron.set('p', point_1)
     
-    Ep_1 = universe.electrical_potential_energy_equation('electron').solve('Ue')
+    Ue_1 = universe.electrical_potential_energy_equation('electron').solve('Ue')
 
-    W = Ep_0[0] - Ep_1[0] # W = -AEp = Ep_0 - Ep_1
+    W = Ue_0[0] - Ue_1[0] # W = -AUe = Ue_0 - Ue_1
 
     assert compare_floats(1.97E-18, W)
 
-def test_electrical_A3_2023_modelo_b():
+def test_electrical_a3b_2023_modelo():
     """
-    F4.1-PAU-Electric Field
-    A3.b 2023 modelo
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+    Problem: A3.b 2023 modelo
+    Statement: A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2.
+    b) Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
     """
     point_0 = (0, 2, 0)
     point_1 = (3, 0, 0)
@@ -212,12 +225,12 @@ def test_electrical_A3_2023_modelo_b():
 
     point.set('p', point_0)
 
-    Ep_0 = universe.electrical_potential_energy_equation('point').solve('Ue')
+    Ue_0 = universe.electrical_potential_energy_equation('point').solve('Ue')
 
     point.set('p', point_1)
     
-    Ep_1 = universe.electrical_potential_energy_equation('point').solve('Ue')
+    Ue_1 = universe.electrical_potential_energy_equation('point').solve('Ue')
 
-    W = Ep_0[0] - Ep_1[0] # W = -AEp = Ep_0 - Ep_1
+    W = Ue_0[0] - Ue_1[0] # W = -AEp = Ue_0 - Ue_1
 
     assert compare_floats(3.393E-8, W)

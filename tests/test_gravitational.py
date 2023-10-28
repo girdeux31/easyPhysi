@@ -8,10 +8,12 @@ from pyphysics.drivers.universe import Universe
 from pyphysics.utils import compare_floats, magnitude
 
 
-def test_gravity_b1_2019_junio_a():
+def test_gravity_b1a_2019_junio_coincidentes():
     """
-    F2-PAU-Gravitation
-    B1.a 2019 junio
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+    Problem: B1.a 2019 junio
+    Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine:
+    a) The force exerted by mass A on mass B.
     """
     body_a = Body('A')
     body_a.set('m', 3)
@@ -32,10 +34,11 @@ def test_gravity_b1_2019_junio_a():
     assert compare_floats(Fg_y, +8.84E-11)
     assert compare_floats(Fg, +1.25E-10)
 
-def test_gravity_b1_2019_junio_b():
+def test_gravity_b1b_2019_junio_coincidentes():
     """
-    F2-PAU-Gravitation
-    B1.b 2019 junio
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+    Problem: B1.b 2019 junio
+    Statement: The work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
     """
     pa = (0, 0)
     pb_0 = (2, -2)
@@ -54,20 +57,22 @@ def test_gravity_b1_2019_junio_b():
 
     body_b.set('p', pb_0)
 
-    Ep_0 = universe.gravitational_potential_energy_equation('B').solve('Ug')
+    Ug_0 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 
     body_b.set('p', pb_1)
     
-    Ep_1 = universe.gravitational_potential_energy_equation('B').solve('Ug')
+    Ug_1 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 
-    W = Ep_0[0] - Ep_1[0] # W = -AEp = Ep_0 - Ep_1
+    W = Ug_0[0] - Ug_1[0] # W = -AEp = Ug_0 - Ug_1
 
     assert compare_floats(W, 1.47E-10)
 
-def test_gravity_a1_2019_junio_a1():
+def test_gravity_a1a_2019_junio():
     """
-    F2-PAU-Gravitation
-    A1.a1 2019 junio
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+    Problem: A1.a 2019 junio
+    Statement: A point mass m1 = 5 kg is located at the point (4, 3) m.
+    a) Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
     """
     body_a = Body('A')
     body_a.set('m', 5)

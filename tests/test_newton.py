@@ -11,10 +11,13 @@ from pyphysics.drivers.system import System
 from pyphysics.utils import compare_floats
 
 
-def test_newton_i():
+def test_newton_14():
     """
-    Relación 8 las fuerzas
-    Problema 14
+    URL: https://fq.iespm.es/documentos/rafael_artacho/4_ESO/08.%20Problemas%20Las%20fuerzas.pdf
+    Problem: 14
+    Statement: The following ramp has an inclination of 25º. Determine the force that must be exerted on the 250 kg wagon to make it go up with constant velocity:
+    a) If there is no friction.
+    b) If 𝜇 = 0.1.
     """
     mu = Symbol('mu')
     alpha = math.radians(25)
@@ -41,10 +44,12 @@ def test_newton_i():
     assert compare_floats(f_00, -1036.47)
     assert compare_floats(f_01, -1258.74)
 
-def test_newton_ii():
+def test_newton_14b_bis():
     """
-    Relación 8 las fuerzas
-    Problema 14
+    URL: https://fq.iespm.es/documentos/rafael_artacho/4_ESO/08.%20Problemas%20Las%20fuerzas.pdf
+    Problem: 14b
+    Statement: The following ramp has an inclination of 25º. Determine the force that must be exerted on the 250 kg wagon to make it go up with constant velocity:
+    b) If 𝜇 = 0.1.
     """
     mu = 0.1
     alpha = math.radians(25)
@@ -71,10 +76,11 @@ def test_newton_ii():
     assert compare_floats(a_y, -4.74)
     assert compare_floats(f_x, -1258.74)
 
-def test_newton_iii():
+def test_newton_8():
     """
-    Examen cinemática y dinámica
-    Problema 8
+    File: Examen cinemática y dinámica
+    Problem: 8
+    Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
     """
     # initialize parameters and constants
     g = 9.81
@@ -136,10 +142,11 @@ def test_newton_iii():
     assert compare_floats(T2, 7.59)
     assert compare_floats(a_x, 0.79)
 
-def test_newton_iv():
+def test_newton_8_bis():
     """
-    Examen cinemática y dinámica
-    Problema 8
+    File: Examen cinemática y dinámica
+    Problem: 8
+    Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
     """
     # initialize parameters and constants
     g = 9.81
