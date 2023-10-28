@@ -3,63 +3,52 @@
 > [!WARNING]
 > **Library under development yet**
 
-pyPhysics is a physics library to solve pre-universitary physics problems. The physics areas that are covered in the library, along with some examples, are summarized in the following [table](#tab-areas).
+pyPhysics is a physics library to solve pre-universitary physics problems. The physics areas that are covered by pyPhisics are summarized hereafter. See the [main structure](#sec-main-structure) to use pyPhysics and also some [examples](#sec-examples).
 
-<a name="tab-areas"></a>
+ - Kinematics
+ - Dinamics
+ - Energy conservation
+ - Gravitational field
+ - Electrical field
 
- | Area                 | Examples                                          |
- |----------------------|---------------------------------------------------|
- | Kinematics           | [K-examples](#sec-example-kinematics)             |
- | Dinamics             | [D-examples](#sec-example-dinamics)               |
- | Energy conservation  | [EC-examples](#sec-example-energy-conservation)   |
- | Gravitational field  | [GF-examples](#sec-example-gravitational-field)   |
- | Electrical field     | [EF-examples](#sec-example-electrical-field)      |
-
-## <a name="sec-index"></a>Index
-
-1. [Characteristics](#sec-characteristics)
-2. [Requirements](#sec-requirementes)
-3. [Installation](#sec-installation)
-4. [Usage](#sec-usage)
-    1. [Main structure](#sec-main-structure)
-    2. [Properties](#sec-properties)
-    3. [Special bodies](#sec-special-bodies)
-    4. [Equations](#sec-equations)
-    5. [Advance features](#sec-advance-features)
-5. [Examples](#sec-examples)
-    1. [Kinematics](#sec-example-kinematics)
-    2. [Dinamics](#sec-example-dinamics)
-    3. [Energy conservation](#sec-example-energy-conservation)
-    4. [Gravitational field](#sec-example-gravitational-field)
-    5. [Electrical field](#sec-example-electrical-field)
-6. [Bugs and limitations](#sec-bugs-limitations)
-7. [License](#sec-licence)
-8. [Contact](#sec-contact)
-
-## <a name="sec-characteristics"></a>Characteristics
+The main characteristics for pyPhysics are summarized in the following table.
 
 <a name="tab-characteristics"></a>
 
  | Characteristic   | Value         |
  |------------------|---------------|
- | Program          | pyPhysics     |
+ | Name             | pyPhysics     |
  | Version          | 1.0           |
  | Author           | Carles Mesado |
  | Date             | 31/10/2023    |
  | Size             | ~ 18 KiB      |
- 
-## <a name="sec-requirementes"></a>Requirements
 
-Python 3.10 and the following third-party modules:
+## <a name="sec-index"></a>Index
 
- - matplotlib>=3.7.0
- - scipy>=1.11.0
- - sympy==1.12
+1. [Installation](#sec-installation)
+2. [Usage](#sec-usage)
+    1. [Main structure](#sec-main-structure)
+    2. [Properties](#sec-properties)
+    3. [Special bodies](#sec-special-bodies)
+    4. [Equations](#sec-equations)
+    5. [Advance features](#sec-advance-features)
+3. [Examples](#sec-examples)
+    1. [Kinematics](#sec-example-kinematics)
+    2. [Dinamics](#sec-example-dinamics)
+    3. [Energy conservation](#sec-example-energy-conservation)
+    4. [Gravitational field](#sec-example-gravitational-field)
+    5. [Electrical field](#sec-example-electrical-field)
+4. [Bugs and limitations](#sec-bugs-limitations)
+5. [License](#sec-licence)
+6. [Contact](#sec-contact)
 
 ## <a name="sec-installation"></a>Installation
 
 > [!WARNING]
 > **Package not in pypi yet**
+
+> [!NOTE]
+> pyPhysics is developed and tested with Python 3.10.
 
 Install the package with pip,
 
@@ -68,6 +57,12 @@ Install the package with pip,
 or clone the GitHub repository.
 
 `gh repo clone girdeux31/pyPhysics`
+
+The following third-party modules are requirements.
+
+ - matplotlib>=3.7.0
+ - scipy>=1.11.0
+ - sympy==1.12
 
 ## <a name="sec-usage"></a>Usage
 
