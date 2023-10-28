@@ -154,7 +154,7 @@ earth.set('p', (149600000, 0))
 
 moon = Body('moon')
 moon.set('m', 7.348e229)
-mars.set('p', (384400, 0))  # relative to the Earth
+moon.set('p', (384400, 0))  # relative to the Earth
 
 mars = Body('mars')
 mars.set('m', 6.417e23)
