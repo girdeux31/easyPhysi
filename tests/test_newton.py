@@ -132,10 +132,12 @@ def test_newton_8():
     # Then solve system:
 
     unkowns = ['T1', 'T2', 'a_x']
+
     system = System()
     system.add_equation(eq_a)
     system.add_equation(eq_b)
     system.add_equation(eq_c)
+    
     T1, T2, a_x = system.solve(unkowns)
     
     assert compare_floats(T1, 13.54)

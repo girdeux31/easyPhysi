@@ -273,18 +273,16 @@ See examples for scalar equation in [example XX](#sec:) and vectorial equation i
 
 ### <a name="sec:example-kinematics"></a>Kinematics
 
-#### <a name="sec:example-k1"></a>K-1
+#### <a name="sec:example-k1"></a>Example K-1
 
 URL: https://fq.iespm.es/documentos/janavarro/fisica2bach/T0_vectores_cinematica.pdf
+
 Problem: 10
 
-**Statement**
+Statement: A ball falls from a roof located 10 m high, forming a 30º angle with the horizontal, with a speed of 2 m/s. Calculate:
 
-A ball falls from a roof located 10 m high, forming a 30º angle with the horizontal, with a speed of 2 m/s. Calculate:
-    a) At what distance from the wall does it hit the ground?
-    b) The speed it has when it reaches the ground (disregard air friction).
-
-**Code**
+a) At what distance from the wall does it hit the ground?
+b) The speed it has when it reaches the ground (disregard air friction).
 
 ```
 alpha = math.radians(-30)
@@ -315,8 +313,6 @@ v_x, v_y = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
 v = magnitude((v_x, v_y))
 ```
 
-**Result**
-
 ```
 t = 1.33 s
 v_x = 1.73 m/s
@@ -326,18 +322,16 @@ v = 14.15 m/s
 
 ### <a name="sec:example-dinamics"></a>Dinamics
 
-#### <a name="sec:example-d1"></a>D-1
+#### <a name="sec:example-d1"></a>Example D-1
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/4_ESO/08.%20Problemas%20Las%20fuerzas.pdf
+
 Problem: 14
 
-**Statement**
-
 Statement: The following ramp has an inclination of 25º. Determine the force that must be exerted on the 250 kg wagon to make it go up with constant velocity:
-    a) If there is no friction.
-    b) If 𝜇 = 0.1.
 
-**Code**
+a) If there is no friction.
+b) If 𝜇 = 0.1.
 
 ```
 mu = Symbol('mu')
@@ -363,20 +357,16 @@ f_00 = m*a_x.subs('mu', 0.0)
 f_01 = m*a_x.subs('mu', 0.1)
 ```
 
-**Result**
-
 ```
 assert compare_floats(f_00, -1036.47)
 assert compare_floats(f_01, -1258.74)
 ```
 
-#### <a name="sec:example-d2"></a>D-2
-
-**Statement**
+#### <a name="sec:example-d2"></a>Example D-2
 
 Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
 
-**Code**
+# TODO include figure
 
 ```
 g = 9.81
@@ -421,14 +411,14 @@ eq_b = universe.newton_equation('B')['x']
 eq_c = universe.newton_equation('C')['x']
 
 unkowns = ['T1', 'T2', 'a_x']
+
 system = System()
 system.add_equation(eq_a)
 system.add_equation(eq_b)
 system.add_equation(eq_c)
+
 T1, T2, a_x = system.solve(unkowns)
 ```
-
-**Result**
 
 ```
 assert compare_floats(T1, 13.54)
@@ -436,13 +426,11 @@ assert compare_floats(T2, 7.59)
 assert compare_floats(a_x, 0.79)
 ```
 
-#### <a name="sec:example-d2"></a>D-2
-
-**Statement**
+#### <a name="sec:example-d3"></a>Example D-3
 
 Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
 
-**Code**
+# TODO include figure
 
 ```
 g = 9.81
@@ -479,8 +467,6 @@ universe.add_body(body)
 a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
 ```
 
-**Result**
-
 ```
 assert compare_floats(a_x, 0.79)
 assert compare_floats(a_y, -1.89)
@@ -488,17 +474,15 @@ assert compare_floats(a_y, -1.89)
 
 ### <a name="sec:example-energy-conservation"></a>Energy conservation
 
-#### <a name="sec:example-ec1"></a>EC-1
+#### <a name="sec:example-ec1"></a>Example EC-1
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
+
 Problem: 15.a
 
-**Statement**
-
 Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey:
-    a) With what speed does it reach the base of the plane?
 
-**Code**
+a) With what speed does it reach the base of the plane?
 
 ```
 m = 1.0
@@ -528,24 +512,20 @@ universe.add_body(body)
 vf = universe.energy_conservation_equation('body').solve('vf')
 ```
 
-**Result**
-
 ```
 assert compare_floats(vf[0], -4.54)
 assert compare_floats(vf[1], 4.54)
 ```
 
-#### <a name="sec:example-ec2"></a>EC-2
+#### <a name="sec:example-ec2"></a>Example EC-2
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
+
 Problem: 15.a
 
-**Statement**
-
 Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey:
-    a) With what speed does it reach the base of the plane?
 
-**Code**
+a) With what speed does it reach the base of the plane?
 
 ```
 file = 'vf_f_v0.png'
@@ -577,22 +557,17 @@ universe.add_body(body)
 universe.energy_conservation_equation('body').plot('vf', 'v0', [0, 4], points=200, path=file, show=False)
 ```
 
-**Result**
-
 ```
 # TODO insert image
 ```
 
-#### <a name="sec:example-ec3"></a>EC-3
+#### <a name="sec:example-ec3"></a>Example EC-3
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
+
 Problem: 15.b
 
-**Statement**
-
 Statement: If upon reaching the flat surface, it collides with a spring of constant k = 200 N/m, what distance will the spring compress?
-
-**Code**
 
 ```
 m = 0.5
@@ -626,24 +601,20 @@ universe.add_body(body)
 dx = universe.energy_conservation_equation('body').solve('dx')
 ```
 
-**Result**
-
 ```
 assert compare_floats(dx[0], -0.227, decimals=3)
 assert compare_floats(dx[1], 0.227, decimals=3)
 ```
 
-#### <a name="sec:example-ec4"></a>EC-4
+#### <a name="sec:example-ec4"></a>Example EC-4
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
+
 Problem: 20.c
 
-**Statement**
+Statement: A 3 kg block situated at a height of 4 m is allowed to slide down a smooth, frictionless curved ramp. When it reaches the ground, it travels 10 m on a rough horizontal surface until it stops. Calculate:
 
-A 3 kg block situated at a height of 4 m is allowed to slide down a smooth, frictionless curved ramp. When it reaches the ground, it travels 10 m on a rough horizontal surface until it stops. Calculate:
-    c) The coefficient of friction with the horizontal surface.
-
-**Code**
+c) The coefficient of friction with the horizontal surface.
 
 ```
 m = 3.0
@@ -675,25 +646,21 @@ universe.add_body(body)
 mu = universe.energy_conservation_equation('body').solve('mu', first_positive_root=True)
 ```
 
-**Result**
-
 ```
 assert compare_floats(mu, 0.40)
 ```
 
 ### <a name="sec:example-gravity-field"></a>Gravitational field
 
-#### <a name="sec:example-gf1"></a>GF-1
+#### <a name="sec:example-gf1"></a>Example GF-1
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+
 Problem: B1.a 2019 junio
 
-**Statement**
+Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine:
 
-A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine:
-    a) The force exerted by mass A on mass B.
-
-**Code**
+a) The force exerted by mass A on mass B.
 
 ```
 body_a = Body('A')
@@ -712,25 +679,21 @@ Fg_x, Fg_y = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y'])
 Fg = magnitude((Fg_x, Fg_y))  # always positive value
 ```
 
-**Result**
-
 ```
 assert compare_floats(Fg_x, -8.84E-11)
 assert compare_floats(Fg_y, +8.84E-11)
 assert compare_floats(Fg, +1.25E-10)
 ```
 
-#### <a name="sec:example-gf2"></a>GF-2
+#### <a name="sec:example-gf2"></a>Example GF-2
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+
 Problem: B1.b 2019 junio
 
-**Statement**
+Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine:
 
-A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine:
-    b) The work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
-
-**Code**
+b) The work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
 
 ```
 pa = (0, 0)
@@ -759,23 +722,19 @@ Ug_1 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 W = Ug_0[0] - Ug_1[0] # W = -AEp = Ug_0 - Ug_1
 ```
 
-**Result**
-
 ```
 assert compare_floats(W, 1.47E-10)
 ```
 
-#### <a name="sec:example-gf3"></a>GF-3
+#### <a name="sec:example-gf3"></a>Example GF-3
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+
 Problem: A1.a 2019 junio
 
-**Statement**
+Statement: A point mass m1 = 5 kg is located at the point (4, 3) m.
 
-A point mass m1 = 5 kg is located at the point (4, 3) m.
-    a) Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
-
-**Code**
+a) Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
 
 ```
 body_a = Body('A')
@@ -790,8 +749,6 @@ g_x, g_y = universe.gravitational_field_intensity_equation(point).solve(['gg_x',
 g = magnitude((g_x, g_y))  # always positive value
 ```
 
-**Result**
-
 ```
 assert compare_floats(g_x, +1.06E-11)
 assert compare_floats(g_y, +7.99E-12)
@@ -800,17 +757,15 @@ assert compare_floats(g, +1.33E-11)
 
 ### <a name="sec:example-electrical-field"></a>Electrical field
 
-#### <a name="sec:example-ef1"></a>EF-1
+#### <a name="sec:example-ef1"></a>Example EF-1
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+
 Problem: A3.a 2021 junio coincidentes
 
-**Statement**
+Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure.
 
-At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure.
-    a) Obtain the electric field created by the charges at the center of the square.
-
-**Code**
+a) Obtain the electric field created by the charges at the center of the square.
 
 ```
 point = (0, 0)
@@ -841,25 +796,21 @@ Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 
 Ee = magnitude((Ee_x, Ee_y))  # always positive value
 ```
 
-**Result**
-
 ```
 assert compare_floats(0.0, Ee_x)
 assert compare_floats(-12.72, Ee_y)
 assert compare_floats(12.72, Ee)
 ```
 
-#### <a name="sec:example-ef2"></a>EF-2
+#### <a name="sec:example-ef2"></a>Example EF-2
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+
 Problem: A3.b 2021 junio coincidentes
 
-**Statement**
+Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure.
 
-At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure.
-    b) If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, calculate the speed at which the electron will leave the square through the midpoint of the top side.
-
-**Code**
+b) If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, calculate the speed at which the electron will leave the square through the midpoint of the top side.
 
 ```
 point_0 = (0, 0)
@@ -899,23 +850,19 @@ Ue_1 = universe.electrical_potential_energy_equation('electron').solve('Ue')
 W = Ue_0[0] - Ue_1[0] # W = -AUe = Ue_0 - Ue_1
 ```
 
-**Result**
-
 ```
 assert compare_floats(1.97E-18, W)
 ```
 
-#### <a name="sec:example-ef3"></a>EF-3
+#### <a name="sec:example-ef3"></a>Example EF-3
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+
 Problem: A3.b 2023 modelo
 
-**Statement**
+Statement: A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2.
 
-A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2.
-    b) Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
-
-**Code**
+b) Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
 
 ```
 point_0 = (0, 2, 0)
@@ -943,14 +890,14 @@ Ue_1 = universe.electrical_potential_energy_equation('point').solve('Ue')
 W = Ue_0[0] - Ue_1[0] # W = -AEp = Ue_0 - Ue_1
 ```
 
-**Result**
-
 ```
 assert compare_floats(3.393E-8, W)
 ```
 
 ## <a name="sec:bugs-limitations"></a>Bugs and limitations
-   
+
+`# TODO Limitation with p being the unknown`
+
 ## <a name="sec:licence"></a>License
 
 This project includes MIT License. A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
