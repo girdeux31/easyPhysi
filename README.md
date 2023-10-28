@@ -14,6 +14,27 @@ pyPhysics is a physics library to solve pre-universitary physics problems. The p
  | Gravitational field  | [GF-examples](#sec:example-gravitational-field)   |
  | Electrical field     | [EF-examples](#sec:example-electrical-field)      |
 
+## <a name="sec:index"></a>Index
+
+1. [Characteristics](#sec:characteristics)
+2. [Requirements](#sec:requirementes)
+3. [Installation](#sec:installation)
+4. [Usage](#sec:usage)
+    1. [Main structure](#sec:main-structure)
+    2. [Properties](#sec:properties)
+    3. [Special bodies](#sec:special-bodies)
+    4. [Equations](#sec:equations)
+    5. [Advance features](#sec:advance-features)
+5. [Examples](#sec:examples)
+    1. [Kinematics](#sec:example-kinematics)
+    2. [Dinamics](#sec:example-dinamics)
+    3. [Energy conservation](#sec:example-energy-conservation)
+    4. [Gravitational field](#sec:example-gravitational-field)
+    5. [Electrical field](#sec:example-electrical-field)
+6. [Bugs and limitations](#sec:bugs-limitations)
+7. [License](#sec:licence)
+8. [Contact](#sec:contact)
+
 ## <a name="sec:characteristics"></a>Characteristics
 
 <a name="tab:characteristics"></a>
