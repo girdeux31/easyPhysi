@@ -21,6 +21,10 @@ class System:
 
         return self.equations[key]
 
+    def get_equation(self, key):
+
+        return self[key]
+
     def add_equation(self, equation, key=None):
 
         if not hasattr(equation, 'function'):
