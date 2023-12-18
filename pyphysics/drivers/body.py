@@ -170,7 +170,7 @@ saturn.set('m', 5.685e26)
 saturn.set('p', (1433500000, 0))
 
 uranus = Body('uranus')
-uranus.set('m', 8.682e259)
+uranus.set('m', 8.682e25)
 uranus.set('p', (2872500000, 0))
 
 neptune = Body('neptune')
