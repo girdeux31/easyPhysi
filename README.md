@@ -182,21 +182,24 @@ See examples for Newton equation and energy conservation equation in [Dynamic Ex
 
 ### <a name="sec-special-bodies"></a>Special bodies
 
-Special bodies are pre-defined bodies that are ready to be used. There are two types of special bodies: subatomic particles and celestial bodies, see following tables. The mass and charge of subatomic particles are defined in kilograms and coulombs. The mass and position of celestial bodies are defined in kilograms and kilometers. The distance is the average distance to the sun (except for the moon, which is the average distance to the Earth) and is defined in the x-axis.
+Special bodies are pre-defined bodies that are ready to be used. There are two types of special bodies: subatomic particles and celestial bodies, see following tables. The mass and charge of subatomic particles are defined in kilograms and coulombs. The mass and position of celestial bodies are defined in kilograms and kilometers.
 
 <a name="tab-body-particles"></a>
 
 | Body     | Mass (kg) | Charge (C) |
--------------------------------------
+|----------|-----------|------------|
 | electron | 9.109e-31 | -1.602e-19 |
 | proton   | 1.673e-27 | 1.602e-19  |
 | neutron  | 1.675e-27 | 0.0        |
 
+> [!NOTE]
+> The distance of celestial bodies is the average distance to the sun (except for the moon, which is the average distance to the Earth) and is defined in the x-axis.
+
 <a name="tab-body-celestial"></a>
 
-| Body     | Mass (kg) | Position[^1] (km) |
-----------------------------------------
-| sun      | 1.98847e30| 0.0           |
+| Body     | Mass (kg) | Position (km) |
+|----------|-----------|---------------|
+| sun      | 1.988e30  | 0.0           |
 | mercury  | 3.301e23  | 57900000      |
 | venus    | 4.867e24  | 108200000     |
 | earth    | 5.972e24  | 149600000     |
@@ -204,10 +207,8 @@ Special bodies are pre-defined bodies that are ready to be used. There are two t
 | mars     | 6.417e23  | 227900000     |
 | jupiter  | 1.899e27  | 778600000     |
 | saturn   | 5.685e26  | 1433500000    |
-| uranus   | 8.682e259 | 2872500000    |
+| uranus   | 8.682e25  | 2872500000    |
 | neptune  | 1.024e26  | 4495100000    |
-
-[^1]: Average distance to the sun, except for the moon, which is the average distance to the Earth.
 
 Import them using the following line and use them without instanciating the body or defining its main properties, see [Electrical Field Examples](#sec-example-ef2).
 
