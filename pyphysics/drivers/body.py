@@ -135,6 +135,7 @@ neutron.set('m', neutron_mass)
 neutron.set('q', 0.0)
 
 # Special bodies: celestial bodies
+# https://en.wikipedia.org/wiki/Planetary_mass
 
 sun = Body('sun')
 sun.set('m', 1.98847e30)  # kg
@@ -153,7 +154,7 @@ earth.set('m', 5.972e24)
 earth.set('p', (149600000, 0))
 
 moon = Body('moon')
-moon.set('m', 7.348e229)
+moon.set('m', 7.348e22)
 moon.set('p', (384400, 0))  # relative to the Earth
 
 mars = Body('mars')

@@ -182,12 +182,32 @@ See examples for Newton equation and energy conservation equation in [Dynamic Ex
 
 ### <a name="sec-special-bodies"></a>Special bodies
 
-Special bodies are pre-defined bodies that are ready to be used. There are two types of special bodies: particles and celestial bodies.
+Special bodies are pre-defined bodies that are ready to be used. There are two types of special bodies: subatomic particles and celestial bodies, see following tables. The mass and charge of subatomic particles are defined in kilograms and coulombs. The mass and position of celestial bodies are defined in kilograms and kilometers. The distance is the average distance to the sun (except for the moon, which is the average distance to the Earth) and is defined in the x-axis.
 
-`# TODO tables`
+<a name="tab-body-particles"></a>
 
- - Particles: `electron`, `proton`, `neutron`
- - Celestial bodies: `sun`, `mercury`, `venus`, `earth`, `moon`, `mars`, `jupiter`, `saturn`, `uranus`, `neptune`
+| Body     | Mass (kg) | Charge (C) |
+-------------------------------------
+| electron | 9.109e-31 | -1.602e-19 |
+| proton   | 1.673e-27 | 1.602e-19  |
+| neutron  | 1.675e-27 | 0.0        |
+
+<a name="tab-body-celestial"></a>
+
+| Body     | Mass (kg) | Position[^1] (km) |
+----------------------------------------
+| sun      | 1.98847e30| 0.0           |
+| mercury  | 3.301e23  | 57900000      |
+| venus    | 4.867e24  | 108200000     |
+| earth    | 5.972e24  | 149600000     |
+| moon     | 7.348e22  | 384400        |
+| mars     | 6.417e23  | 227900000     |
+| jupiter  | 1.899e27  | 778600000     |
+| saturn   | 5.685e26  | 1433500000    |
+| uranus   | 8.682e259 | 2872500000    |
+| neptune  | 1.024e26  | 4495100000    |
+
+[^1]: Average distance to the sun, except for the moon, which is the average distance to the Earth.
 
 Import them using the following line and use them without instanciating the body or defining its main properties, see [Electrical Field Examples](#sec-example-ef2).
 
@@ -309,11 +329,15 @@ Problem: 10
 
 Statement: A ball falls from a roof located 10 m high, forming a 30º angle with the horizontal, with a speed of 2 m/s. Calculate:
 
-  a) At what distance from the wall does it hit the ground?
+a) At what distance from the wall does it hit the ground?
 
-  b) The speed it has when it reaches the ground (disregard air friction).
+b) The speed it has when it reaches the ground (disregard air friction).
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.utils import magnitude
+
 alpha = math.radians(-30)
 g = (0.0, -9.81)
 p0 = (0.0, 10.0)
@@ -336,8 +360,6 @@ body.set('t', t)
 
 p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x', first_positive_root=True)
 
-assert compare_floats(p_x, 2.30)
-
 v_x, v_y = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
 v = magnitude((v_x, v_y))
 ```
@@ -345,9 +367,7 @@ v = magnitude((v_x, v_y))
 Solution:
 
 ```
-t = 1.33 s
-v_x = 1.73 m/s
-v_y = -14.04 m/s
+p_x = 2.30 m
 v = 14.15 m/s
 ```
 
@@ -366,6 +386,10 @@ a) If there is no friction.
 b) If 𝜇 = 0.1.
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.drivers.system import System
+
 mu = Symbol('mu')
 alpha = math.radians(25)
 m = 250
@@ -392,8 +416,8 @@ f_01 = m*a_x.subs('mu', 0.1)
 Solution:
 
 ```
-assert compare_floats(f_00, -1036.47)
-assert compare_floats(f_01, -1258.74)
+f_00 = -1036.47 N
+f_01 = -1258.74 N
 ```
 
 #### <a name="sec-example-d2"></a>Example D-2
@@ -403,6 +427,10 @@ Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB
 `# TODO include figure`
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.drivers.system import System
+
 g = 9.81
 mu = 0.223
 alpha = math.radians(30)
@@ -457,9 +485,9 @@ T1, T2, a_x = system.solve(unkowns)
 Solution:
 
 ```
-assert compare_floats(T1, 13.54)
-assert compare_floats(T2, 7.59)
-assert compare_floats(a_x, 0.79)
+T1 = 13.54 N
+T2 = 7.59 N
+a_x = 0.79 m/s^2
 ```
 
 #### <a name="sec-example-d3"></a>Example D-3
@@ -469,6 +497,10 @@ Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB
 `# TODO include figure`
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.drivers.system import System
+
 g = 9.81
 mu = 0.223
 alpha = math.radians(30)
@@ -506,8 +538,7 @@ a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
 Solution:
 
 ```
-assert compare_floats(a_x, 0.79)
-assert compare_floats(a_y, -1.89)
+a = (0.79, -1.89) m/s^2
 ```
 
 ### <a name="sec-example-energy-conservation"></a>Energy conservation
@@ -521,6 +552,9 @@ Problem: 15.a
 Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, with what speed does it reach the base of the plane?
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+
 m = 1.0
 v0 = 1.0
 alpha = math.radians(30)
@@ -551,8 +585,7 @@ vf = universe.energy_conservation_equation('body').solve('vf')
 Solution:
 
 ```
-assert compare_floats(vf[0], -4.54)
-assert compare_floats(vf[1], 4.54)
+vf = 4.54 m/s
 ```
 
 #### <a name="sec-example-ec2"></a>Example EC-2
@@ -564,6 +597,9 @@ Problem: 15.a
 Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, plot the final velocity as a function of the initial velocity.
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+
 file = 'vf_f_v0.png'
 
 m = 1.0
@@ -606,6 +642,9 @@ Problem: 15.b
 Statement: If upon reaching the flat surface, it collides with a spring of constant k = 200 N/m, what distance will the spring compress?
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+
 m = 0.5
 k = 200.0
 v0 = 1.0
@@ -640,8 +679,7 @@ dx = universe.energy_conservation_equation('body').solve('dx')
 Solution:
 
 ```
-assert compare_floats(dx[0], -0.227, decimals=3)
-assert compare_floats(dx[1], 0.227, decimals=3)
+dx = 0.227 m
 ```
 
 #### <a name="sec-example-ec4"></a>Example EC-4
@@ -653,6 +691,9 @@ Problem: 20.c
 Statement: A 3 kg block situated at a height of 4 m is allowed to slide down a smooth, frictionless curved ramp. When it reaches the ground, it travels 10 m on a rough horizontal surface until it stops. Calculate the coefficient of friction with the horizontal surface.
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+
 m = 3.0
 hc = 0.0
 hb = 0.0
@@ -685,7 +726,7 @@ mu = universe.energy_conservation_equation('body').solve('mu', first_positive_ro
 Solution:
 
 ```
-assert compare_floats(mu, 0.40)
+mu = 0.40
 ```
 
 ### <a name="sec-example-gravity-field"></a>Gravitational field
@@ -699,6 +740,10 @@ Problem: B1.a 2019 junio
 Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the force exerted by mass A on mass B.
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.utils import magnitude
+
 body_a = Body('A')
 body_a.set('m', 3)
 body_a.set('p', (0, 0))
@@ -718,9 +763,7 @@ Fg = magnitude((Fg_x, Fg_y))  # always positive value
 Solution:
 
 ```
-assert compare_floats(Fg_x, -8.84E-11)
-assert compare_floats(Fg_y, +8.84E-11)
-assert compare_floats(Fg, +1.25E-10)
+Fg = +1.25E-10 N
 ```
 
 #### <a name="sec-example-gf2"></a>Example GF-2
@@ -732,6 +775,9 @@ Problem: B1.b 2019 junio
 Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+
 pa = (0, 0)
 pb_0 = (2, -2)
 pb_1 = (2, 0)
@@ -761,7 +807,7 @@ W = Ug_0[0] - Ug_1[0] # W = -AEp = Ug_0 - Ug_1
 Solution:
 
 ```
-assert compare_floats(W, 1.47E-10)
+W = 1.47E-10 J
 ```
 
 #### <a name="sec-example-gf3"></a>Example GF-3
@@ -773,6 +819,10 @@ Problem: A1.a 2019 junio
 Statement: A point mass m1 = 5 kg is located at the point (4, 3) m. Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.utils import magnitude
+
 body_a = Body('A')
 body_a.set('m', 5)
 body_a.set('p', (4, 3))
@@ -788,9 +838,7 @@ g = magnitude((g_x, g_y))  # always positive value
 Solution:
 
 ```
-assert compare_floats(g_x, +1.06E-11)
-assert compare_floats(g_y, +7.99E-12)
-assert compare_floats(g, +1.33E-11)
+g = +1.33E-11 m/s^2
 ```
 
 ### <a name="sec-example-electrical-field"></a>Electrical field
@@ -804,6 +852,10 @@ Problem: A3.a 2021 junio coincidentes
 Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. Obtain the electric field created by the charges at the center of the square.
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+from pyphysics.utils import magnitude
+
 point = (0, 0)
 
 body_1 = Body('1')
@@ -835,9 +887,7 @@ Ee = magnitude((Ee_x, Ee_y))  # always positive value
 Solution:
 
 ```
-assert compare_floats(0.0, Ee_x)
-assert compare_floats(-12.72, Ee_y)
-assert compare_floats(12.72, Ee)
+Ee = 12.72
 ```
 
 #### <a name="sec-example-ef2"></a>Example EF-2
@@ -851,7 +901,6 @@ Statement: At the vertices of a square with a side of 2 m and centered at the or
 ```
 from pyphysics.drivers.body import Body, electron
 from pyphysics.drivers.universe import Universe
-from pyphysics.utils import compare_floats, magnitude
 
 point_0 = (0, 0)
 point_1 = (0, 1)
@@ -893,7 +942,7 @@ W = Ue_0[0] - Ue_1[0] # W = -AUe = Ue_0 - Ue_1
 Solution:
 
 ```
-assert compare_floats(1.97E-18, W)
+W = 1.97E-18 J
 ```
 
 #### <a name="sec-example-ef3"></a>Example EF-3
@@ -905,6 +954,9 @@ Problem: A3.b 2023 modelo
 Statement: A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2. Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
 
 ```
+from pyphysics.drivers.body import Body
+from pyphysics.drivers.universe import Universe
+
 point_0 = (0, 2, 0)
 point_1 = (3, 0, 0)
 
@@ -933,7 +985,7 @@ W = Ue_0[0] - Ue_1[0] # W = -AEp = Ue_0 - Ue_1
 Solution:
 
 ```
-assert compare_floats(3.393E-8, W)
+W = 3.393E-8 J
 ```
 
 ## <a name="sec-bugs-limitations"></a>Bugs and limitations
