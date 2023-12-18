@@ -40,6 +40,7 @@ def test_plot_system():
     F2-PAU-Gravitation
     B1.a 2019 junio
     """
+    # TODO review plot
     file = './tests/ref/F_f_ma.png'
     ma = Symbol('ma')
 

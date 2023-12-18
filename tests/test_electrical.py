@@ -1,5 +1,4 @@
 import sys
-import math
 
 sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
 

@@ -6,7 +6,7 @@
 pyPhysics is a physics library to solve pre-universitary physics problems. The physics areas that are covered by pyPhisics are summarized hereafter. See the [main structure](#sec-main-structure) to use pyPhysics and also some [examples](#sec-examples).
 
  - Kinematics
- - Dinamics
+ - Dynamics
  - Energy conservation
  - Gravitational field
  - Electrical field
@@ -34,7 +34,7 @@ The main characteristics for pyPhysics are summarized in the following table.
     5. [Advance features](#sec-advance-features)
 3. [Examples](#sec-examples)
     1. [Kinematics](#sec-example-kinematics)
-    2. [Dinamics](#sec-example-dinamics)
+    2. [Dynamics](#sec-example-dynamics)
     3. [Energy conservation](#sec-example-energy-conservation)
     4. [Gravitational field](#sec-example-gravitational-field)
     5. [Electrical field](#sec-example-electrical-field)
@@ -90,12 +90,12 @@ unknown = universe.physics_equation('my_body').solve('my_unknown')
 
 Let's take the code apart line by line. 
 
- - Line 1 and 2: import `Universe` and `Body`, objects that are needed in every single problem solved with this library.
- - Line 5: define a universe instance with `Universe` class and include the dimensions of it, only 2 o 3 dimensions are allowed.
- - Line 7: define a body instance with `Body` class, we include its name and dimensions. Define as many bodies as needed provided that they have different names.
- - Line 8: define a property for the body instanciated in previous line and its value. Define as many properties as needed provided they are listed in [Table](#tab-properties). Properties must fulfill its type, see [Section](#sec-property-types).
- - Line 12: add all defined bodies to the universe.
- - Line 16: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations in [Table](#tab-equations).
+ - Line 1 and 2: import `Universe` and `Body` objects, these are needed in every single problem solved with this library.
+ - Line 4: define a universe instance with `Universe` class and include the dimensions of it, only 2 o 3 dimensions are allowed.
+ - Line 6: define a body instance with `Body` class, its name and dimensions are included as arguments. Define as many bodies as needed provided that they have different names.
+ - Line 7: define a property for the body instanciated in previous line and its value. Define as many properties as needed provided they are listed in [Table](#tab-properties). Properties must fulfill its type, see [Section](#sec-property-types).
+ - Line 11: add all defined bodies to the universe.
+ - Line 15: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
 
 ### <a name="sec-properties"></a>Properties
 
@@ -106,7 +106,7 @@ The following properties can be defined in any body.
 
 <a name="tab-properties"></a>
 
- |Property |Description                     |Type      |Components    |           
+ |Property |Description                     |Type      |Components    |
  |---------|--------------------------------|----------|--------------|
  |a        |Acceleration                    |Vector    |(a_x, a_y)    |
  |q        |Charge                          |Scalar    |q             |
@@ -132,11 +132,11 @@ Use `set` method in an instanciated body to define its property and define its v
 > Units are up to the user. Eventhough SI is recommended, other systems can be used provided that different units are consistent.
 
 > [!NOTE]
-> Force and energy cannot be defined as properties, see [Section](#sec-XXX)
+> Force and energy cannot be defined as properties since each force and energy is defined by its own formula, see [Section](#sec-property-nondefined).
 
 #### <a name="sec-property-types"></a>Property types
 
-There are two types of properties: **scalars** (`m` for mass) and **vectors** (`g` for gravity).
+There are two types of properties: **scalars** (for example `m` for mass) and **vectors** (for example `g` for gravity).
 
 ##### <a name="sec-property-type-scalar"></a>Scalars
 
@@ -149,14 +149,14 @@ body.set('prop', 5.0E-9)    # float
 
 ##### <a name="sec-property-type-vectors"></a>Vectors
 
-They are list or tuples, examples follow.
+They are list or tuples (either integers or floats), examples follow.
 
 ```
 body.set('prop', [0.0, -9.81])  # list
 body.set('prop', (0, +3))       # tuple
 ```
 
-The length of `value` (components) must be the same as defined in the instance of universe.
+The length of `value` (components) must be the same as defined in the instance of the body the property applies to and also to the instance of universe.
 
 > [!NOTE]
 > It is also possible to define only one component in a vector parameter (the other may be irrelevant or unknown). To do so, append `_x`, `_y` or `_z` to the property name according to the desired axis.
@@ -169,40 +169,40 @@ body.set('prop_z', value_z)
 
 #### <a name="sec-property-nondefined"></a>Non-defined properties
 
-Force (mainly used in `newton_equation`) and energy (mainly used in `energy_conservation_equation`) cannot be defined as properties in an instanciated body with `set` method. Instead they are defined in an instanciated body with `apply_force` and `add_energy` methods respectively.
+Force (mainly used in `newton_equation`) and energy (mainly used in `energy_conservation_equation`) cannot be defined as properties in an instanciated body with `set` method (note that they are not listed in [Table](#tab-equations)). Instead they can be defined in an instanciated body with `apply_force` and `add_energy` methods respectively.
 
 ```
 body.apply_force('my_force', value)
 body.add_energy('my_energy', value)
 ```
 
-This is designed on purpose because many different forces and energies can be applied/added to a body and they have different algebraical expressions. Thus, the algebraic expression for the force and energy must be defined by the user.
+This is designed on purpose because many different forces and energies can be applied/added to a body and they have different algebraic expressions. Thus, the algebraic expression for the force and energy must be defined by the user.
 
-See examples for Newton equation and energy conservation equation in [D-examples](#sec-example-dinamics) and [E-examples](#sec-example-energy-conservation) respectively.
+See examples for Newton equation and energy conservation equation in [Dynamic Examples](#sec-example-dynamics) and [Energy Conservation Examples](#sec-example-energy-conservation) respectively.
 
 ### <a name="sec-special-bodies"></a>Special bodies
 
-Special bodies are pre-defined to be used. There are two types: particles and celestial bodies.
+Special bodies are pre-defined bodies that are ready to be used. There are two types of special bodies: particles and celestial bodies.
 
 `# TODO tables`
 
  - Particles: `electron`, `proton`, `neutron`
  - Celestial bodies: `sun`, `mercury`, `venus`, `earth`, `moon`, `mars`, `jupiter`, `saturn`, `uranus`, `neptune`
 
-`from pyphysics.drivers.body import special_body`
+Import them using the following line and use them without instanciating the body or defining its main properties, see [Electrical Field Examples](#sec-example-ef2).
 
-See example in [EF-examples](#sec-example-electrical-field).
+`from pyphysics.drivers.body import special_body`
  
 ### <a name="sec-equations"></a>Equations
 
-The following equations can be solved.
+The following equations can be solved. Each equation is a method defined in the `Universe` class.
 
 > [!NOTE]
 > Equation names are case sensitive.
 
-<p style="text-align: center;"><a name="tab-equations"></a>Equations allowed for universe</p>
+<a name="tab-equations"></a>
 
- |Equation                                |Type      |Properties      |
+ |Equation                                |Type      |Unknowns        |
  |----------------------------------------|----------|--------------- |
  |electrical_field_intensity_equation     |Vectorial |Ee, p, q        |
  |electrical_force_equation               |Vectorial |Fe, p, q        |
@@ -217,17 +217,17 @@ The following equations can be solved.
  |linear_velocity_equation                |Vectorial |g, t, v, v0 	  |
  |newton_equation                         |Vectorial |F, a, m 		  |
  
-Use any above equation in an instance of a universe and include the body the equation will be applied to. Then use the `solve` method and include the unknown(s) to be solved, see third column in above table.
+Use any above equation in an instance of universe and include the body the equation applies to. Then use the `solve` method and include the unknown(s) to be solved, see third column in above table.
 
 `universe.physics_equation('my_body').solve('my_unknown')`
 
 #### <a name="sec-equation-types"></a>Equation types
 
-There are two types of equations: scalar (`energy_conservation_equation` for instance) and vectorial (`newton_equation` for instance).
+There are two types of equations: scalar (for example `energy_conservation_equation`) and vectorial (for example `newton_equation`).
 
 ##### <a name="sec-equation-type-scalar"></a>Scalar
 
-Only one input/output unknown is accepted.
+Only one unknown is accepted.
 
 ```
 out = universe.physics_equation('my_body').solve('my_unk')
@@ -235,7 +235,7 @@ out = universe.physics_equation('my_body').solve('my_unk')
 
 ##### <a name="sec-equation-type-vectorial"></a>Vectorial
 
-As many input and output unknowns as universe dimensions defined are accepted. Vector component must be append to input unknown names, such as `a_x` and `a_y` for acceleration, see forth column in [Table](#tab-properties). No name restriction apply for output unkonowns.
+As many unknowns as universe dimensions are accepted, these must be defined as a list and passed as argument of `solve` method. Vector components must be append to unknown names, such as `a_x` and `a_y` for acceleration, see [Section](#sec-property-type-vectors) and forth column in [Table](#tab-properties). The same number of unknowns must be defined as outputs, no name restriction apply for output unknowns.
 
 ```
 out_x, out_y = universe.physics_equation('my_body').solve(['unk_x', 'unk_y'])
@@ -243,14 +243,14 @@ out_x, out_y = universe.physics_equation('my_body').solve(['unk_x', 'unk_y'])
 
 ### <a name="sec-advance-features"></a>Advance features
 
-Library most useful features are already defined. However, for the sake of completeness, a few more features for the advance user are defined in this section.
+The most useful features are already defined. However, for the sake of completeness, a few more features for the advance user are defined in this section.
 
 `# TODO get_equation`
 `# TODO first_positive_root`
 
 #### <a name="sec-other-feature-magnitude"></a>Vector module
 
-Vectorial equations give vectorial results as vector components. A function is available to obtain its module or _magnitude_. See example in [example XX](#sec-).
+Vectorial equations give results as vector components. A function is available to obtain its module or _magnitude_, see [Example](#sec-example-k1).
 
 ```
 from pyphysics.utils import magnitude
@@ -259,7 +259,7 @@ prop = magnitude((prop_x, prop_y))
 
 #### <a name="sec-other-feature-functions"></a>Working with functions
 
-Equations return numerical values if there is only one unknown, but return functions if there is more than one unknown. Then, \'subs\' method can be used to replace an unknown by a specified numerical value. See example in [example XX](#sec-).
+Equations return numerical values if there is only one unknown (all properties are defined but one), but return functions if there is more than one unknown (two or more properties are left undefined). Use \'subs\' method to replace an unknown by a specified numerical value, see [Example](#sec-example-d1).
 
 ```
 foo = universe.physics_equation('body').solve('my_unk')
@@ -268,13 +268,14 @@ out = foo.subs('my_sym', value)
 
 #### <a name="sec-other-feature-systems"></a>Solving system of equations
 
-System of equations can be defined -with `System` class- and solved with `solve` method. The `solve` method accepts a list with as many unknowns as equations defined in the system. See example in [example XX](#sec-).
+System of equations can be defined -with `System` class- and solved with `solve` method. The `solve` method accepts a list with as many unknowns as equations defined in the system, see [example XX](#sec-example-d2).
 
 ```
+equation = universe.physics_equation('body').solve('my_unk')
 system = System()
 system.add_equation(equation)
 
-# add as meny equations as needed
+# define and add as meny equations as needed
 
 x, y, z = system.solve(['x', 'y', 'z'])
 ```
@@ -291,10 +292,10 @@ Arguments are described hereafter.
  - `dependent`: exactle one unknown is expected.
  - `x_range`: range to plot for dependent unknown (x-axis).
  - `points`: number of points to plot, optional argument, default is 100.
- - `path`: path to save image as file, optional argument, by default it is not saved.
+ - `path`: path to save image as file, optional argument, by default it is None and no image is saved.
  - `show`: if `True` the plot is shown on screen, optional argument, by default it is `True`.
 
-See examples for scalar equation in [example XX](#sec-) and vectorial equation in [example XX](#sec-).
+See a plot for scalar equation in [Example](#sec-example-ec2).
 
 ## <a name="sec-examples"></a>Examples
 
@@ -308,8 +309,9 @@ Problem: 10
 
 Statement: A ball falls from a roof located 10 m high, forming a 30º angle with the horizontal, with a speed of 2 m/s. Calculate:
 
-a) At what distance from the wall does it hit the ground?
-b) The speed it has when it reaches the ground (disregard air friction).
+  a) At what distance from the wall does it hit the ground?
+
+  b) The speed it has when it reaches the ground (disregard air friction).
 
 ```
 alpha = math.radians(-30)
@@ -340,6 +342,8 @@ v_x, v_y = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
 v = magnitude((v_x, v_y))
 ```
 
+Solution:
+
 ```
 t = 1.33 s
 v_x = 1.73 m/s
@@ -347,7 +351,7 @@ v_y = -14.04 m/s
 v = 14.15 m/s
 ```
 
-### <a name="sec-example-dinamics"></a>Dinamics
+### <a name="sec-example-dynamics"></a>Dynamics
 
 #### <a name="sec-example-d1"></a>Example D-1
 
@@ -358,6 +362,7 @@ Problem: 14
 Statement: The following ramp has an inclination of 25º. Determine the force that must be exerted on the 250 kg wagon to make it go up with constant velocity:
 
 a) If there is no friction.
+
 b) If 𝜇 = 0.1.
 
 ```
@@ -383,6 +388,8 @@ a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
 f_00 = m*a_x.subs('mu', 0.0)
 f_01 = m*a_x.subs('mu', 0.1)
 ```
+
+Solution:
 
 ```
 assert compare_floats(f_00, -1036.47)
@@ -447,6 +454,8 @@ system.add_equation(eq_c)
 T1, T2, a_x = system.solve(unkowns)
 ```
 
+Solution:
+
 ```
 assert compare_floats(T1, 13.54)
 assert compare_floats(T2, 7.59)
@@ -494,6 +503,8 @@ universe.add_body(body)
 a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
 ```
 
+Solution:
+
 ```
 assert compare_floats(a_x, 0.79)
 assert compare_floats(a_y, -1.89)
@@ -507,9 +518,7 @@ URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_
 
 Problem: 15.a
 
-Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey:
-
-a) With what speed does it reach the base of the plane?
+Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, with what speed does it reach the base of the plane?
 
 ```
 m = 1.0
@@ -539,6 +548,8 @@ universe.add_body(body)
 vf = universe.energy_conservation_equation('body').solve('vf')
 ```
 
+Solution:
+
 ```
 assert compare_floats(vf[0], -4.54)
 assert compare_floats(vf[1], 4.54)
@@ -550,9 +561,7 @@ URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_
 
 Problem: 15.a
 
-Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey:
-
-a) With what speed does it reach the base of the plane?
+Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, plot the final velocity as a function of the initial velocity.
 
 ```
 file = 'vf_f_v0.png'
@@ -584,9 +593,9 @@ universe.add_body(body)
 universe.energy_conservation_equation('body').plot('vf', 'v0', [0, 4], points=200, path=file, show=False)
 ```
 
-```
-`# TODO insert image`
-```
+Solution:
+
+![Plot of final velocity as a function of initial velocity](https://github.com/girdeux31/pyPhysics/blob/main/tests/ref/vf_f_v0.png?raw=true)
 
 #### <a name="sec-example-ec3"></a>Example EC-3
 
@@ -628,6 +637,8 @@ universe.add_body(body)
 dx = universe.energy_conservation_equation('body').solve('dx')
 ```
 
+Solution:
+
 ```
 assert compare_floats(dx[0], -0.227, decimals=3)
 assert compare_floats(dx[1], 0.227, decimals=3)
@@ -639,9 +650,7 @@ URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_
 
 Problem: 20.c
 
-Statement: A 3 kg block situated at a height of 4 m is allowed to slide down a smooth, frictionless curved ramp. When it reaches the ground, it travels 10 m on a rough horizontal surface until it stops. Calculate:
-
-c) The coefficient of friction with the horizontal surface.
+Statement: A 3 kg block situated at a height of 4 m is allowed to slide down a smooth, frictionless curved ramp. When it reaches the ground, it travels 10 m on a rough horizontal surface until it stops. Calculate the coefficient of friction with the horizontal surface.
 
 ```
 m = 3.0
@@ -673,6 +682,8 @@ universe.add_body(body)
 mu = universe.energy_conservation_equation('body').solve('mu', first_positive_root=True)
 ```
 
+Solution:
+
 ```
 assert compare_floats(mu, 0.40)
 ```
@@ -685,9 +696,7 @@ URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recu
 
 Problem: B1.a 2019 junio
 
-Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine:
-
-a) The force exerted by mass A on mass B.
+Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the force exerted by mass A on mass B.
 
 ```
 body_a = Body('A')
@@ -706,6 +715,8 @@ Fg_x, Fg_y = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y'])
 Fg = magnitude((Fg_x, Fg_y))  # always positive value
 ```
 
+Solution:
+
 ```
 assert compare_floats(Fg_x, -8.84E-11)
 assert compare_floats(Fg_y, +8.84E-11)
@@ -718,9 +729,7 @@ URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recu
 
 Problem: B1.b 2019 junio
 
-Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine:
-
-b) The work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
+Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
 
 ```
 pa = (0, 0)
@@ -749,6 +758,8 @@ Ug_1 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 W = Ug_0[0] - Ug_1[0] # W = -AEp = Ug_0 - Ug_1
 ```
 
+Solution:
+
 ```
 assert compare_floats(W, 1.47E-10)
 ```
@@ -759,9 +770,7 @@ URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recu
 
 Problem: A1.a 2019 junio
 
-Statement: A point mass m1 = 5 kg is located at the point (4, 3) m.
-
-a) Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
+Statement: A point mass m1 = 5 kg is located at the point (4, 3) m. Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
 
 ```
 body_a = Body('A')
@@ -775,6 +784,8 @@ universe.add_body(body_a)
 g_x, g_y = universe.gravitational_field_intensity_equation(point).solve(['gg_x', 'gg_y'])
 g = magnitude((g_x, g_y))  # always positive value
 ```
+
+Solution:
 
 ```
 assert compare_floats(g_x, +1.06E-11)
@@ -790,9 +801,7 @@ URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recu
 
 Problem: A3.a 2021 junio coincidentes
 
-Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure.
-
-a) Obtain the electric field created by the charges at the center of the square.
+Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. Obtain the electric field created by the charges at the center of the square.
 
 ```
 point = (0, 0)
@@ -823,6 +832,8 @@ Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 
 Ee = magnitude((Ee_x, Ee_y))  # always positive value
 ```
 
+Solution:
+
 ```
 assert compare_floats(0.0, Ee_x)
 assert compare_floats(-12.72, Ee_y)
@@ -835,11 +846,13 @@ URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recu
 
 Problem: A3.b 2021 junio coincidentes
 
-Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure.
-
-b) If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, calculate the speed at which the electron will leave the square through the midpoint of the top side.
+Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, calculate the speed at which the electron will leave the square through the midpoint of the top side.
 
 ```
+from pyphysics.drivers.body import Body, electron
+from pyphysics.drivers.universe import Universe
+from pyphysics.utils import compare_floats, magnitude
+
 point_0 = (0, 0)
 point_1 = (0, 1)
 
@@ -877,6 +890,8 @@ Ue_1 = universe.electrical_potential_energy_equation('electron').solve('Ue')
 W = Ue_0[0] - Ue_1[0] # W = -AUe = Ue_0 - Ue_1
 ```
 
+Solution:
+
 ```
 assert compare_floats(1.97E-18, W)
 ```
@@ -887,9 +902,7 @@ URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recu
 
 Problem: A3.b 2023 modelo
 
-Statement: A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2.
-
-b) Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
+Statement: A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2. Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
 
 ```
 point_0 = (0, 2, 0)
@@ -916,6 +929,8 @@ Ue_1 = universe.electrical_potential_energy_equation('point').solve('Ue')
 
 W = Ue_0[0] - Ue_1[0] # W = -AEp = Ue_0 - Ue_1
 ```
+
+Solution:
 
 ```
 assert compare_floats(3.393E-8, W)
