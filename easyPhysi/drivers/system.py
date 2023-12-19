@@ -62,6 +62,7 @@ class System:
             raise ValueError('System has several solution')
 
         return solution[0].values()
+        # TODO system solve returns a list of first solution, equation solve returns a list of possible solutions
 
     def plot(self, independents, dependent, x_range, points=100, path=None, show=True):
 

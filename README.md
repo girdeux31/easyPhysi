@@ -98,6 +98,9 @@ Let's take the code apart line by line.
  - Line 11: add all defined bodies to the universe.
  - Line 15: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
 
+> [!NOTE]
+> See [Example](#sec-example-ef3) for a 3D problem.
+
 ### <a name="sec-properties"></a>2.1. Properties
 
 The following properties can be defined in any body.
@@ -347,7 +350,7 @@ p0 = (0.0, 10.0)
 v0 = (2.0*math.cos(alpha), 2.0*math.sin(alpha))
 py = 0.0
 
-body = Body('body', dimensions=2)
+body = Body('body')
 
 body.set('g', g)
 body.set('p0', p0)
@@ -395,7 +398,7 @@ W = (-m*g*math.sin(alpha), -m*g*math.cos(alpha))
 N = (0.0, m*g*math.sin(alpha))
 Fr = (-mu*m*g*math.cos(alpha), 0.0)
 
-body = Body('body', dimensions=2)
+body = Body('body')
 
 body.set('m', m)
 body.apply_force('W', W)
@@ -552,7 +555,7 @@ Ek0 = 1/2*m*v0**2
 Epf = -m*g*hf
 Ekf = -1/2*m*vf**2
 
-body = Body('body', dimensions=2)
+body = Body('body')
 
 body.add_energy('Ep0', Ep0)
 body.add_energy('Ek0', Ek0)
@@ -594,7 +597,7 @@ Ek0 = 1/2*m*v0**2
 Epf = -m*g*hf
 Ekf = -1/2*m*vf**2
 
-body = Body('body', dimensions=2)
+body = Body('body')
 
 body.add_energy('Ep0', Ep0)
 body.add_energy('Ek0', Ek0)
@@ -636,7 +639,7 @@ Epf = -m*g*hf
 Ekf = -1/2*m*vf**2
 Epe = -1/2*k*dx**2
 
-body = Body('body', dimensions=2)
+body = Body('body')
 
 body.add_energy('Ep0', Ep0)
 body.add_energy('Ek0', Ek0)
@@ -678,7 +681,7 @@ Epc = -m*g*hc
 Ekc = -1/2*m*vc**2
 Wfr = -mu*m*g*x
 
-body = Body('body', dimensions=2)
+body = Body('body')
 
 body.add_energy('Epb', Epb)
 body.add_energy('Ekb', Ekb)
