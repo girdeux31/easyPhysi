@@ -64,9 +64,9 @@ The following third-party modules are requirements.
  - scipy>=1.11.0
  - sympy==1.12
 
-## <a name="sec-usage"></a>Usage
+## <a name="sec-usage"></a>2. Usage
 
-### <a name="sec-main-structure"></a>Main structure
+### <a name="sec-main-structure"></a>2.i Main structure
 
 Most pre-university physics problems can be solved following this structure composed of a few lines.
 
@@ -97,7 +97,7 @@ Let's take the code apart line by line.
  - Line 11: add all defined bodies to the universe.
  - Line 15: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
 
-### <a name="sec-properties"></a>Properties
+### <a name="sec-properties"></a>2.ii Properties
 
 The following properties can be defined in any body.
 
@@ -180,7 +180,7 @@ This is designed on purpose because many different forces and energies can be ap
 
 See examples for Newton equation and energy conservation equation in [Dynamic Examples](#sec-example-dynamics) and [Energy Conservation Examples](#sec-example-energy-conservation) respectively.
 
-### <a name="sec-special-bodies"></a>Special bodies
+### <a name="sec-special-bodies"></a>2.iii Special bodies
 
 Special bodies are pre-defined bodies that are ready to be used. There are two types of special bodies: subatomic particles and celestial bodies, see following tables. The mass and charge of subatomic particles are defined in kilograms and coulombs. The mass and position of celestial bodies are defined in kilograms and kilometers.
 
@@ -214,7 +214,7 @@ Import them using the following line and use them without instanciating the body
 
 `from easyPhysi.drivers.body import special_body`
  
-### <a name="sec-equations"></a>Equations
+### <a name="sec-equations"></a>2.iv Equations
 
 The following equations can be solved. Each equation is a method defined in the `Universe` class.
 
@@ -262,7 +262,7 @@ As many unknowns as universe dimensions are accepted, these must be defined as a
 out_x, out_y = universe.physics_equation('my_body').solve(['unk_x', 'unk_y'])
 ```
 
-### <a name="sec-advance-features"></a>Advance features
+### <a name="sec-advance-features"></a>2.v Advance features
 
 The most useful features are already defined. However, for the sake of completeness, a few more features for the advance user are defined in this section.
 
@@ -321,9 +321,9 @@ In some cases, it is only interesting to solve a specific equation from a vector
 
 `universe.pyshics_equation('my_body').get_equation('axis')`
 
-## <a name="sec-examples"></a>Examples
+## <a name="sec-examples"></a>3. Examples
 
-### <a name="sec-example-kinematics"></a>Kinematics
+### <a name="sec-example-kinematics"></a>3.i Kinematics
 
 #### <a name="sec-example-k1"></a>Example K-1
 
@@ -375,7 +375,7 @@ p_x[0] = 2.30 m
 v = 14.15 m/s
 ```
 
-### <a name="sec-example-dynamics"></a>Dynamics
+### <a name="sec-example-dynamics"></a>3.ii Dynamics
 
 #### <a name="sec-example-d1"></a>Example D-1
 
@@ -545,7 +545,7 @@ Solution:
 a = (0.79, -1.89) m/s^2
 ```
 
-### <a name="sec-example-energy-conservation"></a>Energy conservation
+### <a name="sec-example-energy-conservation"></a>3.iii Energy conservation
 
 #### <a name="sec-example-ec1"></a>Example EC-1
 
@@ -733,7 +733,7 @@ Solution:
 mu[0] = 0.40
 ```
 
-### <a name="sec-example-gravity-field"></a>Gravitational field
+### <a name="sec-example-gravity-field"></a>3.iv Gravitational field
 
 #### <a name="sec-example-gf1"></a>Example GF-1
 
@@ -845,7 +845,7 @@ Solution:
 g = +1.33E-11 m/s^2
 ```
 
-### <a name="sec-example-electrical-field"></a>Electrical field
+### <a name="sec-example-electrical-field"></a>3.v Electrical field
 
 #### <a name="sec-example-ef1"></a>Example EF-1
 
@@ -992,15 +992,15 @@ Solution:
 W = 3.393E-8 J
 ```
 
-## <a name="sec-bugs-limitations"></a>Bugs and limitations
+## <a name="sec-bugs-limitations"></a>4. Bugs and limitations
 
 `# TODO Limitation with p being the unknown`
 
-## <a name="sec-licence"></a>License
+## <a name="sec-licence"></a>5. License
 
 This project includes MIT License. A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
 
-## <a name="sec-contact"></a>Contact
+## <a name="sec-contact"></a>6. Contact
 
 Feel free to contact mesado31@gmail.com for any suggestion or bug.
 
