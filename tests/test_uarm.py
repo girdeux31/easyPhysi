@@ -21,7 +21,7 @@ def test_mrua_3():
     v0 = (22.22*math.cos(alpha), 22.22*math.sin(alpha))
     y = 0.0
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.set('g', g)
     body.set('p0', p0)
@@ -56,7 +56,7 @@ def test_mrua_10():
     v0 = (2.0*math.cos(alpha), 2.0*math.sin(alpha))
     py = 0.0
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.set('g', g)
     body.set('p0', p0)

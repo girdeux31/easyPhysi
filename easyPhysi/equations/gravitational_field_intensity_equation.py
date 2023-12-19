@@ -4,7 +4,7 @@ from scipy.constants import G
 from ..drivers.axes import Axes
 from ..drivers.equation import Equation
 from ..drivers.system import System
-from ..utils import distance, angle_with_horizontal_2d
+from ..utils import distance, angle_with_horizontal_2d, angle_with_horizontal_3d
 
 
 class GravitationalFieldIntensityEquation:

@@ -4,7 +4,7 @@ from scipy.constants import G
 from ..drivers.axes import Axes
 from ..drivers.equation import Equation
 from ..drivers.system import System
-from ..utils import distance, angle_with_horizontal_2d
+from ..utils import distance, angle_with_horizontal_2d, angle_with_horizontal_3d
 
 
 class GravitationalForceEquation:
@@ -32,7 +32,7 @@ class GravitationalForceEquation:
                 if self.universe.dimensions == 2:
                     alpha = angle_with_horizontal_2d(body.position(), main_body.position())
                 else:  # 3D
-                    alpha, beta = alpha = angle_with_horizontal_3d(body.position(), main_body.position())
+                    alpha, beta = angle_with_horizontal_3d(body.position(), main_body.position())
 
                 dist = distance(body.position(), main_body.position())
                 factor = math.cos(alpha) if axis == 0 else math.sin(alpha) if axis == 1 else math.sin(beta)
