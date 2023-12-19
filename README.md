@@ -370,8 +370,7 @@ v = magnitude((v_x, v_y))
 ```
 
 > [!TIP]
-> Solution: p_x[0] = 2.30 m
-> v = 14.15 m/s
+> `p_x[0] = 2.30 m, v = 14.15 m/s`
 
 ### <a name="sec-example-dynamics"></a>3.1. Dynamics
 
@@ -416,8 +415,7 @@ f_01 = m*a_x.subs('mu', 0.1)
 ```
 
 > [!TIP]
-> Solution: f_00 = -1036.47 N
-> f_01 = -1258.74 N
+> `f_00 = -1036.47 N, f_01 = -1258.74 N`
 
 #### <a name="sec-example-d2"></a>3.1.1. Example D-1
 
@@ -482,9 +480,7 @@ T1, T2, a_x = system.solve(unkowns)
 ```
 
 > [!TIP]
-> Solution: T1 = 13.54 N
-> T2 = 7.59 N
-> a_x = 0.79 m/s^2
+> `T1 = 13.54 N, T2 = 7.59 N, a_x = 0.79 m/s<sup>2</sup>`
 
 #### <a name="sec-example-d3"></a>3.1.2. Example D-2
 
@@ -532,7 +528,7 @@ a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
 ```
 
 > [!TIP]
-> Solution: a = (0.79, -1.89) m/s^2
+> `a = (0.79, -1.89) m/s<sup>2</sup>`
 
 ### <a name="sec-example-energy-conservation"></a>3.2. Energy conservation
 
@@ -576,7 +572,7 @@ vf = universe.energy_conservation_equation('body').solve('vf')
 ```
 
 > [!TIP]
-> Solution: vf = 4.54 m/s
+> `vf = 4.54 m/s`
 
 #### <a name="sec-example-ec2"></a>3.2.1. Example EC-1
 
@@ -619,8 +615,7 @@ universe.add_body(body)
 universe.energy_conservation_equation('body').plot('vf', 'v0', [0, 4], points=200, path=file, show=False)
 ```
 
-> [!TIP]
-> Solution: ![Plot of final velocity as a function of initial velocity](https://github.com/girdeux31/easyPhysi/blob/main/tests/ref/vf_f_v0.png?raw=true)
+![Plot of final velocity as a function of initial velocity](https://github.com/girdeux31/easyPhysi/blob/main/tests/ref/vf_f_v0.png?raw=true)
 
 #### <a name="sec-example-ec3"></a>3.2.2. Example EC-2
 
@@ -666,7 +661,7 @@ dx = universe.energy_conservation_equation('body').solve('dx')
 ```
 
 > [!TIP]
-> Solution: dx = 0.227 m
+> `dx = 0.227 m`
 
 #### <a name="sec-example-ec4"></a>3.2.3. Example EC-3
 
@@ -710,7 +705,7 @@ mu = universe.energy_conservation_equation('body').solve('mu')
 ```
 
 > [!TIP]
-> Solution: mu[0] = 0.40
+> `mu[0] = 0.40`
 
 ### <a name="sec-example-gravity-field"></a>3.3. Gravitational field
 
@@ -744,7 +739,7 @@ Fg = magnitude((Fg_x, Fg_y))  # always positive value
 ```
 
 > [!TIP]
-> Solution: Fg = +1.25E-10 N
+> `Fg = +1.25E-10 N`
 
 #### <a name="sec-example-gf2"></a>3.3.1. Example GF-1
 
@@ -785,7 +780,7 @@ W = Ug_0[0] - Ug_1[0] # W = -AEp = Ug_0 - Ug_1
 ```
 
 > [!TIP]
-> Solution: W = 1.47E-10 J
+> `W = 1.47E-10 J`
 
 #### <a name="sec-example-gf3"></a>3.3.2. Example GF-2
 
@@ -813,7 +808,7 @@ g = magnitude((g_x, g_y))  # always positive value
 ```
 
 > [!TIP]
-> Solution: g = +1.33E-11 m/s^2
+> `g = +1.33E-11 m/s<sup>2</sup>`
 
 ### <a name="sec-example-electrical-field"></a>3.4. Electrical field
 
@@ -859,7 +854,7 @@ Ee = magnitude((Ee_x, Ee_y))  # always positive value
 ```
 
 > [!TIP]
-> Solution: Ee = 12.72
+> `Ee = 12.72`
 
 #### <a name="sec-example-ef2"></a>3.4.1. Example EF-1
 
@@ -911,7 +906,7 @@ W = Ue_0[0] - Ue_1[0] # W = -AUe = Ue_0 - Ue_1
 ```
 
 > [!TIP]
-> Solution: W = 1.97E-18 J
+> `W = 1.97E-18 J`
 
 #### <a name="sec-example-ef3"></a>3.4.2. Example EF-2
 
@@ -951,7 +946,7 @@ W = Ue_0[0] - Ue_1[0] # W = -AEp = Ue_0 - Ue_1
 ```
 
 > [!TIP]
-> Solution: W = 3.393E-8 J
+> `W = 3.393E-8 J`
 
 ## <a name="sec-bugs-limitations"></a>4. Bugs and limitations
 
