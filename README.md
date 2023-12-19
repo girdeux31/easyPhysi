@@ -328,11 +328,9 @@ In some cases, it is only interesting to solve a specific equation from a vector
 
 #### <a name="sec-example-k1"></a>3.0.0. Example K-0
 
-URL: https://fq.iespm.es/documentos/janavarro/fisica2bach/T0_vectores_cinematica.pdf
+[Problem 10](https://fq.iespm.es/documentos/janavarro/fisica2bach/T0_vectores_cinematica.pdf)
 
-Problem: 10
-
-Statement: A ball falls from a roof located 10 m high, forming a 30º angle with the horizontal, with a speed of 2 m/s. Calculate:
+A ball falls from a roof located 10 m high, forming a 30º angle with the horizontal, with a speed of 2 m/s. Calculate:
 
 a) At what distance from the wall does it hit the ground?
 
@@ -376,11 +374,9 @@ v = magnitude((v_x, v_y))
 
 #### <a name="sec-example-d1"></a>3.1.0. Example D-0
 
-URL: https://fq.iespm.es/documentos/rafael_artacho/4_ESO/08.%20Problemas%20Las%20fuerzas.pdf
+[Problem 14](https://fq.iespm.es/documentos/rafael_artacho/4_ESO/08.%20Problemas%20Las%20fuerzas.pdf)
 
-Problem: 14
-
-Statement: The following ramp has an inclination of 25º. Determine the force that must be exerted on the 250 kg wagon to make it go up with constant velocity:
+The following ramp has an inclination of 25º. Determine the force that must be exerted on the 250 kg wagon to make it go up with constant velocity:
 
 a) If there is no friction.
 
@@ -419,7 +415,7 @@ f_01 = m*a_x.subs('mu', 0.1)
 
 #### <a name="sec-example-d2"></a>3.1.1. Example D-1
 
-Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
+In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
 
 `# TODO include figure`
 
@@ -480,11 +476,11 @@ T1, T2, a_x = system.solve(unkowns)
 ```
 
 > [!TIP]
-> `T1 = 13.54 N, T2 = 7.59 N, a_x = 0.79 m/s<sup>2</sup>`
+> `T1 = 13.54 N, T2 = 7.59 N, a_x = 0.79 m/s2`
 
 #### <a name="sec-example-d3"></a>3.1.2. Example D-2
 
-Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
+In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
 
 `# TODO include figure`
 
@@ -528,17 +524,15 @@ a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
 ```
 
 > [!TIP]
-> `a = (0.79, -1.89) m/s<sup>2</sup>`
+> `a = (0.79, -1.89) m/s2`
 
 ### <a name="sec-example-energy-conservation"></a>3.2. Energy conservation
 
 #### <a name="sec-example-ec1"></a>3.2.0. Example EC-0
 
-URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
+[Problem 15.a](https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf)
 
-Problem: 15.a
-
-Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, with what speed does it reach the base of the plane?
+From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, with what speed does it reach the base of the plane?
 
 ```
 from easyPhysi.drivers.body import Body
@@ -576,11 +570,9 @@ vf = universe.energy_conservation_equation('body').solve('vf')
 
 #### <a name="sec-example-ec2"></a>3.2.1. Example EC-1
 
-URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
+[Problem: 15.a](https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf)
 
-Problem: 15.a
-
-Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, plot the final velocity as a function of the initial velocity.
+From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, plot the final velocity as a function of the initial velocity.
 
 ```
 from easyPhysi.drivers.body import Body
@@ -619,11 +611,9 @@ universe.energy_conservation_equation('body').plot('vf', 'v0', [0, 4], points=20
 
 #### <a name="sec-example-ec3"></a>3.2.2. Example EC-2
 
-URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
+[Problem 15.b](https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf)
 
-Problem: 15.b
-
-Statement: If upon reaching the flat surface, it collides with a spring of constant k = 200 N/m, what distance will the spring compress?
+If upon reaching the flat surface, it collides with a spring of constant k = 200 N/m, what distance will the spring compress?
 
 ```
 from easyPhysi.drivers.body import Body
@@ -665,11 +655,9 @@ dx = universe.energy_conservation_equation('body').solve('dx')
 
 #### <a name="sec-example-ec4"></a>3.2.3. Example EC-3
 
-URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
+[Problem 20.c](https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf)
 
-Problem: 20.c
-
-Statement: A 3 kg block situated at a height of 4 m is allowed to slide down a smooth, frictionless curved ramp. When it reaches the ground, it travels 10 m on a rough horizontal surface until it stops. Calculate the coefficient of friction with the horizontal surface.
+A 3 kg block situated at a height of 4 m is allowed to slide down a smooth, frictionless curved ramp. When it reaches the ground, it travels 10 m on a rough horizontal surface until it stops. Calculate the coefficient of friction with the horizontal surface.
 
 ```
 from easyPhysi.drivers.body import Body
@@ -711,11 +699,9 @@ mu = universe.energy_conservation_equation('body').solve('mu')
 
 #### <a name="sec-example-gf1"></a>3.3.0. Example GF-0
 
-URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+[Problem B1.a 2019 junio](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf)
 
-Problem: B1.a 2019 junio
-
-Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the force exerted by mass A on mass B.
+A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the force exerted by mass A on mass B.
 
 ```
 from easyPhysi.drivers.body import Body
@@ -743,11 +729,9 @@ Fg = magnitude((Fg_x, Fg_y))  # always positive value
 
 #### <a name="sec-example-gf2"></a>3.3.1. Example GF-1
 
-URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+[Problem B1.b 2019 junio](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf)
 
-Problem: B1.b 2019 junio
-
-Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
+A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
 
 ```
 from easyPhysi.drivers.body import Body
@@ -784,11 +768,9 @@ W = Ug_0[0] - Ug_1[0] # W = -AEp = Ug_0 - Ug_1
 
 #### <a name="sec-example-gf3"></a>3.3.2. Example GF-2
 
-URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+[Problem A1.a 2019 junio](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf)
 
-Problem: A1.a 2019 junio
-
-Statement: A point mass m1 = 5 kg is located at the point (4, 3) m. Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
+A point mass m1 = 5 kg is located at the point (4, 3) m. Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
 
 ```
 from easyPhysi.drivers.body import Body
@@ -808,17 +790,15 @@ g = magnitude((g_x, g_y))  # always positive value
 ```
 
 > [!TIP]
-> `g = +1.33E-11 m/s<sup>2</sup>`
+> `g = +1.33E-11 m/s2`
 
 ### <a name="sec-example-electrical-field"></a>3.4. Electrical field
 
 #### <a name="sec-example-ef1"></a>3.4.0. Example EF-0
 
-URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+[Problem A3.a 2021 junio coincidentes](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf)
 
-Problem: A3.a 2021 junio coincidentes
-
-Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. Obtain the electric field created by the charges at the center of the square.
+At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. Obtain the electric field created by the charges at the center of the square.
 
 ```
 from easyPhysi.drivers.body import Body
@@ -858,11 +838,9 @@ Ee = magnitude((Ee_x, Ee_y))  # always positive value
 
 #### <a name="sec-example-ef2"></a>3.4.1. Example EF-1
 
-URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+[Problem A3.b 2021 junio coincidentes](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf)
 
-Problem: A3.b 2021 junio coincidentes
-
-Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, calculate the speed at which the electron will leave the square through the midpoint of the top side.
+At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, calculate the speed at which the electron will leave the square through the midpoint of the top side.
 
 ```
 from easyPhysi.drivers.body import Body, electron
@@ -910,11 +888,9 @@ W = Ue_0[0] - Ue_1[0] # W = -AUe = Ue_0 - Ue_1
 
 #### <a name="sec-example-ef3"></a>3.4.2. Example EF-2
 
-URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
+[Problem A3.b 2023 modelo](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf)
 
-Problem: A3.b 2023 modelo
-
-Statement: A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2. Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
+A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2. Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
 
 ```
 from easyPhysi.drivers.body import Body
