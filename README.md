@@ -28,17 +28,17 @@ The main characteristics for easyPhysi are summarized in the following table.
 0. [Index](#sec-index)
 1. [Installation](#sec-installation)
 2. [Usage](#sec-usage)
-    0. [Main structure](#sec-main-structure)
-    1. [Properties](#sec-properties)
-    2. [Special bodies](#sec-special-bodies)
-    3. [Equations](#sec-equations)
-    4. [Advance features](#sec-advance-features)
+    - [Main structure](#sec-main-structure)
+    - [Properties](#sec-properties)
+    - [Special bodies](#sec-special-bodies)
+    - [Equations](#sec-equations)
+    - [Advance features](#sec-advance-features)
 3. [Examples](#sec-examples)
-    0. [Kinematics](#sec-example-kinematics)
-    1. [Dynamics](#sec-example-dynamics)
-    2. [Energy conservation](#sec-example-energy-conservation)
-    3. [Gravitational field](#sec-example-gravitational-field)
-    4. [Electrical field](#sec-example-electrical-field)
+    - [Kinematics](#sec-example-kinematics)
+    - [Dynamics](#sec-example-dynamics)
+    - [Energy conservation](#sec-example-energy-conservation)
+    - [Gravitational field](#sec-example-gravitational-field)
+    - [Electrical field](#sec-example-electrical-field)
 4. [Bugs and limitations](#sec-bugs-limitations)
 5. [License](#sec-licence)
 6. [Contact](#sec-contact)
@@ -326,7 +326,7 @@ In some cases, it is only interesting to solve a specific equation from a vector
 
 ### <a name="sec-example-kinematics"></a>3.0. Kinematics
 
-#### <a name="sec-example-k1"></a>3.0.0. Example K-1
+#### <a name="sec-example-k1"></a>3.0.0. Example K-0
 
 URL: https://fq.iespm.es/documentos/janavarro/fisica2bach/T0_vectores_cinematica.pdf
 
@@ -369,16 +369,13 @@ v_x, v_y = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
 v = magnitude((v_x, v_y))
 ```
 
-Solution:
-
-```
-p_x[0] = 2.30 m
-v = 14.15 m/s
-```
+> [!TIP]
+> Solution: p_x[0] = 2.30 m
+> v = 14.15 m/s
 
 ### <a name="sec-example-dynamics"></a>3.1. Dynamics
 
-#### <a name="sec-example-d1"></a>3.1.0. Example D-1
+#### <a name="sec-example-d1"></a>3.1.0. Example D-0
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/4_ESO/08.%20Problemas%20Las%20fuerzas.pdf
 
@@ -418,14 +415,11 @@ f_00 = m*a_x.subs('mu', 0.0)
 f_01 = m*a_x.subs('mu', 0.1)
 ```
 
-Solution:
+> [!TIP]
+> Solution: f_00 = -1036.47 N
+> f_01 = -1258.74 N
 
-```
-f_00 = -1036.47 N
-f_01 = -1258.74 N
-```
-
-#### <a name="sec-example-d2"></a>3.1.1. Example D-2
+#### <a name="sec-example-d2"></a>3.1.1. Example D-1
 
 Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
 
@@ -487,15 +481,12 @@ system.add_equation(eq_c)
 T1, T2, a_x = system.solve(unkowns)
 ```
 
-Solution:
+> [!TIP]
+> Solution: T1 = 13.54 N
+> T2 = 7.59 N
+> a_x = 0.79 m/s^2
 
-```
-T1 = 13.54 N
-T2 = 7.59 N
-a_x = 0.79 m/s^2
-```
-
-#### <a name="sec-example-d3"></a>3.1.2. Example D-3
+#### <a name="sec-example-d3"></a>3.1.2. Example D-2
 
 Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
 
@@ -540,15 +531,12 @@ universe.add_body(body)
 a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
 ```
 
-Solution:
-
-```
-a = (0.79, -1.89) m/s^2
-```
+> [!TIP]
+> Solution: a = (0.79, -1.89) m/s^2
 
 ### <a name="sec-example-energy-conservation"></a>3.2. Energy conservation
 
-#### <a name="sec-example-ec1"></a>3.2.0. Example EC-1
+#### <a name="sec-example-ec1"></a>3.2.0. Example EC-0
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
 
@@ -587,13 +575,10 @@ universe.add_body(body)
 vf = universe.energy_conservation_equation('body').solve('vf')
 ```
 
-Solution:
+> [!TIP]
+> Solution: vf = 4.54 m/s
 
-```
-vf = 4.54 m/s
-```
-
-#### <a name="sec-example-ec2"></a>3.2.1. Example EC-2
+#### <a name="sec-example-ec2"></a>3.2.1. Example EC-1
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
 
@@ -634,11 +619,10 @@ universe.add_body(body)
 universe.energy_conservation_equation('body').plot('vf', 'v0', [0, 4], points=200, path=file, show=False)
 ```
 
-Solution:
+> [!TIP]
+> Solution: ![Plot of final velocity as a function of initial velocity](https://github.com/girdeux31/easyPhysi/blob/main/tests/ref/vf_f_v0.png?raw=true)
 
-![Plot of final velocity as a function of initial velocity](https://github.com/girdeux31/easyPhysi/blob/main/tests/ref/vf_f_v0.png?raw=true)
-
-#### <a name="sec-example-ec3"></a>3.2.2. Example EC-3
+#### <a name="sec-example-ec3"></a>3.2.2. Example EC-2
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
 
@@ -681,13 +665,10 @@ universe.add_body(body)
 dx = universe.energy_conservation_equation('body').solve('dx')
 ```
 
-Solution:
+> [!TIP]
+> Solution: dx = 0.227 m
 
-```
-dx = 0.227 m
-```
-
-#### <a name="sec-example-ec4"></a>3.2.3. Example EC-4
+#### <a name="sec-example-ec4"></a>3.2.3. Example EC-3
 
 URL: https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf
 
@@ -728,15 +709,12 @@ universe.add_body(body)
 mu = universe.energy_conservation_equation('body').solve('mu')
 ```
 
-Solution:
-
-```
-mu[0] = 0.40
-```
+> [!TIP]
+> Solution: mu[0] = 0.40
 
 ### <a name="sec-example-gravity-field"></a>3.3. Gravitational field
 
-#### <a name="sec-example-gf1"></a>3.3.0. Example GF-1
+#### <a name="sec-example-gf1"></a>3.3.0. Example GF-0
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
 
@@ -765,13 +743,10 @@ Fg_x, Fg_y = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y'])
 Fg = magnitude((Fg_x, Fg_y))  # always positive value
 ```
 
-Solution:
+> [!TIP]
+> Solution: Fg = +1.25E-10 N
 
-```
-Fg = +1.25E-10 N
-```
-
-#### <a name="sec-example-gf2"></a>3.3.1. Example GF-2
+#### <a name="sec-example-gf2"></a>3.3.1. Example GF-1
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
 
@@ -809,13 +784,10 @@ Ug_1 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 W = Ug_0[0] - Ug_1[0] # W = -AEp = Ug_0 - Ug_1
 ```
 
-Solution:
+> [!TIP]
+> Solution: W = 1.47E-10 J
 
-```
-W = 1.47E-10 J
-```
-
-#### <a name="sec-example-gf3"></a>3.3.2. Example GF-3
+#### <a name="sec-example-gf3"></a>3.3.2. Example GF-2
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
 
@@ -840,15 +812,12 @@ g_x, g_y = universe.gravitational_field_intensity_equation(point).solve(['gg_x',
 g = magnitude((g_x, g_y))  # always positive value
 ```
 
-Solution:
-
-```
-g = +1.33E-11 m/s^2
-```
+> [!TIP]
+> Solution: g = +1.33E-11 m/s^2
 
 ### <a name="sec-example-electrical-field"></a>3.4. Electrical field
 
-#### <a name="sec-example-ef1"></a>3.4.0. Example EF-1
+#### <a name="sec-example-ef1"></a>3.4.0. Example EF-0
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
 
@@ -889,13 +858,10 @@ Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 
 Ee = magnitude((Ee_x, Ee_y))  # always positive value
 ```
 
-Solution:
+> [!TIP]
+> Solution: Ee = 12.72
 
-```
-Ee = 12.72
-```
-
-#### <a name="sec-example-ef2"></a>3.4.1. Example EF-2
+#### <a name="sec-example-ef2"></a>3.4.1. Example EF-1
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
 
@@ -944,13 +910,10 @@ Ue_1 = universe.electrical_potential_energy_equation('electron').solve('Ue')
 W = Ue_0[0] - Ue_1[0] # W = -AUe = Ue_0 - Ue_1
 ```
 
-Solution:
+> [!TIP]
+> Solution: W = 1.97E-18 J
 
-```
-W = 1.97E-18 J
-```
-
-#### <a name="sec-example-ef3"></a>3.4.2. Example EF-3
+#### <a name="sec-example-ef3"></a>3.4.2. Example EF-2
 
 URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
 
@@ -987,11 +950,8 @@ Ue_1 = universe.electrical_potential_energy_equation('point').solve('Ue')
 W = Ue_0[0] - Ue_1[0] # W = -AEp = Ue_0 - Ue_1
 ```
 
-Solution:
-
-```
-W = 3.393E-8 J
-```
+> [!TIP]
+> Solution: W = 3.393E-8 J
 
 ## <a name="sec-bugs-limitations"></a>4. Bugs and limitations
 
