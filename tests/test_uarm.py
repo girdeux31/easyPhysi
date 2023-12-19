@@ -31,15 +31,16 @@ def test_mrua_3():
     universe = Universe()
     universe.add_body(body)
 
-    t = universe.linear_position_equation('body').get_equation('y').solve('t', first_positive_root=True)
+    t = universe.linear_position_equation('body').get_equation('y').solve('t')
     
-    assert compare_floats(t, 3.20)
+    assert compare_floats(t[0], 0.0)
+    assert compare_floats(t[1], 3.20)
 
-    body.set('t', t)
+    body.set('t', t[1])
 
-    p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x', first_positive_root=True)
+    p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x')
     
-    assert compare_floats(p_x, 50.33)
+    assert compare_floats(p_x[0], 50.33)
 
 def test_mrua_10():
     """
@@ -65,15 +66,16 @@ def test_mrua_10():
     universe = Universe()
     universe.add_body(body)
 
-    t = universe.linear_position_equation('body').get_equation('y').solve('t', first_positive_root=True)
+    t = universe.linear_position_equation('body').get_equation('y').solve('t')
     
-    assert compare_floats(t, 1.33)
+    assert compare_floats(t[0], -1.53)
+    assert compare_floats(t[1], 1.33)
 
-    body.set('t', t)
+    body.set('t', t[1])
 
-    p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x', first_positive_root=True)
+    p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x')
     
-    assert compare_floats(p_x, 2.30)
+    assert compare_floats(p_x[0], 2.30)
 
     v_x, v_y = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
     v = magnitude((v_x, v_y))

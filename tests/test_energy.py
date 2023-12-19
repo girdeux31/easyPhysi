@@ -41,10 +41,6 @@ def test_energy_15a():
     universe = Universe()
     universe.add_body(body)
 
-    vf = universe.energy_conservation_equation('body').solve('vf', first_positive_root=True)
-
-    assert compare_floats(vf, 4.54)
-
     vf = universe.energy_conservation_equation('body').solve('vf')
 
     assert compare_floats(vf[0], -4.54)
@@ -83,10 +79,6 @@ def test_energy_15b():
 
     universe = Universe()
     universe.add_body(body)
-
-    dx = universe.energy_conservation_equation('body').solve('dx', first_positive_root=True)
-
-    assert compare_floats(dx, 0.227, decimals=3)
 
     dx = universe.energy_conservation_equation('body').solve('dx')
 
@@ -127,10 +119,6 @@ def test_energy_15c():
     universe = Universe()
     universe.add_body(body)
 
-    vf = universe.energy_conservation_equation('body').solve('vf', first_positive_root=True)
-
-    assert compare_floats(vf, 3.72)
-
     vf = universe.energy_conservation_equation('body').solve('vf')
 
     assert compare_floats(vf[0], -3.72)
@@ -164,10 +152,6 @@ def test_energy_20a():
 
     universe = Universe()
     universe.add_body(body)
-
-    vb = universe.energy_conservation_equation('body').solve('vb', first_positive_root=True)
-
-    assert compare_floats(vb, 8.86)
 
     vb = universe.energy_conservation_equation('body').solve('vb')
 
@@ -206,6 +190,6 @@ def test_energy_20c():
     universe = Universe()
     universe.add_body(body)
 
-    mu = universe.energy_conservation_equation('body').solve('mu', first_positive_root=True)
+    mu = universe.energy_conservation_equation('body').solve('mu')
 
-    assert compare_floats(mu, 0.40)
+    assert compare_floats(mu[0], 0.40)

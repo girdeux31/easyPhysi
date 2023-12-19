@@ -210,7 +210,7 @@ Special bodies are pre-defined bodies that are ready to be used. There are two t
 | uranus   | 8.682e25  | 2872500000    |
 | neptune  | 1.024e26  | 4495100000    |
 
-Import them using the following line and use them without instanciating the body or defining its main properties, see [Electrical Field Examples](#sec-example-ef2).
+Import them using the following line and use them without instanciating the body or defining its main properties, see [Example](#sec-example-ef2).
 
 `from pyphysics.drivers.body import special_body`
  
@@ -266,9 +266,6 @@ out_x, out_y = universe.physics_equation('my_body').solve(['unk_x', 'unk_y'])
 
 The most useful features are already defined. However, for the sake of completeness, a few more features for the advance user are defined in this section.
 
-`# TODO get_equation`
-`# TODO first_positive_root`
-
 #### <a name="sec-other-feature-magnitude"></a>Vector module
 
 Vectorial equations give results as vector components. A function is available to obtain its module or _magnitude_, see [Example](#sec-example-k1).
@@ -318,6 +315,12 @@ Arguments are described hereafter.
 
 See a plot for scalar equation in [Example](#sec-example-ec2).
 
+#### <a name="sec-other-feature-equation"></a>Get equation from system
+
+In some cases, it is only interesting to solve a specific equation from a vectorial equation (that is a set of equations or a system). The method 'get_equation' can be used over any vectorial equation to return the specific equation, the axis component is expected as argument to the method, see [Example](#sec-example-k1).
+
+`universe.pyshics_equation('my_body').get_equation('axis')`
+
 ## <a name="sec-examples"></a>Examples
 
 ### <a name="sec-example-kinematics"></a>Kinematics
@@ -355,11 +358,11 @@ body.set('p_y', py)
 universe = Universe()
 universe.add_body(body)
 
-t = universe.linear_position_equation('body').get_equation('y').solve('t', first_positive_root=True)
+t = universe.linear_position_equation('body').get_equation('y').solve('t')
 
-body.set('t', t)
+body.set('t', t[1])
 
-p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x', first_positive_root=True)
+p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x')
 
 v_x, v_y = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
 v = magnitude((v_x, v_y))
@@ -368,7 +371,7 @@ v = magnitude((v_x, v_y))
 Solution:
 
 ```
-p_x = 2.30 m
+p_x[0] = 2.30 m
 v = 14.15 m/s
 ```
 
@@ -721,13 +724,13 @@ body.add_energy('Wfr', Wfr)
 universe = Universe()
 universe.add_body(body)
 
-mu = universe.energy_conservation_equation('body').solve('mu', first_positive_root=True)
+mu = universe.energy_conservation_equation('body').solve('mu')
 ```
 
 Solution:
 
 ```
-mu = 0.40
+mu[0] = 0.40
 ```
 
 ### <a name="sec-example-gravity-field"></a>Gravitational field
