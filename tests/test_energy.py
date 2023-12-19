@@ -31,7 +31,7 @@ def test_energy_15a():
     Epf = -m*g*hf
     Ekf = -1/2*m*vf**2
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.add_energy('Ep0', Ep0)
     body.add_energy('Ek0', Ek0)
@@ -69,7 +69,7 @@ def test_energy_15b():
     Ekf = -1/2*m*vf**2
     Epe = -1/2*k*dx**2
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.add_energy('Ep0', Ep0)
     body.add_energy('Ek0', Ek0)
@@ -108,7 +108,7 @@ def test_energy_15c():
     Ekf = -1/2*m*vf**2
     Wfr = -mu*m*g*math.cos(alpha)*length
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.add_energy('Ep0', Ep0)
     body.add_energy('Ek0', Ek0)
@@ -143,7 +143,7 @@ def test_energy_20a():
     Epb = -m*g*hb
     Ekb = -1/2*m*vb**2
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.add_energy('Epa', Epa)
     body.add_energy('Eka', Eka)
@@ -179,7 +179,7 @@ def test_energy_20c():
     Ekc = -1/2*m*vc**2
     Wfr = -mu*m*g*x
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.add_energy('Epb', Epb)
     body.add_energy('Ekb', Ekb)

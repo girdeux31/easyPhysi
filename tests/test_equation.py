@@ -29,7 +29,7 @@ def test_plot_scalar_equation():
     Epf = -m*g*hf
     Ekf = -1/2*m*vf**2
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.add_energy('Ep0', Ep0)
     body.add_energy('Ek0', Ek0)

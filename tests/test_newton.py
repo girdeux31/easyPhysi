@@ -27,7 +27,7 @@ def test_newton_14():
     N = (0.0, m*g*math.sin(alpha))
     Fr = (-mu*m*g*math.cos(alpha), 0.0)
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.set('m', m)
     body.apply_force('W', W)
@@ -59,7 +59,7 @@ def test_newton_14b_bis():
     N = (0.0, m*g*math.sin(alpha))
     Fr = (-mu*m*g*math.cos(alpha), 0.0)
 
-    body = Body('body', dimensions=2)
+    body = Body('body')
 
     body.set('m', m)
     body.apply_force('W', W)
