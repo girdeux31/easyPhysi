@@ -4,10 +4,10 @@ import sys
 import math
 from sympy import Symbol
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
 
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
 
 
 def test_plot_scalar_equation():

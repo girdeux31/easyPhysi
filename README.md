@@ -1,9 +1,9 @@
-# <a name="sec-top"></a>pyPhysics
+# <a name="sec-top"></a>easyPhysi
 
 > [!WARNING]
 > **Library under development yet**
 
-pyPhysics is a physics library to solve pre-universitary physics problems. The physics areas that are covered by pyPhisics are summarized hereafter. See the [main structure](#sec-main-structure) to use pyPhysics and also some [examples](#sec-examples).
+easyPhysi is a physics library to solve pre-universitary physics problems. The physics areas that are covered by pyPhisics are summarized hereafter. See the [main structure](#sec-main-structure) to use easyPhysi and also some [examples](#sec-examples).
 
  - Kinematics
  - Dynamics
@@ -11,13 +11,13 @@ pyPhysics is a physics library to solve pre-universitary physics problems. The p
  - Gravitational field
  - Electrical field
 
-The main characteristics for pyPhysics are summarized in the following table.
+The main characteristics for easyPhysi are summarized in the following table.
 
 <a name="tab-characteristics"></a>
 
  | Characteristic   | Value         |
  |------------------|---------------|
- | Name             | pyPhysics     |
+ | Name             | easyPhysi     |
  | Version          | 1.0           |
  | Author           | Carles Mesado |
  | Date             | 31/10/2023    |
@@ -48,15 +48,15 @@ The main characteristics for pyPhysics are summarized in the following table.
 > **Package not in pypi yet**
 
 > [!NOTE]
-> pyPhysics is developed and tested with Python 3.10.
+> easyPhysi is developed and tested with Python 3.10.
 
 Install the package with pip,
 
-`pip install pyphysics`
+`pip install easyPhysi`
 
 or clone the GitHub repository.
 
-`gh repo clone girdeux31/pyPhysics`
+`gh repo clone girdeux31/easyPhysi`
 
 The following third-party modules are requirements.
 
@@ -71,8 +71,8 @@ The following third-party modules are requirements.
 Most pre-university physics problems can be solved following this structure composed of a few lines.
 
 ```
-from pyphysics.drivers.universe import Universe
-from pyphysics.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
+from easyPhysi.drivers.body import Body
 
 universe = Universe(dimensions=2)  # 2 o 3 dimensions
 
@@ -212,7 +212,7 @@ Special bodies are pre-defined bodies that are ready to be used. There are two t
 
 Import them using the following line and use them without instanciating the body or defining its main properties, see [Example](#sec-example-ef2).
 
-`from pyphysics.drivers.body import special_body`
+`from easyPhysi.drivers.body import special_body`
  
 ### <a name="sec-equations"></a>Equations
 
@@ -271,7 +271,7 @@ The most useful features are already defined. However, for the sake of completen
 Vectorial equations give results as vector components. A function is available to obtain its module or _magnitude_, see [Example](#sec-example-k1).
 
 ```
-from pyphysics.utils import magnitude
+from easyPhysi.utils import magnitude
 prop = magnitude((prop_x, prop_y))
 ```
 
@@ -338,9 +338,9 @@ a) At what distance from the wall does it hit the ground?
 b) The speed it has when it reaches the ground (disregard air friction).
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
-from pyphysics.utils import magnitude
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
+from easyPhysi.utils import magnitude
 
 alpha = math.radians(-30)
 g = (0.0, -9.81)
@@ -390,9 +390,9 @@ a) If there is no friction.
 b) If 𝜇 = 0.1.
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
-from pyphysics.drivers.system import System
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
+from easyPhysi.drivers.system import System
 
 mu = Symbol('mu')
 alpha = math.radians(25)
@@ -431,9 +431,9 @@ Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB
 `# TODO include figure`
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
-from pyphysics.drivers.system import System
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
+from easyPhysi.drivers.system import System
 
 g = 9.81
 mu = 0.223
@@ -501,9 +501,9 @@ Statement: In the system shown in the figure, the three masses are mA = 1 kg, mB
 `# TODO include figure`
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
-from pyphysics.drivers.system import System
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
+from easyPhysi.drivers.system import System
 
 g = 9.81
 mu = 0.223
@@ -556,8 +556,8 @@ Problem: 15.a
 Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, with what speed does it reach the base of the plane?
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
 
 m = 1.0
 v0 = 1.0
@@ -601,8 +601,8 @@ Problem: 15.a
 Statement: From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g body is allowed to slide with an initial velocity of 1 m/s. Assuming that there is no friction during the journey, plot the final velocity as a function of the initial velocity.
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
 
 file = 'vf_f_v0.png'
 
@@ -635,7 +635,7 @@ universe.energy_conservation_equation('body').plot('vf', 'v0', [0, 4], points=20
 
 Solution:
 
-![Plot of final velocity as a function of initial velocity](https://github.com/girdeux31/pyPhysics/blob/main/tests/ref/vf_f_v0.png?raw=true)
+![Plot of final velocity as a function of initial velocity](https://github.com/girdeux31/easyPhysi/blob/main/tests/ref/vf_f_v0.png?raw=true)
 
 #### <a name="sec-example-ec3"></a>Example EC-3
 
@@ -646,8 +646,8 @@ Problem: 15.b
 Statement: If upon reaching the flat surface, it collides with a spring of constant k = 200 N/m, what distance will the spring compress?
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
 
 m = 0.5
 k = 200.0
@@ -695,8 +695,8 @@ Problem: 20.c
 Statement: A 3 kg block situated at a height of 4 m is allowed to slide down a smooth, frictionless curved ramp. When it reaches the ground, it travels 10 m on a rough horizontal surface until it stops. Calculate the coefficient of friction with the horizontal surface.
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
 
 m = 3.0
 hc = 0.0
@@ -744,9 +744,9 @@ Problem: B1.a 2019 junio
 Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the force exerted by mass A on mass B.
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
-from pyphysics.utils import magnitude
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
+from easyPhysi.utils import magnitude
 
 body_a = Body('A')
 body_a.set('m', 3)
@@ -779,8 +779,8 @@ Problem: B1.b 2019 junio
 Statement: A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
 
 pa = (0, 0)
 pb_0 = (2, -2)
@@ -823,9 +823,9 @@ Problem: A1.a 2019 junio
 Statement: A point mass m1 = 5 kg is located at the point (4, 3) m. Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
-from pyphysics.utils import magnitude
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
+from easyPhysi.utils import magnitude
 
 body_a = Body('A')
 body_a.set('m', 5)
@@ -856,9 +856,9 @@ Problem: A3.a 2021 junio coincidentes
 Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. Obtain the electric field created by the charges at the center of the square.
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
-from pyphysics.utils import magnitude
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
+from easyPhysi.utils import magnitude
 
 point = (0, 0)
 
@@ -903,8 +903,8 @@ Problem: A3.b 2021 junio coincidentes
 Statement: At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, calculate the speed at which the electron will leave the square through the midpoint of the top side.
 
 ```
-from pyphysics.drivers.body import Body, electron
-from pyphysics.drivers.universe import Universe
+from easyPhysi.drivers.body import Body, electron
+from easyPhysi.drivers.universe import Universe
 
 point_0 = (0, 0)
 point_1 = (0, 1)
@@ -958,8 +958,8 @@ Problem: A3.b 2023 modelo
 Statement: A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2. Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
 
 ```
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
 
 point_0 = (0, 2, 0)
 point_1 = (3, 0, 0)
@@ -1005,4 +1005,4 @@ This project includes MIT License. A short and simple permissive license with co
 Feel free to contact mesado31@gmail.com for any suggestion or bug.
 
 > [!IMPORTANT]
-> Visit GitHub page at https://github.com/girdeux31/pyPhysics
+> Visit GitHub page at https://github.com/girdeux31/easyPhysi

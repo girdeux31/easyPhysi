@@ -1,11 +1,11 @@
 
 import sys
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
 
-from pyphysics.drivers.body import Body
-from pyphysics.drivers.universe import Universe
-from pyphysics.utils import compare_floats, magnitude
+from easyPhysi.drivers.body import Body
+from easyPhysi.drivers.universe import Universe
+from easyPhysi.utils import compare_floats, magnitude
 
 
 def test_gravity_b1a_2019_junio_coincidentes():

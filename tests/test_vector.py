@@ -1,8 +1,8 @@
 import sys
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
 
-from pyphysics.drivers.vector import Vector
+from easyPhysi.drivers.vector import Vector
 
 tup = Vector('a', dimensions=3)
 

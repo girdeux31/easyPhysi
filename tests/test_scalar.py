@@ -1,8 +1,8 @@
 import sys
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/pyphysics')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
 
-from pyphysics.drivers.scalar import Scalar
+from easyPhysi.drivers.scalar import Scalar
 
 scalar = Scalar('a')
 
