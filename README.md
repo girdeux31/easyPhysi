@@ -42,7 +42,7 @@ The main characteristics for easyPhysi are summarized in the following table.
 5. [License](#sec-licence)
 6. [Contact](#sec-contact)
 
-## <a name="sec-installation"></a>Installation
+## <a name="sec-installation"></a>1. Installation
 
 > [!WARNING]
 > **Package not in pypi yet**
