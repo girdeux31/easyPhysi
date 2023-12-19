@@ -53,11 +53,12 @@ def test_gravity_b1a_2019_junio_coincidentes_3d():
     universe.add_body(body_a)
     universe.add_body(body_b)
 
-    Fg_x, Fg_y = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y'])
-    Fg = magnitude((Fg_x, Fg_y))  # always positive value
+    Fg_x, Fg_y, Fg_z = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y', 'Fg_z'])
+    Fg = magnitude((Fg_x, Fg_y, Fg_z))  # always positive value
 
     assert compare_floats(Fg_x, -8.84E-11)
     assert compare_floats(Fg_y, +8.84E-11)
+    assert compare_floats(Fg_z, 0.0)
     assert compare_floats(Fg, +1.25E-10)
 
 def test_gravity_b1b_2019_junio_coincidentes():
