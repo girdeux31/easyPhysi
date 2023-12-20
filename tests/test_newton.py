@@ -76,6 +76,34 @@ def test_newton_14b_bis():
     assert compare_floats(a_y, -4.74)
     assert compare_floats(f_x, -1258.74)
 
+def test_newton_14b_bis_bis():
+
+    mu = 0.1
+    sin_alpha = Symbol('sin_alpha')
+    cos_alpha = Symbol('cos_alpha')
+    m = 250
+    g = 9.81
+    a = (-5.03497308675920, -4.74499424315328)
+    W = (-m*g*sin_alpha, -m*g*cos_alpha)
+    N = (0.0, m*g*sin_alpha)
+    Fr = (-mu*m*g*cos_alpha, 0.0)
+
+    body = Body('body')
+
+    body.set('m', m)
+    body.set('a', a)
+    body.apply_force('W', W)
+    body.apply_force('Fr', Fr)
+    body.apply_force('N', N)
+
+    universe = Universe()
+    universe.add_body(body)
+
+    sin_alpha, cos_alpha = universe.newton_equation('body').solve(['sin_alpha', 'cos_alpha'])
+
+    assert compare_floats(math.degrees(math.asin(sin_alpha)), 90-25)
+    assert compare_floats(math.degrees(math.acos(cos_alpha)), 90-25)
+
 def test_newton_8():
     """
     File: Examen cinemática y dinámica

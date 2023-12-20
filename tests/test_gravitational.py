@@ -1,5 +1,6 @@
 
 import sys
+import pytest
 
 sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
 
@@ -94,6 +95,32 @@ def test_gravity_b1b_2019_junio_coincidentes():
 
     assert compare_floats(W, 1.47E-10)
 
+def test_gravity_b1b_2019_junio_coincidentes_bis():
+    """
+    URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
+    Problem: B1.b 2019 junio
+    Statement: The work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
+    """    
+    pa = (0, 0)
+    pb_0 = (2, -2)
+
+    body_a = Body('A')
+    body_a.set('m', 3)
+    body_a.set('p', pa)
+
+    body_b = Body('B')
+    body_b.set('m', 5)
+    body_b.set('Ug', -3.5396e-10)
+    body_b.set('p_y', -2)
+
+    universe = Universe()
+    universe.add_body(body_a)
+    universe.add_body(body_b)
+
+    p_x = universe.gravitational_potential_energy_equation('B').solve('p_x')
+        
+    assert compare_floats(p_x[1], 2.0)
+
 def test_gravity_a1a_2019_junio():
     """
     URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf
@@ -116,3 +143,21 @@ def test_gravity_a1a_2019_junio():
     assert compare_floats(g_y, +7.99E-12)
     assert compare_floats(g, +1.33E-11)
 
+def test_error_p_angle():
+
+    body_a = Body('A')
+    body_a.set('m', 3)
+    body_a.set('p', (0, 0))
+
+    body_b = Body('B')
+    body_b.set('m', 5)
+    body_b.set('Fg', (-8.84E-11, +8.84E-11))
+
+    universe = Universe()
+    universe.add_body(body_a)
+    universe.add_body(body_b)
+
+    with pytest.raises(Exception) as exc_info:   
+        p_x, p_y = universe.gravitational_force_equation('B').solve(['p_x', 'p_y'])
+        
+    assert exc_info.value.args[0] == 'Cannot convert expression to float'
