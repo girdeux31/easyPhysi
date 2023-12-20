@@ -26,7 +26,7 @@ class GravitationalFieldIntensityEquation:
         
         for body in self.universe.bodies:
                 
-            # array from body to point since we want to measure the angle between horizontal axis and point
+            # vector from body to point since we want to measure the angle between horizontal axis and point
 
             if self.universe.dimensions == 2:
                 alpha = angle_with_horizontal_2d(body.position(), point)

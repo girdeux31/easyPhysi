@@ -26,7 +26,7 @@ class ElectricalForceEquation:
         for body in self.universe.bodies:
             if body is not main_body:
                 
-                # array from body to main_body since we want to measure the angle between horizontal axis and main body
+                # vector from body to main_body since we want to measure the angle between horizontal axis and main body
 
                 if self.universe.dimensions == 2:
                     alpha = angle_with_horizontal_2d(body.position(), main_body.position())

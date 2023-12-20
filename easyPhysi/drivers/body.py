@@ -93,7 +93,7 @@ class Body:
         else:
             unknown.undefine()
 
-    def apply_force(self, name, value):
+    def add_force(self, name, value):
 
         force = Vector(name, dimensions=self.dimensions, value=value)
         self.forces.append(force)

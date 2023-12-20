@@ -40,7 +40,7 @@ The main characteristics for easyPhysi are summarized in the following table.
     - [Gravitational field](#sec-example-gravitational-field)
     - [Electrical field](#sec-example-electrical-field)
 4. [Bugs and limitations](#sec-bugs-limitations)
-5. [Changelog](#secchange-log)
+5. [Changelog](#sec-changelog)
 6. [License](#sec-licence)
 7. [Contact](#sec-contact)
 
@@ -174,10 +174,10 @@ body.set('prop_z', value_z)
 
 #### <a name="sec-property-nondefined"></a>2.1.1. Non-defined properties
 
-Force (mainly used in `newton_equation`) and energy (mainly used in `energy_conservation_equation`) cannot be defined as properties in an instanciated body with `set` method (note that they are not listed in [Table](#tab-equations)). Instead they can be defined in an instanciated body with `apply_force` and `add_energy` methods respectively.
+Force (mainly used in `newton_equation`) and energy (mainly used in `energy_conservation_equation`) cannot be defined as properties in an instanciated body with `set` method (note that they are not listed in [Table](#tab-equations)). Instead they can be defined in an instanciated body with `add_force` and `add_energy` methods respectively.
 
 ```
-body.apply_force('my_force', value)
+body.add_force('my_force', value)
 body.add_energy('my_energy', value)
 ```
 
@@ -226,7 +226,7 @@ The following equations can be solved. Each equation is a method defined in the 
 > [!NOTE]
 > Equation names are case sensitive.
 
-<a name="tab-equations"></a>  # TODO E and F should be removed
+<a name="tab-equations"></a>
 
  |Equation                                |Type      |Unknowns        |
  |----------------------------------------|----------|--------------- |
@@ -234,14 +234,14 @@ The following equations can be solved. Each equation is a method defined in the 
  |electrical_force_equation               |Vectorial |Fe, p, q        |
  |electrical_potential_energy_equation    |Scalar    |Ue, p, q        |
  |electrical_potential_equation           |Scalar    |Ve, p, q        |
- |energy_conservation_equation            |Scalar    |E 		      |
+ |energy_conservation_equation            |Scalar    |- 		      |
  |gravitational_field_intensity_equation  |Vectorial |gg, m, p        |
  |gravitational_force_equation            |Vectorial |Fg, m, p        |
  |gravitational_potential_energy_equation |Scalar    |Ug, m, p        |
  |gravitational_potential_equation        |Scalar    |Vg, m, p        |
  |linear_position_equation                |Vectorial |g, p, p0, t, v0 |
  |linear_velocity_equation                |Vectorial |g, t, v, v0 	  |
- |newton_equation                         |Vectorial |F, a, m 		  |
+ |newton_equation                         |Vectorial |a, m 	          |
  
 Use any of these equation in an instance of universe and include the body the equation applies to. Then use the `solve` method and include the unknown(s) to be solved, see third column in  table above.
 
@@ -407,9 +407,9 @@ Fr = (-mu*m*g*math.cos(alpha), 0.0)
 body = Body('body')
 
 body.set('m', m)
-body.apply_force('W', W)
-body.apply_force('Fr', Fr)
-body.apply_force('N', N)
+body.add_force('W', W)
+body.add_force('Fr', Fr)
+body.add_force('N', N)
 
 universe = Universe()
 universe.add_body(body)
@@ -448,9 +448,9 @@ body = Body('body')
 
 body.set('m', m)
 body.set('a', a)
-body.apply_force('W', W)
-body.apply_force('Fr', Fr)
-body.apply_force('N', N)
+body.add_force('W', W)
+body.add_force('Fr', Fr)
+body.add_force('N', N)
 
 universe = Universe()
 universe.add_body(body)
@@ -495,20 +495,20 @@ Tcb = (-Symbol('T1'), 0.0)
 
 body_a = Body('A')
 body_a.set('m', ma)
-body_a.apply_force('T2', Tab)
-body_a.apply_force('Fra', Fra)
-body_a.apply_force('Wa', Wa)
+body_a.add_force('T2', Tab)
+body_a.add_force('Fra', Fra)
+body_a.add_force('Wa', Wa)
 
 body_b = Body('B')
 body_b.set('m', mb)
-body_b.apply_force('T1', Tbc)
-body_b.apply_force('T2', Tba)
-body_b.apply_force('Frb', Frb)
+body_b.add_force('T1', Tbc)
+body_b.add_force('T2', Tba)
+body_b.add_force('Frb', Frb)
 
 body_c = Body('C')
 body_c.set('m', mc)
-body_c.apply_force('Wc', Wc)
-body_c.apply_force('T1', Tcb)
+body_c.add_force('Wc', Wc)
+body_c.add_force('T1', Tcb)
 
 universe = Universe()
 universe.add_body(body_a)
@@ -565,14 +565,14 @@ Tcb = (-Symbol('T1'), 0.0)
 
 body = Body('body')
 body.set('m', ma+mb+mc)
-body.apply_force('T2', Tab)
-body.apply_force('Fra', Fra)
-body.apply_force('Wa', Wa)
-body.apply_force('T1', Tbc)
-body.apply_force('T2', Tba)
-body.apply_force('Frb', Frb)
-body.apply_force('Wc', Wc)
-body.apply_force('T1', Tcb)
+body.add_force('T2', Tab)
+body.add_force('Fra', Fra)
+body.add_force('Wa', Wa)
+body.add_force('T1', Tbc)
+body.add_force('T2', Tba)
+body.add_force('Frb', Frb)
+body.add_force('Wc', Wc)
+body.add_force('T1', Tcb)
 
 universe = Universe()
 universe.add_body(body)
@@ -763,7 +763,7 @@ mu = universe.energy_conservation_equation('body').solve('mu')
 > [!TIP]
 > Solution: `mu[0] = 0.40`
 
-### <a name="sec-example-gravity-field"></a>3.3. Gravitational field
+### <a name="sec-example-gravitational-field"></a>3.3. Gravitational field
 
 #### <a name="sec-example-gf0"></a>3.3.0. Example GF-0
 
@@ -999,7 +999,7 @@ W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
     - electrical_force_equation
     - gravitational_field_intensity_equation
     - gravitational_force_equation
-* For the same reason, when defining forces for `newton_equation` with `apply_force` method, the angle cannot be set as un unkown as it is usually inside `math.sin` or `math.cos` functions. Fortunatelly, since the force algebraic formula is defined by the user, `sin_alpha` and `cos_alpha` can be set as unknowns instead of `math.sin(alpha)` or `math.cos(alpha)`. Then, easily get the angle with `math.asin`, `math.acos`, see [Example](#sec-example-d1).
+* For the same reason, when defining forces for `newton_equation` with `add_force` method, the angle cannot be set as un unkown as it is usually inside `math.sin` or `math.cos` functions. Fortunatelly, since the algebraic formula that defines each force is set by the user, arbitrary unknowns can be set instead of `math.sin(alpha)` or `math.cos(alpha)`. Then, easily get the angle with `math.asin` or `math.acos`, see [Example](#sec-example-d1).
 
 ## <a name="sec-changelog"></a>5. Changelog
 
