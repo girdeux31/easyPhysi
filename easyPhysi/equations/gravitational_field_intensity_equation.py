@@ -37,7 +37,7 @@ class GravitationalFieldIntensityEquation:
             factor = math.cos(alpha) if axis == 0 else math.sin(alpha) if axis == 1 else math.sin(beta)
             foo += G*body.mass()/dist**2 * factor
             
-        foo += body.gravitational_field_intensity[axis]  # TODO whole system, not only body
+        foo += self.universe.gravitational_field_intensity[axis]
         
         return Equation(foo)
 

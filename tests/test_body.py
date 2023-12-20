@@ -9,32 +9,30 @@ from easyPhysi.drivers.body import Body
 
 def test_body_2d():
 
-    g = (0.0, -9.81)
+    a = (0.0, -9.81)
     p = (0.0, 1.0)
 
     body = Body('A')
 
-    body.set('g', g)
+    body.set('a', a)
     body.set('p_x', p[0])
     body.set('p_y', p[1])
-    body.help()
 
 def test_body_3d():
 
-    g = (0.0, 0.0, -9.81)
+    a = (0.0, 0.0, -9.81)
     p = (0.0, 1.0, 2.0)
 
     body = Body('A', dimensions=3)
 
-    body.set('g', g)
+    body.set('a', a)
     body.set('p_x', p[0])
     body.set('p_y', p[1])
     body.set('p_z', p[2])
-    body.help()
 
 def test_body_help():
 
-    file = r'tests/ref/properties.txt'
+    file = r'tests/ref/body.txt'
 
     if os.path.exists(file):
         os.remove(file)

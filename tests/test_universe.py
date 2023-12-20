@@ -7,9 +7,29 @@ sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
 from easyPhysi.drivers.universe import Universe
 
 
+def test_universe_2d():
+
+    g = (0.0, -9.81)
+    t = 0.0
+
+    universe = Universe()
+
+    universe.set('g', g)
+    universe.set('t', t)
+
+def test_universe_3d():
+
+    g = (0.0, 0.0, -9.81)
+    t = 0.0
+
+    universe = Universe(dimensions=3)
+
+    universe.set('g', g)
+    universe.set('t', t)
+
 def test_universe_help():
 
-    file = r'tests/ref/equations.txt'
+    file = r'tests/ref/universe.txt'
 
     if os.path.exists(file):
         os.remove(file)

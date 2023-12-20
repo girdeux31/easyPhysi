@@ -25,7 +25,7 @@ class ElectricalPotentialEquation:
             dist = distance(body.position(), point)
             foo -= K*body.charge()/dist
 
-        foo += body.electrical_potential()  # TODO whole system, not only body
+        foo += self.universe.electrical_potential()
         
         return Equation(foo)
 

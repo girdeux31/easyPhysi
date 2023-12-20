@@ -35,12 +35,11 @@ def test_electrical_a3a_2021_modelo():
     assert compare_floats(Ee_y, 0.0)
     assert compare_floats(Ee, 2.88)
 
-def test_electrical_a3a_2021_modelo_bis():
+def test_electrical_a3b_2021_modelo_bis():
     """
     URL: https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf
     Problem: A3.a 2021 modelo
     Statement: Two equal point charges of 5 nC are located on the (x, y) plane at points (0, 3) m and (0, -3) m.
-    a) Determine the electric field created by both charges at the point (4, 0) m.
     """
     point_0 = (0, 0)
     point_1 = (4, 0)

@@ -23,12 +23,13 @@ def test_mrua_3():
 
     body = Body('body')
 
-    body.set('g', g)
     body.set('p0', p0)
     body.set('v0', v0)
     body.set('p_y', y)
 
     universe = Universe()
+
+    universe.set('g', g)
     universe.add_body(body)
 
     t = universe.linear_position_equation('body').get_equation('y').solve('t')
@@ -36,7 +37,7 @@ def test_mrua_3():
     assert compare_floats(t[0], 0.0)
     assert compare_floats(t[1], 3.20)
 
-    body.set('t', t[1])
+    universe.set('t', t[1])
 
     p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x')
     
@@ -58,12 +59,13 @@ def test_mrua_10():
 
     body = Body('body')
 
-    body.set('g', g)
     body.set('p0', p0)
     body.set('v0', v0)
     body.set('p_y', py)
 
     universe = Universe()
+
+    universe.set('g', g)
     universe.add_body(body)
 
     t = universe.linear_position_equation('body').get_equation('y').solve('t')
@@ -71,7 +73,7 @@ def test_mrua_10():
     assert compare_floats(t[0], -1.53)
     assert compare_floats(t[1], 1.33)
 
-    body.set('t', t[1])
+    universe.set('t', t[1])
 
     p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x')
     

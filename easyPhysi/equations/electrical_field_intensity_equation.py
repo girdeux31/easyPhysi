@@ -36,7 +36,7 @@ class ElectricalFieldIntensityEquation:
             factor = math.cos(alpha) if axis == 0 else math.sin(alpha) if axis == 1 else math.sin(beta)
             foo -= K*body.charge()/dist**2 * factor
             
-        foo += body.electrical_field_intensity[axis]  # TODO whole system, not only body
+        foo += self.universe.electrical_field_intensity[axis]
         
         return Equation(foo)
 

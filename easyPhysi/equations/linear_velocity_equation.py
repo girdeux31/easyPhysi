@@ -20,7 +20,7 @@ class LinearVelocityEquation:
         # equation to solve is v0-v + g*t = 0
         
         foo = body.initial_velocity[axis] - body.velocity[axis] \
-                    + body.gravity[axis]*body.time()
+                    + self.universe.gravity[axis]*self.universe.time()
 
         return Equation(foo)
 

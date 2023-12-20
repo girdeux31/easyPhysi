@@ -20,8 +20,8 @@ class LinearPositionEquation:
         # equation to solve is p0-p + v0*t + 1/2*g*t**2 = 0
         
         foo = body.initial_position[axis] - body.position[axis] \
-                    + body.initial_velocity[axis]*body.time() \
-                    + body.gravity[axis]/2*body.time()**2
+                    + body.initial_velocity[axis]*self.universe.time() \
+                    + self.universe.gravity[axis]/2*self.universe.time()**2
         
         return Equation(foo)
 

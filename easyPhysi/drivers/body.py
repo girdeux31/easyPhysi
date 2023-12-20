@@ -17,24 +17,18 @@ class Body:
         self.forces = list()
         self.energies = list()
 
-        # initialize properties
+        # define body properties
 
         self.acceleration = Vector('a', self.dimensions)
         self.charge = Scalar('q')
-        self.electrical_field_intensity = Vector('Ee', self.dimensions)
         self.electrical_force = Vector('Fe', self.dimensions)
         self.electrical_potential_energy = Scalar('Ue')
-        self.electrical_potential = Scalar('Ve')
-        self.gravitational_field_intensity = Vector('gg', self.dimensions)  # this is the same as gravity 'g'
         self.gravitational_force = Vector('Fg', self.dimensions)
         self.gravitational_potential_energy = Scalar('Ug')
-        self.gravitational_potential = Scalar('Vg')
-        self.gravity = Vector('g', self.dimensions)
         self.initial_position = Vector('p0', self.dimensions)
         self.initial_velocity = Vector('v0', self.dimensions)
         self.mass = Scalar('m')
         self.position = Vector('p', self.dimensions)
-        self.time = Scalar('t')
         self.velocity = Vector('v', self.dimensions)
 
     def short_to_long(self, short):

@@ -1,4 +1,16 @@
 
+The following properties are allowed:
+
+ Property   Description                      Type       Value           
+ ========== ================================ ========== ================
+ Ee         Electrical field intensity       Vector     (Ee_x, Ee_y)
+ Ve         Electrical potential             Scalar     Ve
+ gg         Gravitational field intensity    Vector     (gg_x, gg_y)
+ Vg         Gravitational potential          Scalar     Vg
+ g          Gravity                          Vector     (g_x, g_y)
+ t          Time                             Scalar     t
+
+
 The following equations are allowed:
 
  Equation                                 Type       Parameters      
