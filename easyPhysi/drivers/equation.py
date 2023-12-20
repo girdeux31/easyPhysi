@@ -13,7 +13,7 @@ class Equation:
     def solve(self, unknown):
         
         if unknown not in self.unknowns:
-            raise ValueError(f'Unknown \'{unknown}\' not in equation unkowns {self.unknowns}')
+            raise ValueError(f'Unknown \'{unknown}\' not in equation unknowns {self.unknowns}')
 
         roots = solve(self.function, unknown)
 

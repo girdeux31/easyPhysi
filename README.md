@@ -3,13 +3,16 @@
 > [!WARNING]
 > **Library under development yet**
 
-easyPhysi is a physics library to solve pre-universitary physics problems. The physics areas that are covered by pyPhisics are summarized hereafter. See the [main structure](#sec-main-structure) to use easyPhysi and also some [examples](#sec-examples).
+easyPhysi is a physics library to solve pre-university physics problems. The physics areas that are covered by easyPhysi are summarized hereafter. See the main structure to use easyPhysi in [Section](#sec-main-structure) and also some [Examples](#sec-examples).
 
  - Kinematics
  - Dynamics
  - Energy conservation
  - Gravitational field
  - Electrical field
+
+> [!Note]
+> Visit GitHub page at https://github.com/girdeux31/easyPhysi
 
 The main characteristics for easyPhysi are summarized in the following table.
 
@@ -21,7 +24,7 @@ The main characteristics for easyPhysi are summarized in the following table.
  | Version          | 1.0.0         |
  | Author           | Carles Mesado |
  | Date             | 22/12/2023    |
- | Size             | ~ 18 KiB      |
+ | Size             | ~ 40 KiB      |
 
 > [!NOTE]
 > Notes are use through this document to remark some features.
@@ -107,6 +110,9 @@ Let's take the code apart line by line.
  - Line 11: add all defined bodies to the universe.
  - Line 15: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
 
+> [!NOTE]
+> Define all bodies (line 6), their properties (line 7) and add them to a universe  (line 11) before instanciating any equation (line 15).
+
 > [!TIP]
 > [Example](#sec-example-ef2) defines a 3D problem.
 
@@ -142,7 +148,7 @@ The following properties can be defined in any body.
 Use `set` method in an instanciated body to define its property and define its value according to its type. See value types in [Section](#sec-property-types).
 
 > [!NOTE]
-> Units are up to the user. Eventhough SI is recommended, other systems can be used provided that different units are consistent.
+> Units are up to the user. Even though SI is recommended, other systems can be used provided that different units are consistent.
 
 > [!NOTE]
 > Force and energy cannot be defined as properties since each force and energy is defined by its own formula, see [Section](#sec-property-nondefined).
@@ -284,7 +290,7 @@ The most useful features are already defined. However, for the sake of completen
 
 #### <a name="sec-other-feature-magnitude"></a>2.4.0. Vector module
 
-Vectorial equations give results as vector components. `magnitude` function is available to obtain a vector module or magnitude.
+Function `magnitude` is available to obtain a vector module or magnitude.
 
 ```
 from easyPhysi.utils import magnitude
@@ -294,9 +300,21 @@ prop = magnitude((prop_x, prop_y))
 > [!TIP]
 > [Example](#sec-example-k0) makes use of `magnitude` function to calculate the modulo of the velocity.
 
-#### <a name="sec-other-feature-functions"></a>2.4.1. Working with functions
+#### <a name="sec-other-feature-symbol"></a>2.4.1. Define new unknowns
 
-Equations return numerical values if there is only one unknown (all properties are defined but one), but return functions if there is more than one unknown (two or more properties are left undefined). Use `subs` method to replace an unknown by a specified numerical value.
+Most unknowns are already defined when a body is instanciated, see [Table](#tab-properties). However, sometimes new unknowns must be defined, specially with Newton equations and energy conservation equations since force and energy algebraic expressions are defined by user. In these case, Symbol class from Sympy library can be used. Then, it can be used as argument in `solve` method to calculate its numerical value.
+
+```
+from sympy import Symbol
+my_unknown = Symbol('my_unknown')
+```
+
+> [!TIP]
+> [Example](#sec-example-ec0) makes uso of `Symbol` class to define the final velocity (`vf`) as an unknown and then solve its value.
+
+#### <a name="sec-other-feature-subs"></a>2.4.1. Substitute variable
+
+Method `solve` returns numerical values if there is only one unknown (all properties are defined but one), but returns expressions if there is more than one unknown (two or more properties are left undefined). Use `subs` method to replace an unknown by a specified numerical value.
 
 ```
 foo = universe.physics_equation('body').solve('my_unk')
@@ -309,7 +327,16 @@ out = foo.subs('my_sym', value)
 > [!TIP]
 > [Example](#sec-example-d0) makes uso of `subs` method to substitute the friction coefficient by its value.
 
-#### <a name="sec-other-feature-systems"></a>2.4.2. Solving system of equations
+#### <a name="sec-other-feature-get-equation"></a>2.4.2. Get equation from system
+
+In some cases, it is only interesting to solve a specific equation from a vectorial equation (that is a set of equations or a system). The method `get_equation` can be used over any vectorial equation to return the specific equation, the axis component is expected as method argument.
+
+`universe.physics_equation('my_body').get_equation('axis')`
+
+> [!TIP]
+> [Example](#sec-example-k0) makes use of `get_equation` method to extract an equation from a vectorial equation (or set of equations) and, then, solve its unknown.
+
+#### <a name="sec-other-feature-solve-systems"></a>2.4.3. Solving system of equations
 
 System of equations can be defined -with `System` class- and solved with `solve` method. The `solve` method accepts a list with as many unknowns as equations defined in the system.
 
@@ -321,7 +348,7 @@ equation = universe.physics_equation('body').solve('my_unk')
 system = System()
 system.add_equation(equation)
 
-# define and add as meny equations as needed
+# define and add as many equations as needed
 
 x, y, z = system.solve(['x', 'y', 'z'])
 ```
@@ -329,16 +356,16 @@ x, y, z = system.solve(['x', 'y', 'z'])
 > [!TIP]
 > [Example](#sec-example-d2) makes use of `System` class to solve a set of equations.
 
-#### <a name="sec-other-feature-plot"></a>2.4.3. Plotting equations
+#### <a name="sec-other-feature-plot"></a>2.4.4. Plotting equations
 
-Method `plot` can be used over any equation to plot unknowns in the form of function `independent = f(dependent)`.
+Method `plot` can be used over any equation -scalar or vectorial- to plot unknowns in the form of function `independent = f(dependent)`.
 
 `universe.physics_equation('my_body').plot(independent, dependent, x_range, points=100, path=None, show=True)`
 
 Arguments are described hereafter.
 
- - `independent`: if equation is [scalar](#sec-equation-type-scalar), then only one independent unknown is expected. If equation is [vectorial](#sec-equation-type-vectorial), then exactly the same number of universe dimensions are expected as independent unknowns (as a list).
- - `dependent`: exactle one unknown is expected.
+ - `independent`: if equation is [scalar](#sec-equation-type-scalar), then only one independent unknown is expected. If equation is [vectorial](#sec-equation-type-vectorial), then a list with length equal to the number of components (or universe dimensions) is expected.
+ - `dependent`: exactly one unknown is expected.
  - `x_range`: range to plot for dependent unknown (x-axis).
  - `points`: number of points to plot, optional argument, default is 100.
  - `path`: path to save image as file, optional argument, by default it is None and no image is saved.
@@ -346,15 +373,6 @@ Arguments are described hereafter.
 
 > [!TIP]
 > [Example](#sec-example-ec1) makes uso of `plot` method to plot a scalar equation (final velocity as a function of initial velocity).
-
-#### <a name="sec-other-feature-equation"></a>2.4.4. Get equation from system
-
-In some cases, it is only interesting to solve a specific equation from a vectorial equation (that is a set of equations or a system). The method 'get_equation' can be used over any vectorial equation to return the specific equation, the axis component is expected as argument to the method.
-
-`universe.pyshics_equation('my_body').get_equation('axis')`
-
-> [!TIP]
-> [Example](#sec-example-k0) makes use of `get_equation` method to extract an equation from a vectorial equation (or set of equations) and, then, solve its unknown.
 
 ## <a name="sec-examples"></a>3. Examples
 
@@ -549,14 +567,14 @@ eq_a = universe.newton_equation('A')['x']
 eq_b = universe.newton_equation('B')['x']
 eq_c = universe.newton_equation('C')['x']
 
-unkowns = ['T1', 'T2', 'a_x']
+unknowns = ['T1', 'T2', 'a_x']
 
 system = System()
 system.add_equation(eq_a)
 system.add_equation(eq_b)
 system.add_equation(eq_c)
 
-T1, T2, a_x = system.solve(unkowns)
+T1, T2, a_x = system.solve(unknowns)
 ```
 
 > [!TIP]
@@ -699,6 +717,8 @@ universe.add_body(body)
 
 universe.energy_conservation_equation('body').plot('vf', 'v0', [0, 4], points=200, path=file, show=False)
 ```
+
+Solution:
 
 ![Plot of final velocity as a function of initial velocity](https://github.com/girdeux31/easyPhysi/blob/main/tests/ref/vf_f_v0.png?raw=true)
 
@@ -1031,10 +1051,10 @@ W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
     - electrical_force_equation
     - gravitational_field_intensity_equation
     - gravitational_force_equation
-* For the same reason, when defining forces for `newton_equation` with `add_force` method, the angle cannot be set as un unkown as it is usually inside `math.sin` or `math.cos` functions. Fortunatelly, since the algebraic formula that defines each force is set by the user, arbitrary unknowns can be set instead of `math.sin(alpha)` or `math.cos(alpha)`. Then, easily get the angle with `math.asin` or `math.acos`.
+* For the same reason, when defining forces for `newton_equation` with `add_force` method, the angle cannot be set as un unknown as it is usually inside `math.sin` or `math.cos` functions. Fortunately, since the algebraic formula that defines each force is set by the user, arbitrary unknowns can be set instead of `math.sin(alpha)` or `math.cos(alpha)`. Then, easily get the angle with `math.asin` or `math.acos`.
 
 > [!TIP]
-> [Example](#sec-example-d1) uses this methodology to solve the position unknown in a Dynamics problem.
+> [Example](#sec-example-d1) uses this methodology to solve the position unknown in a dynamics problem.
 
 ### <a name="sec-bugs"></a>4.1. Bugs
 
@@ -1052,6 +1072,3 @@ This project includes MIT License. A short and simple permissive license with co
 ## <a name="sec-contact"></a>7. Contact
 
 Feel free to contact mesado31@gmail.com for any suggestion or bug.
-
-> [!IMPORTANT]
-> Visit GitHub page at https://github.com/girdeux31/easyPhysi

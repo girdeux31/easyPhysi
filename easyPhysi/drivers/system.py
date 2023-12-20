@@ -49,7 +49,7 @@ class System:
                 raise TypeError(f'Unknown must be str not {type(unknown).__name__}')
             
             if unknown not in self.unknowns:
-                raise RuntimeError(f'Unknwon \'{unknown}\' not in system unkowns {self.unknowns}')
+                raise RuntimeError(f'Unknown \'{unknown}\' not in system unknowns {self.unknowns}')
 
         unknowns = [Symbol(unknown) for unknown in unknowns]
         functions = [equation.function for equation in self.equations.values()]  # dict order is preserved in python 3.6+
