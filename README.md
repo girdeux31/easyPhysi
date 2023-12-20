@@ -88,6 +88,7 @@ from easyPhysi.drivers.universe import Universe
 from easyPhysi.drivers.body import Body
 
 universe = Universe(dimensions=2)  # 2 o 3 dimensions
+universe.set('my_prop', value)
 
 body = Body('my_body', dimensions=2)
 body.set('my_prop', value)
@@ -105,53 +106,59 @@ Let's take the code apart line by line.
 
  - Line 1 and 2: import `Universe` and `Body` objects, these are needed in every single problem solved with this library.
  - Line 4: define a universe instance with `Universe` class and include the dimensions of it, only 2 o 3 dimensions are allowed.
- - Line 6: define a body instance with `Body` class, its name and dimensions are included as arguments. Define as many bodies as needed provided that they have different names.
- - Line 7: define a property for the body instanciated in previous line and its value. Define as many properties as needed provided they are listed in [Table](#tab-properties). Properties must fulfill its type, see [Section](#sec-property-types).
- - Line 11: add all defined bodies to the universe.
- - Line 15: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
+ - Line 5: define a property for the universe instanciated in previous line and its value. Define as many properties as needed provided they are listed in [Table](#tab-universe-properties). Properties must fulfill its type, see [Section](#sec-property-types).
+ - Line 7: define a body instance with `Body` class, its name and dimensions are included as arguments. Define as many bodies as needed provided that they have different names.
+ - Line 8: define a property for the body instanciated in previous line and its value. Define as many properties as needed provided they are listed in [Table](#tab-body-properties). Properties must fulfill its type, see [Section](#sec-property-types).
+ - Line 12: add all defined bodies to the universe.
+ - Line 16: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
 
-> [!NOTE]
-> Define all bodies (line 6), their properties (line 7) and add them to a universe  (line 11) before instanciating any equation (line 15).
+> [!NOTE] # TODO check
+> Define all bodies (line 7), their properties (line 8) and add them to a universe  (line 12) before instanciating any equation (line 16).
 
 > [!TIP]
 > [Example](#sec-example-ef2) defines a 3D problem.
 
 ### <a name="sec-properties"></a>2.1. Properties
 
-The following properties can be defined in any body.
+Depending on the property, these are defined on a specific body or in the universe. [Table](#tab-body-properties) list all properties that are allowed to be defined on a body and [Table](#tab-universe-properties) list all properties that are allowed to be defined in the universe.
 
 > [!NOTE]
 > Property names are case sensitive.
 
-<a name="tab-properties"></a>
+<a name="tab-body-properties"></a>
 
  |Property |Description                     |Type      |Components           |
  |---------|--------------------------------|----------|---------------------|
  |a        |Acceleration                    |Vector    |(a_x, a_y[, a_z])    |
  |q        |Charge                          |Scalar    |q                    |
- |Ee       |Electrical field intensity      |Vector    |(Ee_x, Ee_y[, Ee_z]) |
  |Fe       |Electrical force                |Vector    |(Fe_x, Fe_y[, Fe_z]) |
  |Ue       |Electrical potential energy     |Scalar    |Ue                   |
- |Ve       |Electrical potential            |Scalar    |Ve                   |
- |gg       |Gravitational field intensity   |Vector    |(gg_x, gg_y[, gg_z]) |
  |Fg       |Gravitational force             |Vector    |(Fg_x, Fg_y[, Fg_z]) |
  |Ug       |Gravitational potential energy  |Scalar    |Ug                   |
- |Vg       |Gravitational potential         |Scalar    |Vg                   |
- |g        |Gravity                         |Vector    |(g_x, g_y[, g_z])    |
  |p0       |Initial position                |Vector    |(p0_x, p0_y[, p0_z]) |
  |v0       |Initial velocity                |Vector    |(v0_x, v0_y[, v0_z]) |
  |m        |Mass                            |Scalar    |m                    |
  |p        |Position                        |Vector    |(p_x, p_y[, p_z])    |
- |t        |Time                            |Scalar    |t                    |
  |v        |Velocity                        |Vector    |(v_x, v_y[, v_z])    |
- 
-Use `set` method in an instanciated body to define its property and define its value according to its type. See value types in [Section](#sec-property-types).
+
+<a name="tab-universe-properties"></a>
+
+ |Property |Description                     |Type      |Value                |
+ |---------|--------------------------------|----------|---------------------|
+ |Ee       |Electrical field intensity      |Vector    |(Ee_x, Ee_y[, Ee_z]) |
+ |Ve       |Electrical potential            |Scalar    |Ve                   |
+ |gg       |Gravitational field intensity   |Vector    |(gg_x, gg_y[, gg_z]) |
+ |Vg       |Gravitational potential         |Scalar    |Vg                   |
+ |g        |Gravity                         |Vector    |(g_x, g_y[, g_z])    |
+ |t        |Time                            |Scalar    |t                    |
+
+Use `set` method in an instanciated body or universe to define its property and define its value according to its type. See value types in [Section](#sec-property-types).
 
 > [!NOTE]
 > Units are up to the user. Even though SI is recommended, other systems can be used provided that different units are consistent.
 
 > [!NOTE]
-> Force and energy cannot be defined as properties since each force and energy is defined by its own formula, see [Section](#sec-property-nondefined).
+> Force and energy cannot be defined as properties since each force and energy is defined by its own algebraic formula, see [Section](#sec-property-nondefined).
 
 #### <a name="sec-property-types"></a>2.1.0. Property types
 
@@ -278,7 +285,7 @@ out = universe.physics_equation('my_body').solve('my_unk')
 
 ##### <a name="sec-equation-type-vectorial"></a>2.3.0.ii Vectorial
 
-As many unknowns as universe dimensions are accepted, these must be defined as a list and passed as argument of `solve` method. Vector components must be append to unknown names, such as `a_x`, `a_y` and `a_z` for acceleration, see [Section](#sec-property-type-vectors) and forth column in [Table](#tab-properties). The same number of unknowns must be defined as outputs, no name restriction apply for output unknowns.
+As many unknowns as universe dimensions are accepted, these must be defined as a list and passed as argument of `solve` method. Vector components must be append to unknown names, such as `a_x`, `a_y` and `a_z` for acceleration, see [Section](#sec-property-type-vectors). The same number of unknowns must be defined as outputs, no name restriction apply for output unknowns.
 
 ```
 out_x, out_y = universe.physics_equation('my_body').solve(['unk_x', 'unk_y'])
@@ -302,7 +309,7 @@ prop = magnitude((prop_x, prop_y))
 
 #### <a name="sec-other-feature-symbol"></a>2.4.1. Define new unknowns
 
-Most unknowns are already defined when a body is instanciated, see [Table](#tab-properties). However, sometimes new unknowns must be defined, specially with Newton equations and energy conservation equations since force and energy algebraic expressions are defined by user. In these case, Symbol class from Sympy library can be used. Then, it can be used as argument in `solve` method to calculate its numerical value.
+Most unknowns are already defined when a universe or body are instanciated, see [Table](#tab-universe-properties) and [Table](#tab-body-properties). However, sometimes new unknowns must be defined, specially with Newton equations and energy conservation equations since force and energy algebraic expressions are defined by user. In these case, Symbol class from Sympy library can be used. Then, it can be used as argument in `solve` method to calculate its numerical value.
 
 ```
 from sympy import Symbol
@@ -312,7 +319,7 @@ my_unknown = Symbol('my_unknown')
 > [!TIP]
 > [Example](#sec-example-ec0) makes uso of `Symbol` class to define the final velocity (`vf`) as an unknown and then solve its value.
 
-#### <a name="sec-other-feature-subs"></a>2.4.1. Substitute variable
+#### <a name="sec-other-feature-subs"></a>2.4.2. Substitute variable
 
 Method `solve` returns numerical values if there is only one unknown (all properties are defined but one), but returns expressions if there is more than one unknown (two or more properties are left undefined). Use `subs` method to replace an unknown by a specified numerical value.
 
@@ -327,7 +334,7 @@ out = foo.subs('my_sym', value)
 > [!TIP]
 > [Example](#sec-example-d0) makes uso of `subs` method to substitute the friction coefficient by its value.
 
-#### <a name="sec-other-feature-get-equation"></a>2.4.2. Get equation from system
+#### <a name="sec-other-feature-get-equation"></a>2.4.3. Get equation from system
 
 In some cases, it is only interesting to solve a specific equation from a vectorial equation (that is a set of equations or a system). The method `get_equation` can be used over any vectorial equation to return the specific equation, the axis component is expected as method argument.
 
@@ -336,7 +343,7 @@ In some cases, it is only interesting to solve a specific equation from a vector
 > [!TIP]
 > [Example](#sec-example-k0) makes use of `get_equation` method to extract an equation from a vectorial equation (or set of equations) and, then, solve its unknown.
 
-#### <a name="sec-other-feature-solve-systems"></a>2.4.3. Solving system of equations
+#### <a name="sec-other-feature-solve-systems"></a>2.4.4. Solving system of equations
 
 System of equations can be defined -with `System` class- and solved with `solve` method. The `solve` method accepts a list with as many unknowns as equations defined in the system.
 
@@ -356,7 +363,7 @@ x, y, z = system.solve(['x', 'y', 'z'])
 > [!TIP]
 > [Example](#sec-example-d2) makes use of `System` class to solve a set of equations.
 
-#### <a name="sec-other-feature-plot"></a>2.4.4. Plotting equations
+#### <a name="sec-other-feature-plot"></a>2.4.5. Plotting equations
 
 Method `plot` can be used over any equation -scalar or vectorial- to plot unknowns in the form of function `independent = f(dependent)`.
 
@@ -403,17 +410,18 @@ py = 0.0
 
 body = Body('body')  # by default 2D
 
-body.set('g', g)
 body.set('p0', p0)
 body.set('v0', v0)
 body.set('p_y', py)
 
 universe = Universe()  # by default 2D
+
+universe.set('g', g)
 universe.add_body(body)
 
 t = universe.linear_position_equation('body').get_equation('y').solve('t')
 
-body.set('t', t[1])
+universe.set('t', t[1])
 
 p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x')
 
@@ -958,7 +966,7 @@ Ee = magnitude((Ee_x, Ee_y))  # always positive value
 
 [Problem A3.b 2021 junio coincidentes](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf)
 
-At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, calculate the speed at which the electron will leave the square through the midpoint of the top side.
+At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, obtain the work done by the electric field when the electron leaves the square through the midpoint of the top side.
 
 ```
 from easyPhysi.drivers.body import Body, electron
