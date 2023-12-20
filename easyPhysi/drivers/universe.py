@@ -21,8 +21,8 @@ class Universe:
 
     def __init__(self, dimensions=2):
 
-        if dimensions < 1 or dimensions > 3:
-            raise ValueError('Parameter \'dimensions\' must be between 1 and 3')
+        if dimensions != 2 and dimensions != 3:
+            raise ValueError('Parameter \'dimensions\' must be 2 or 3')
         
         self.dimensions = dimensions
 
