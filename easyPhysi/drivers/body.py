@@ -139,7 +139,7 @@ neutron.set('q', 0.0)
 
 sun = Body('sun')
 sun.set('m', 1.98847e30)  # kg
-sun.set('p', (0, 0))  # km, relative to the sun
+sun.set('p', (0, 0))  # km, relative to the Sun
 
 mercury = Body('mercury')
 mercury.set('m', 3.301e23)

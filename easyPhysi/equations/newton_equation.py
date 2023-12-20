@@ -31,7 +31,7 @@ class NewtonEquation:
     @property
     def parameters(self):
 
-        parameters = ['F', 'm', 'a']
+        parameters = ['F', 'm', 'a']  # TODO should be F removed?
 
         return ', '.join(sorted(parameters))
 

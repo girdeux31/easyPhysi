@@ -225,7 +225,7 @@ The following equations can be solved. Each equation is a method defined in the 
 > [!NOTE]
 > Equation names are case sensitive.
 
-<a name="tab-equations"></a>
+<a name="tab-equations"></a>  # TODO E and F should be removed
 
  |Equation                                |Type      |Unknowns        |
  |----------------------------------------|----------|--------------- |
@@ -242,7 +242,7 @@ The following equations can be solved. Each equation is a method defined in the 
  |linear_velocity_equation                |Vectorial |g, t, v, v0 	  |
  |newton_equation                         |Vectorial |F, a, m 		  |
  
-Use any above equation in an instance of universe and include the body the equation applies to. Then use the `solve` method and include the unknown(s) to be solved, see third column in above table.
+Use any of these equation in an instance of universe and include the body the equation applies to. Then use the `solve` method and include the unknown(s) to be solved, see third column in  table above.
 
 `universe.physics_equation('my_body').solve('my_unknown')`
 
