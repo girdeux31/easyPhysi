@@ -7,12 +7,12 @@ The following equations are allowed:
  electrical_force_equation                Vectorial  Fe, p, q
  electrical_potential_energy_equation     Scalar     Ue, p, q
  electrical_potential_equation            Scalar     Ve, p, q
- energy_conservation_equation             Scalar     E
+ energy_conservation_equation             Scalar     
  gravitational_field_intensity_equation   Vectorial  gg, m, p
  gravitational_force_equation             Vectorial  Fg, m, p
  gravitational_potential_energy_equation  Scalar     Ug, m, p
  gravitational_potential_equation         Scalar     Vg, m, p
  linear_position_equation                 Vectorial  g, p, p0, t, v0
  linear_velocity_equation                 Vectorial  g, t, v, v0
- newton_equation                          Vectorial  F, a, m
+ newton_equation                          Vectorial  a, m
 

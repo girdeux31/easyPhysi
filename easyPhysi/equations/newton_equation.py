@@ -31,7 +31,7 @@ class NewtonEquation:
     @property
     def parameters(self):
 
-        parameters = ['F', 'm', 'a']  # TODO should be F removed?
+        parameters = ['m', 'a']
 
         return ', '.join(sorted(parameters))
 
@@ -41,7 +41,7 @@ class NewtonEquation:
         body = self.universe.get_body(name)
 
         if not body.forces:
-            raise ValueError('Before solving the equation you must add force(s) over body with \'apply_force\' method')
+            raise ValueError('Before solving the equation you must add force(s) over body with \'add_force\' method')
 
         for axis, idx in self.axes.components.items():
 

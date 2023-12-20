@@ -28,7 +28,7 @@ class EnergyConservationEquation:
     @property
     def parameters(self):
 
-        parameters = ['E']  # TODO should be E removed?
+        parameters = []
 
         return ', '.join(sorted(parameters))
 
