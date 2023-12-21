@@ -20,7 +20,7 @@ The main characteristics for easyPhysi are summarized in the following table.
  | Name             | easyPhysi     |
  | Version          | 1.0.0         |
  | Author           | Carles Mesado |
- | Date             | 22/12/2023    |
+ | Date             | 21/12/2023    |
  | Size             | ~ 40 KiB      |
 
 > [!NOTE]
@@ -293,7 +293,7 @@ out_x, out_y = universe.physics_equation('my_body').solve(['unk_x', 'unk_y'])
 ```
 
 > [!NOTE]
-> The output always have as many list of roots as unknowns.
+> The output always has as many list of roots as unknowns.
 
 ### <a id="sec-advance-features"></a>2.4. Advance features
 
@@ -1079,7 +1079,7 @@ Contact the main author if you discover any bug, see [Section](#sec-contact).
 Main changes:
 
 * 25/06/23 - Initial idea
-* 22/12/23 - v1.0.0 first stable version
+* 21/12/23 - v1.0.0 first stable version
 
 ## <a id="sec-licence"></a>6. License
 
