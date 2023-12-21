@@ -1,4 +1,4 @@
-__name__ = 'easyPhysi'
+__name__ = 'easyphysi'
 __version__ = '1.0.0'
 __summary__ = 'Physics library to solve pre-universitary physics problems'
 __author__ = 'Carles Mesado'

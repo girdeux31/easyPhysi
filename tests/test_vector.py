@@ -1,8 +1,8 @@
 import sys
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyphysi')
 
-from easyPhysi.drivers.vector import Vector
+from easyphysi.drivers.vector import Vector
 
 tup = Vector('a', dimensions=3)
 

@@ -59,7 +59,7 @@ The main characteristics for easyPhysi are summarized in the following table.
 
 Install the package with pip,
 
-`pip install easyPhysi`
+`pip install easyphysi`
 
 or clone the GitHub repository.
 
@@ -78,8 +78,8 @@ The following third-party modules are requirements.
 Most pre-university physics problems can be solved following this structure composed of a few lines.
 
 ```
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.drivers.body import Body
 
 universe = Universe(dimensions=2)  # 2 o 3 dimensions, default is 2
 universe.set('my_prop', value)
@@ -236,7 +236,7 @@ The mass and position of celestial bodies are defined in kilograms and kilometer
 
 Import them using the following line and use them without instanciating the body or defining its main properties.
 
-`from easyPhysi.drivers.body import special_body`
+`from easyphysi.drivers.body import special_body`
 
 > [!TIP]
 > [Example](#sec-example-ef1) imports an electron from special bodies.
@@ -304,7 +304,7 @@ The most useful features are already defined. However, for the sake of completen
 Function `magnitude` is available to obtain a vector module or magnitude.
 
 ```
-from easyPhysi.utils import magnitude
+from easyphysi.utils import magnitude
 prop = magnitude((prop_x, prop_y))
 ```
 
@@ -352,7 +352,7 @@ In some cases, it is only interesting to solve a specific equation from a vector
 System of equations can be defined -with `System` class- and solved with `solve` method. The `solve` method accepts a list with as many unknowns as equations defined in the system.
 
 ```
-from easyPhysi.drivers.system import System
+from easyphysi.drivers.system import System
 
 equation = universe.physics_equation('body').solve('my_unk')
 
@@ -402,9 +402,9 @@ b) The speed it has when it reaches the ground (disregard air friction).
 ```
 import math
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.utils import magnitude
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.utils import magnitude
 
 alpha = math.radians(-30)
 g = (0.0, -9.81)
@@ -452,9 +452,9 @@ b) If 𝜇 = 0.1.
 import math
 from sympy import Symbol
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.drivers.system import System
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.drivers.system import System
 
 mu = Symbol('mu')
 alpha = math.radians(25)
@@ -490,9 +490,9 @@ Following previous example, calculate the angle if the acceleration is known.
 import math
 from sympy import Symbol
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.drivers.system import System
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.drivers.system import System
 
 mu = 0.1
 sin_alpha = Symbol('sin_alpha')
@@ -534,9 +534,9 @@ In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, an
 import math
 from sympy import Symbol
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.drivers.system import System
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.drivers.system import System
 
 g = 9.81
 mu = 0.223
@@ -602,10 +602,10 @@ In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, an
 import math
 from sympy import Symbol
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.drivers.system import System
-from easyPhysi.utils import magnitude
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.drivers.system import System
+from easyphysi.utils import magnitude
 
 g = 9.81
 mu = 0.223
@@ -657,8 +657,8 @@ From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g bo
 import math
 from sympy import Symbol
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
 
 m = 1.0
 v0 = 1.0
@@ -700,8 +700,8 @@ From the top of an inclined plane of 2 m in length and 30º of slope, a 500 g bo
 import math
 from sympy import Symbol
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
 
 file = 'vf_f_v0.png'
 
@@ -746,8 +746,8 @@ If upon reaching the flat surface, it collides with a spring of constant k = 200
 import math
 from sympy import Symbol
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
 
 m = 0.5
 k = 200.0
@@ -792,8 +792,8 @@ A 3 kg block situated at a height of 4 m is allowed to slide down a smooth, fric
 ```
 from sympy import Symbol
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
 
 m = 3.0
 hc = 0.0
@@ -836,9 +836,9 @@ mu = universe.energy_conservation_equation('body').solve('mu')
 A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the force exerted by mass A on mass B.
 
 ```
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.utils import magnitude
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.utils import magnitude
 
 body_a = Body('A')
 body_a.set('m', 3)
@@ -866,8 +866,8 @@ Fg = magnitude((Fg_x[0], Fg_y[0]))
 A point mass A, MA = 3 kg, is located on the xy-plane, at the origin of coordinates. If a point mass B, MB = 5 kg, is placed at point (2, -2) m, determine the work required to move mass B from point (2, -2) m to point (2, 0) m due to the gravitational field created by mass A.
 
 ```
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
 
 pa = (0, 0)
 pb_0 = (2, -2)
@@ -905,9 +905,9 @@ W = Ug_0[0] - Ug_1[0]  # W = -AEp = Ug_0 - Ug_1
 A point mass m1 = 5 kg is located at the point (4, 3) m. Determine the intensity of the gravitational field created by mass m1 at the origin of coordinates.
 
 ```
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.utils import magnitude
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.utils import magnitude
 
 body_a = Body('A')
 body_a.set('m', 5)
@@ -933,9 +933,9 @@ g = magnitude((g_x[0], g_y[0]))
 At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. Obtain the electric field created by the charges at the center of the square.
 
 ```
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.utils import magnitude
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.utils import magnitude
 
 point = (0, 0)
 
@@ -975,8 +975,8 @@ Ee = magnitude((Ee_x[0], Ee_y[0]))
 At the vertices of a square with a side of 2 m and centered at the origin of coordinates, four electric charges are placed as shown in the figure. If an electron is launched from the center of the square with a velocity v = 3E4 j m/s, obtain the work done by the electric field when the electron leaves the square through the midpoint of the top side.
 
 ```
-from easyPhysi.drivers.body import Body, electron
-from easyPhysi.drivers.universe import Universe
+from easyphysi.drivers.body import Body, electron
+from easyphysi.drivers.universe import Universe
 
 point_0 = (0, 0)
 point_1 = (0, 1)
@@ -1025,8 +1025,8 @@ W = Ue_0[0] - Ue_1[0]  # W = -AUe = Ue_0 - Ue_1
 A hollow spherical shell with a radius of 3 cm and centered at the origin of coordinates is charged with a uniform surface charge density σ = 2 µC/m2. Obtain the work done by the electric field to move a particle with a charge of 1 nC from the point (0, 2, 0) m to the point (3, 0, 0) m.
 
 ```
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
 
 point_0 = (0, 2, 0)
 point_1 = (3, 0, 0)

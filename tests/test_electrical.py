@@ -1,10 +1,10 @@
 import sys
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyphysi')
 
-from easyPhysi.drivers.body import Body, electron
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.utils import compare_floats, magnitude
+from easyphysi.drivers.body import Body, electron
+from easyphysi.drivers.universe import Universe
+from easyphysi.utils import compare_floats, magnitude
 
 
 def test_electrical_a3a_2021_modelo():

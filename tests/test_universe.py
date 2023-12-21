@@ -2,9 +2,9 @@ import os
 import sys
 from contextlib import redirect_stdout
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyphysi')
 
-from easyPhysi.drivers.universe import Universe
+from easyphysi.drivers.universe import Universe
 
 
 def test_universe_2d():

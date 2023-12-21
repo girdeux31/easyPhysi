@@ -3,12 +3,12 @@ import sys
 import math
 from sympy import Symbol
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyphysi')
 
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
-from easyPhysi.drivers.system import System
-from easyPhysi.utils import compare_floats, magnitude
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
+from easyphysi.drivers.system import System
+from easyphysi.utils import compare_floats, magnitude
 
 
 def test_newton_14():

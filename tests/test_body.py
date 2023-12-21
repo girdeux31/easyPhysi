@@ -2,9 +2,9 @@ import os
 import sys
 from contextlib import redirect_stdout
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyphysi')
 
-from easyPhysi.drivers.body import Body
+from easyphysi.drivers.body import Body
 
 
 def test_body_2d():

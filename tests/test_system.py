@@ -3,13 +3,13 @@ import sys
 import math
 from sympy import Symbol
 
-sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
+sys.path.append(r'/home/cmesado/Dropbox/dev/easyphysi')
 
-from easyPhysi.utils import compare_floats
-from easyPhysi.drivers.equation import Equation
-from easyPhysi.drivers.system import System
-from easyPhysi.drivers.body import Body
-from easyPhysi.drivers.universe import Universe
+from easyphysi.utils import compare_floats
+from easyphysi.drivers.equation import Equation
+from easyphysi.drivers.system import System
+from easyphysi.drivers.body import Body
+from easyphysi.drivers.universe import Universe
 
 
 def test_system():
