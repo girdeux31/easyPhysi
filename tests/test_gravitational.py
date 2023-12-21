@@ -29,10 +29,10 @@ def test_gravity_b1a_2019_junio_coincidentes():
     universe.add_body(body_b)
 
     Fg_x, Fg_y = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y'])
-    Fg = magnitude((Fg_x, Fg_y))  # always positive value
+    Fg = magnitude((Fg_x[0], Fg_y[0]))
 
-    assert compare_floats(Fg_x, -8.84E-11)
-    assert compare_floats(Fg_y, +8.84E-11)
+    assert compare_floats(Fg_x[0], -8.84E-11)
+    assert compare_floats(Fg_y[0], +8.84E-11)
     assert compare_floats(Fg, +1.25E-10)
 
 def test_gravity_b1a_2019_junio_coincidentes_3d():
@@ -55,11 +55,11 @@ def test_gravity_b1a_2019_junio_coincidentes_3d():
     universe.add_body(body_b)
 
     Fg_x, Fg_y, Fg_z = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y', 'Fg_z'])
-    Fg = magnitude((Fg_x, Fg_y, Fg_z))  # always positive value
+    Fg = magnitude((Fg_x[0], Fg_y[0], Fg_z[0]))
 
-    assert compare_floats(Fg_x, -8.84E-11)
-    assert compare_floats(Fg_y, +8.84E-11)
-    assert compare_floats(Fg_z, 0.0)
+    assert compare_floats(Fg_x[0], -8.84E-11)
+    assert compare_floats(Fg_y[0], +8.84E-11)
+    assert compare_floats(Fg_z[0], 0.0)
     assert compare_floats(Fg, +1.25E-10)
 
 def test_gravity_b1b_2019_junio_coincidentes():
@@ -91,7 +91,7 @@ def test_gravity_b1b_2019_junio_coincidentes():
     
     Ug_1 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 
-    W = Ug_0[0] - Ug_1[0] # W = -AEp = Ug_0 - Ug_1
+    W = Ug_0[0] - Ug_1[0]  # W = -AEp = Ug_0 - Ug_1
 
     assert compare_floats(W, 1.47E-10)
 
@@ -137,10 +137,10 @@ def test_gravity_a1a_2019_junio():
     universe.add_body(body_a)
 
     g_x, g_y = universe.gravitational_field_intensity_equation(point).solve(['gg_x', 'gg_y'])
-    g = magnitude((g_x, g_y))  # always positive value
+    g = magnitude((g_x[0], g_y[0]))
     
-    assert compare_floats(g_x, +1.06E-11)
-    assert compare_floats(g_y, +7.99E-12)
+    assert compare_floats(g_x[0], +1.06E-11)
+    assert compare_floats(g_y[0], +7.99E-12)
     assert compare_floats(g, +1.33E-11)
 
 def test_error_p_angle():

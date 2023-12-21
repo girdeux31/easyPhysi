@@ -31,9 +31,9 @@ def test_system():
 
     n, y1, y2 = system.solve(unknowns)
 
-    assert compare_floats(n, 108.77)
-    assert compare_floats(y1, 0.55)
-    assert compare_floats(y2, 0.45)
+    assert compare_floats(n[0], 108.77)
+    assert compare_floats(y1[0], 0.55)
+    assert compare_floats(y2[0], 0.45)
 
 def test_plot_system():
     """

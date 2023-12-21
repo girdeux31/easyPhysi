@@ -29,10 +29,10 @@ def test_electrical_a3a_2021_modelo():
     universe.add_body(body_2)
 
     Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 'Ee_y'])
-    Ee = magnitude((Ee_x, Ee_y))  # always positive value
+    Ee = magnitude((Ee_x[0], Ee_y[0]))
 
-    assert compare_floats(Ee_x, 2.88)
-    assert compare_floats(Ee_y, 0.0)
+    assert compare_floats(Ee_x[0], 2.88)
+    assert compare_floats(Ee_y[0], 0.0)
     assert compare_floats(Ee, 2.88)
 
 def test_electrical_a3b_2021_modelo_bis():
@@ -84,10 +84,10 @@ def test_electrical_a3a_2019_junio_coincidentes():
     universe.add_body(body_2)
 
     Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 'Ee_y'])
-    Ee = magnitude((Ee_x, Ee_y))  # always positive value
+    Ee = magnitude((Ee_x[0], Ee_y[0]))
 
-    assert compare_floats(Ee_x, -1.73)
-    assert compare_floats(Ee_y, 0.0)
+    assert compare_floats(Ee_x[0], -1.73)
+    assert compare_floats(Ee_y[0], 0.0)
     assert compare_floats(Ee, 1.73)
 
 def test_electrical_a3a_2019_junio_coincidentes_bis():
@@ -150,10 +150,10 @@ def test_electrical_a3a_2021_junio_coincidentes_a():
     universe.add_body(body_4)
 
     Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 'Ee_y'])
-    Ee = magnitude((Ee_x, Ee_y))  # always positive value
+    Ee = magnitude((Ee_x[0], Ee_y[0]))
 
-    assert compare_floats(0.0, Ee_x)
-    assert compare_floats(-12.72, Ee_y)
+    assert compare_floats(0.0, Ee_x[0])
+    assert compare_floats(-12.72, Ee_y[0])
     assert compare_floats(12.72, Ee)
 
 def test_electrical_a3b_2021_junio_coincidentes():
@@ -196,7 +196,7 @@ def test_electrical_a3b_2021_junio_coincidentes():
     
     Ue_1 = universe.electrical_potential_energy_equation('electron').solve('Ue')
 
-    W = Ue_0[0] - Ue_1[0] # W = -AUe = Ue_0 - Ue_1
+    W = Ue_0[0] - Ue_1[0]  # W = -AUe = Ue_0 - Ue_1
 
     assert compare_floats(1.97E-18, W)
 
@@ -229,6 +229,6 @@ def test_electrical_a3b_2023_modelo():
     
     Ue_1 = universe.electrical_potential_energy_equation('point').solve('Ue')
 
-    W = Ue_0[0] - Ue_1[0] # W = -AEp = Ue_0 - Ue_1
+    W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
 
     assert compare_floats(3.393E-8, W)

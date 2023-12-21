@@ -53,16 +53,21 @@ class System:
 
         unknowns = [Symbol(unknown) for unknown in unknowns]
         functions = [equation.function for equation in self.equations.values()]  # dict order is preserved in python 3.6+
-        solution = solve(functions, unknowns, dict=True)
+        solutions = solve(functions, unknowns, dict=True)
 
-        if not solution:
+        if not solutions:
             raise ValueError('System solution not found')
 
-        if len(solution) != 1:
-            raise ValueError('System has several solution')
+        #let's move the roots of each unknown into a list to be consistent with Equation solutions
 
-        return solution[0].values()
-        # TODO system solve returns a list of first solution, equation solve returns a list of possible solutions
+        roots = dict()
+
+        for unknown in unknowns:
+            roots[unknown] = list()
+            for solution in solutions:
+                roots[unknown].append(solution[unknown])
+
+        return roots.values()
 
     def plot(self, independents, dependent, x_range, points=100, path=None, show=True):
 

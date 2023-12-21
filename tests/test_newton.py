@@ -8,7 +8,7 @@ sys.path.append(r'/home/cmesado/Dropbox/dev/easyPhysi')
 from easyPhysi.drivers.body import Body
 from easyPhysi.drivers.universe import Universe
 from easyPhysi.drivers.system import System
-from easyPhysi.utils import compare_floats
+from easyPhysi.utils import compare_floats, magnitude
 
 
 def test_newton_14():
@@ -38,8 +38,8 @@ def test_newton_14():
     universe.add_body(body)
 
     a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
-    f_00 = m*a_x.subs('mu', 0.0)
-    f_01 = m*a_x.subs('mu', 0.1)
+    f_00 = m*a_x[0].subs('mu', 0.0)
+    f_01 = m*a_x[0].subs('mu', 0.1)
 
     assert compare_floats(f_00, -1036.47)
     assert compare_floats(f_01, -1258.74)
@@ -70,10 +70,10 @@ def test_newton_14b_bis():
     universe.add_body(body)
 
     a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
-    f_x = m*a_x
+    f_x = m*a_x[0]
 
-    assert compare_floats(a_x, -5.03)
-    assert compare_floats(a_y, -4.74)
+    assert compare_floats(a_x[0], -5.03)
+    assert compare_floats(a_y[0], -4.74)
     assert compare_floats(f_x, -1258.74)
 
 def test_newton_14b_bis_bis():
@@ -101,8 +101,8 @@ def test_newton_14b_bis_bis():
 
     sin_alpha, cos_alpha = universe.newton_equation('body').solve(['sin_alpha', 'cos_alpha'])
 
-    assert compare_floats(math.degrees(math.asin(sin_alpha)), 90-25)
-    assert compare_floats(math.degrees(math.acos(cos_alpha)), 90-25)
+    assert compare_floats(math.degrees(math.asin(sin_alpha[0])), 25)
+    assert compare_floats(math.degrees(math.acos(cos_alpha[0])), 25)
 
 def test_newton_8():
     """
@@ -168,9 +168,9 @@ def test_newton_8():
     
     T1, T2, a_x = system.solve(unknowns)
     
-    assert compare_floats(T1, 13.54)
-    assert compare_floats(T2, 7.59)
-    assert compare_floats(a_x, 0.79)
+    assert compare_floats(T1[0], 13.54)
+    assert compare_floats(T2[0], 7.59)
+    assert compare_floats(a_x[0], 0.79)
 
 def test_newton_8_bis():
     """
@@ -215,6 +215,8 @@ def test_newton_8_bis():
 
     # Solve for a
     a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
+    a = magnitude((a_x[0], a_y[0]))
     
-    assert compare_floats(a_x, 0.79)
-    assert compare_floats(a_y, -1.89)
+    assert compare_floats(a_x[0], 0.79)
+    assert compare_floats(a_y[0], -1.89)
+    assert compare_floats(a, 2.05)

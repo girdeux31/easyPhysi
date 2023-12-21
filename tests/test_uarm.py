@@ -80,8 +80,8 @@ def test_mrua_10():
     assert compare_floats(p_x[0], 2.30)
 
     v_x, v_y = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
-    v = magnitude((v_x, v_y))
+    v = magnitude((v_x[0], v_y[0]))
     
-    assert compare_floats(v_x, 1.73)
-    assert compare_floats(v_y, -14.04)
+    assert compare_floats(v_x[0], 1.73)
+    assert compare_floats(v_y[0], -14.04)
     assert compare_floats(v, 14.15)
