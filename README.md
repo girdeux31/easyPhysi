@@ -1,4 +1,4 @@
-# <a name="sec-top"></a>easyPhysi
+# <a id="sec-top"></a>easyPhysi
 
 easyPhysi is a physics library to solve pre-university physics problems. The physics areas that are covered by easyPhysi are summarized hereafter. See the main structure to use easyPhysi in [Section](#sec-main-structure) and also some [Examples](#sec-examples).
 
@@ -13,7 +13,7 @@ easyPhysi is a physics library to solve pre-university physics problems. The phy
 
 The main characteristics for easyPhysi are summarized in the following table.
 
-<a name="tab-characteristics"></a>
+<a id="tab-characteristics"></a>
 
  | Characteristic   | Value         |
  |------------------|---------------|
@@ -29,7 +29,7 @@ The main characteristics for easyPhysi are summarized in the following table.
 > [!TIP]
 > Tips are use through this document to link relevant examples or show their solution.
 
-## <a name="sec-index"></a>0. Index
+## <a id="sec-index"></a>0. Index
 
 0. [Index](#sec-index)
 1. [Installation](#sec-installation)
@@ -52,7 +52,7 @@ The main characteristics for easyPhysi are summarized in the following table.
 6. [License](#sec-licence)
 7. [Contact](#sec-contact)
 
-## <a name="sec-installation"></a>1. Installation
+## <a id="sec-installation"></a>1. Installation
 
 > [!NOTE]
 > easyPhysi is developed and tested with Python 3.10.
@@ -71,9 +71,9 @@ The following third-party modules are requirements.
  - scipy>=1.11.0
  - sympy==1.12
 
-## <a name="sec-usage"></a>2. Usage
+## <a id="sec-usage"></a>2. Usage
 
-### <a name="sec-main-structure"></a>2.0. Main structure
+### <a id="sec-main-structure"></a>2.0. Main structure
 
 Most pre-university physics problems can be solved following this structure composed of a few lines.
 
@@ -112,14 +112,14 @@ Let's take the code apart line by line.
 > [!TIP]
 > [Example](#sec-example-ef2) defines a 3D problem.
 
-### <a name="sec-properties"></a>2.1. Properties
+### <a id="sec-properties"></a>2.1. Properties
 
 Some properties are defined on a body, while others are defined on a universe. [Table](#tab-body-properties) list all properties that are allowed to be defined on a body.
 
 > [!NOTE]
 > Property names are case sensitive.
 
-<a name="tab-body-properties"></a>
+<a id="tab-body-properties"></a>
 
  |Property |Description                     |Type      |Components           |
  |---------|--------------------------------|----------|---------------------|
@@ -137,7 +137,7 @@ Some properties are defined on a body, while others are defined on a universe. [
 
 [Table](#tab-universe-properties) list all properties that are allowed to be defined in a universe.
 
-<a name="tab-universe-properties"></a>
+<a id="tab-universe-properties"></a>
 
  |Property |Description                     |Type      |Value                |
  |---------|--------------------------------|----------|---------------------|
@@ -156,11 +156,11 @@ Use `set` method in an instanciated body or universe to define its property and 
 > [!NOTE]
 > Force and energy cannot be defined as properties since each force and energy is defined by its own algebraic formula, see [Section](#sec-property-nondefined).
 
-#### <a name="sec-property-types"></a>2.1.0. Property types
+#### <a id="sec-property-types"></a>2.1.0. Property types
 
 There are two types of properties: **scalars** (for example `m` for mass) and **vectors** (for example `g` for gravity).
 
-##### <a name="sec-property-type-scalar"></a>2.1.0.i Scalars
+##### <a id="sec-property-type-scalar"></a>2.1.0.i Scalars
 
 They are integers of floats, examples follow.
 
@@ -169,7 +169,7 @@ body.set('prop', 250)       # int
 body.set('prop', 5.0E-9)    # float
 ```
 
-##### <a name="sec-property-type-vectors"></a>2.1.0.ii Vectors
+##### <a id="sec-property-type-vectors"></a>2.1.0.ii Vectors
 
 They are list or tuples (either integers or floats), examples follow.
 
@@ -189,7 +189,7 @@ body.set('prop_y', value_y)
 body.set('prop_z', value_z)
 ```
 
-#### <a name="sec-property-nondefined"></a>2.1.1. Non-defined properties
+#### <a id="sec-property-nondefined"></a>2.1.1. Non-defined properties
 
 Force (mainly used in `newton_equation`) and energy (mainly used in `energy_conservation_equation`) cannot be defined as properties in an instanciated body (note that they are not listed in [Table](#tab-equations)). Instead they can be defined in with `add_force` and `add_energy` methods over any instanciated body.
 
@@ -202,11 +202,11 @@ This is designed on purpose because many different forces and energies can apply
 
 See examples for Newton equation and energy conservation equation in [Dynamic Examples](#sec-example-dynamics) and [Energy Conservation Examples](#sec-example-energy-conservation) respectively.
 
-### <a name="sec-special-bodies"></a>2.2. Special bodies
+### <a id="sec-special-bodies"></a>2.2. Special bodies
 
 Special bodies are pre-defined bodies that are ready to be used. There are two types of special bodies: subatomic particles and celestial bodies, see following tables. The mass and charge of subatomic particles are defined in kilograms and coulombs.
 
-<a name="tab-body-particles"></a>
+<a id="tab-body-particles"></a>
 
 | Body     | Mass (kg) | Charge (C) |
 |----------|-----------|------------|
@@ -219,7 +219,7 @@ The mass and position of celestial bodies are defined in kilograms and kilometer
 > [!NOTE]
 > The distance of celestial bodies is the average distance to the Sun (except for the Moon, which is the average distance to the Earth) and is defined in the x-axis.
 
-<a name="tab-body-celestial"></a>
+<a id="tab-body-celestial"></a>
 
 | Body     | Mass (kg) | Position (km) |
 |----------|-----------|---------------|
@@ -241,14 +241,14 @@ Import them using the following line and use them without instanciating the body
 > [!TIP]
 > [Example](#sec-example-ef1) imports an electron from special bodies.
  
-### <a name="sec-equations"></a>2.3. Equations
+### <a id="sec-equations"></a>2.3. Equations
 
 The following equations can be solved, each one is a method defined in the `Universe` class.
 
 > [!NOTE]
 > Equation names are case sensitive.
 
-<a name="tab-equations"></a>
+<a id="tab-equations"></a>
 
  |Equation                                |Type      |Unknowns        |
  |----------------------------------------|----------|--------------- |
@@ -269,11 +269,11 @@ Use any of these equation in an instance of universe and include the body the eq
 
 `universe.physics_equation('my_body').solve('my_unknown')`
 
-#### <a name="sec-equation-types"></a>2.3.0. Equation types
+#### <a id="sec-equation-types"></a>2.3.0. Equation types
 
 There are two types of equations: scalar (for example `energy_conservation_equation`) and vectorial (for example `newton_equation`).
 
-##### <a name="sec-equation-type-scalar"></a>2.3.0.i Scalar
+##### <a id="sec-equation-type-scalar"></a>2.3.0.i Scalar
 
 Only one unknown is accepted.
 
@@ -284,7 +284,7 @@ out = universe.physics_equation('my_body').solve('my_unk')
 > [!NOTE]
 > The output is always a list of roots.
 
-##### <a name="sec-equation-type-vectorial"></a>2.3.0.ii Vectorial
+##### <a id="sec-equation-type-vectorial"></a>2.3.0.ii Vectorial
 
 As many unknowns as universe dimensions are accepted, these must be defined as a list and passed as argument of `solve` method. Vector components must be append to unknown names, such as `a_x`, `a_y` and `a_z` for acceleration, see [Section](#sec-property-type-vectors). The same number of unknowns must be defined as outputs, no name restriction apply for output unknowns.
 
@@ -295,11 +295,11 @@ out_x, out_y = universe.physics_equation('my_body').solve(['unk_x', 'unk_y'])
 > [!NOTE]
 > The output always have as many list of roots as unknowns.
 
-### <a name="sec-advance-features"></a>2.4. Advance features
+### <a id="sec-advance-features"></a>2.4. Advance features
 
 The most useful features are already defined. However, for the sake of completeness, a few more features for the advance user are defined in this section.
 
-#### <a name="sec-other-feature-magnitude"></a>2.4.0. Vector module
+#### <a id="sec-other-feature-magnitude"></a>2.4.0. Vector module
 
 Function `magnitude` is available to obtain a vector module or magnitude.
 
@@ -311,7 +311,7 @@ prop = magnitude((prop_x, prop_y))
 > [!TIP]
 > [Example](#sec-example-k0) makes use of `magnitude` function to calculate the modulo of the velocity.
 
-#### <a name="sec-other-feature-symbol"></a>2.4.1. Define new unknowns
+#### <a id="sec-other-feature-symbol"></a>2.4.1. Define new unknowns
 
 Most unknowns are already defined when a universe or body are instanciated, see [Table](#tab-universe-properties) and [Table](#tab-body-properties). However, sometimes new unknowns must be defined, specially with Newton equations and energy conservation equations since force and energy algebraic expressions are defined by user. In these case, `Symbol` class from Sympy library can be used. Then, it can be used as argument in `solve` method to calculate its numerical value.
 
@@ -323,7 +323,7 @@ my_unknown = Symbol('my_unknown')
 > [!TIP]
 > [Example](#sec-example-ec0) makes uso of `Symbol` class to define the final velocity (`vf`) as an unknown and then solve its value.
 
-#### <a name="sec-other-feature-subs"></a>2.4.2. Substitute variable
+#### <a id="sec-other-feature-subs"></a>2.4.2. Substitute variable
 
 Method `solve` returns numerical values if there is only one unknown (all properties are defined but one), but returns expressions if there is more than one unknown (two or more properties are left undefined). Use `subs` method to replace an unknown by a specified numerical value.
 
@@ -338,7 +338,7 @@ out = foo.subs('my_sym', value)
 > [!TIP]
 > [Example](#sec-example-d0) makes uso of `subs` method to substitute the friction coefficient by its value.
 
-#### <a name="sec-other-feature-get-equation"></a>2.4.3. Get equation from system
+#### <a id="sec-other-feature-get-equation"></a>2.4.3. Get equation from system
 
 In some cases, it is only interesting to solve a specific equation from a vectorial equation (that is a set of equations or a system). The method `get_equation` can be used over any vectorial equation to return the specific equation, the axis component is expected as method argument.
 
@@ -347,7 +347,7 @@ In some cases, it is only interesting to solve a specific equation from a vector
 > [!TIP]
 > [Example](#sec-example-k0) makes use of `get_equation` method to extract an equation from a vectorial equation (or set of equations) and, then, solve its unknown.
 
-#### <a name="sec-other-feature-solve-systems"></a>2.4.4. Solving system of equations
+#### <a id="sec-other-feature-solve-systems"></a>2.4.4. Solving system of equations
 
 System of equations can be defined -with `System` class- and solved with `solve` method. The `solve` method accepts a list with as many unknowns as equations defined in the system.
 
@@ -367,7 +367,7 @@ x, y, z = system.solve(['x', 'y', 'z'])
 > [!TIP]
 > [Example](#sec-example-d2) makes use of `System` class to solve a set of equations.
 
-#### <a name="sec-other-feature-plot"></a>2.4.5. Plotting equations
+#### <a id="sec-other-feature-plot"></a>2.4.5. Plotting equations
 
 Method `plot` can be used over any equation -scalar or vectorial- to plot unknowns in the form of function `independent = f(dependent)`.
 
@@ -385,11 +385,11 @@ Arguments are described hereafter.
 > [!TIP]
 > [Example](#sec-example-ec1) makes uso of `plot` method to plot a scalar equation (final velocity as a function of initial velocity).
 
-## <a name="sec-examples"></a>3. Examples
+## <a id="sec-examples"></a>3. Examples
 
-### <a name="sec-example-kinematics"></a>3.0. Kinematics
+### <a id="sec-example-kinematics"></a>3.0. Kinematics
 
-#### <a name="sec-example-k0"></a>3.0.0. Example K-0
+#### <a id="sec-example-k0"></a>3.0.0. Example K-0
 
 [Problem 10](https://fq.iespm.es/documentos/janavarro/fisica2bach/T0_vectores_cinematica.pdf)
 
@@ -436,9 +436,9 @@ v = magnitude((v_x[0], v_y[0]))
 > [!TIP]
 > Solution: `p_x[0] = 2.30 m, v = 14.15 m/s`
 
-### <a name="sec-example-dynamics"></a>3.1. Dynamics
+### <a id="sec-example-dynamics"></a>3.1. Dynamics
 
-#### <a name="sec-example-d0"></a>3.1.0. Example D-0
+#### <a id="sec-example-d0"></a>3.1.0. Example D-0
 
 [Problem 14](https://fq.iespm.es/documentos/rafael_artacho/4_ESO/08.%20Problemas%20Las%20fuerzas.pdf)
 
@@ -482,7 +482,7 @@ f_01 = m*a_x[0].subs('mu', 0.1)
 > [!TIP]
 > Solution: `f_00 = -1036.47 N, f_01 = -1258.74 N`
 
-#### <a name="sec-example-d1"></a>3.1.1. Example D-1
+#### <a id="sec-example-d1"></a>3.1.1. Example D-1
 
 Following previous example, calculate the angle if the acceleration is known.
 
@@ -524,7 +524,7 @@ alpha_from_cos = math.degrees(math.acos(cos_alpha[0]))
 > [!TIP]
 > Solution: `alpha_from_sin = 25º, alpha_from_cos = 25º`
 
-#### <a name="sec-example-d2"></a>3.1.2. Example D-2
+#### <a id="sec-example-d2"></a>3.1.2. Example D-2
 
 In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
 
@@ -592,7 +592,7 @@ T1, T2, a_x = system.solve(unknowns)
 > [!TIP]
 > Solution: `T1[0] = 13.54 N, T2[0] = 7.59 N, a_x[0] = 0.79 m/s2`
 
-#### <a name="sec-example-d3"></a>3.1.3. Example D-3
+#### <a id="sec-example-d3"></a>3.1.3. Example D-3
 
 In the system shown in the figure, the three masses are mA = 1 kg, mB = 2 kg, and mC = 1.5 kg. If the coefficient of friction is 𝜇 = 0.223, calculate the acceleration of the system when it is released.
 
@@ -645,9 +645,9 @@ a = magnitude((a_x[0], a_y[0]))
 > [!TIP]
 > Solution: `a = 2.05 m/s2`
 
-### <a name="sec-example-energy-conservation"></a>3.2. Energy conservation
+### <a id="sec-example-energy-conservation"></a>3.2. Energy conservation
 
-#### <a name="sec-example-ec0"></a>3.2.0. Example EC-0
+#### <a id="sec-example-ec0"></a>3.2.0. Example EC-0
 
 [Problem 15.a](https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf)
 
@@ -690,7 +690,7 @@ vf = universe.energy_conservation_equation('body').solve('vf')
 > [!TIP]
 > Solution: `vf[0] = 4.54 m/s`
 
-#### <a name="sec-example-ec1"></a>3.2.1. Example EC-1
+#### <a id="sec-example-ec1"></a>3.2.1. Example EC-1
 
 [Problem: 15.a](https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf)
 
@@ -736,7 +736,7 @@ Solution:
 
 ![Plot of final velocity as a function of initial velocity](https://github.com/girdeux31/easyPhysi/blob/main/tests/ref/vf_f_v0.png?raw=true)
 
-#### <a name="sec-example-ec2"></a>3.2.2. Example EC-2
+#### <a id="sec-example-ec2"></a>3.2.2. Example EC-2
 
 [Problem 15.b](https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf)
 
@@ -783,7 +783,7 @@ dx = universe.energy_conservation_equation('body').solve('dx')
 > [!TIP]
 > Solution: `dx[0] = 0.227 m`
 
-#### <a name="sec-example-ec3"></a>3.2.3. Example EC-3
+#### <a id="sec-example-ec3"></a>3.2.3. Example EC-3
 
 [Problem 20.c](https://fq.iespm.es/documentos/rafael_artacho/1_bachillerato/15._problemas_trabajo_y_energia_mecanica.pdf)
 
@@ -827,9 +827,9 @@ mu = universe.energy_conservation_equation('body').solve('mu')
 > [!TIP]
 > Solution: `mu[0] = 0.40`
 
-### <a name="sec-example-gravitational-field"></a>3.3. Gravitational field
+### <a id="sec-example-gravitational-field"></a>3.3. Gravitational field
 
-#### <a name="sec-example-gf0"></a>3.3.0. Example GF-0
+#### <a id="sec-example-gf0"></a>3.3.0. Example GF-0
 
 [Problem B1.a 2019 junio](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf)
 
@@ -859,7 +859,7 @@ Fg = magnitude((Fg_x[0], Fg_y[0]))
 > [!TIP]
 > Solution: `Fg = 1.25E-10 N`
 
-#### <a name="sec-example-gf1"></a>3.3.1. Example GF-1
+#### <a id="sec-example-gf1"></a>3.3.1. Example GF-1
 
 [Problem B1.b 2019 junio](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf)
 
@@ -898,7 +898,7 @@ W = Ug_0[0] - Ug_1[0]  # W = -AEp = Ug_0 - Ug_1
 > [!TIP]
 > Solution: `W = 1.47E-10 J`
 
-#### <a name="sec-example-gf2"></a>3.3.2. Example GF-2
+#### <a id="sec-example-gf2"></a>3.3.2. Example GF-2
 
 [Problem A1.a 2019 junio](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F2-PAU-Gravitacion.pdf)
 
@@ -924,9 +924,9 @@ g = magnitude((g_x[0], g_y[0]))
 > [!TIP]
 > Solution: `g = 1.33E-11 m/s2`
 
-### <a name="sec-example-electrical-field"></a>3.4. Electrical field
+### <a id="sec-example-electrical-field"></a>3.4. Electrical field
 
-#### <a name="sec-example-ef0"></a>3.4.0. Example EF-0
+#### <a id="sec-example-ef0"></a>3.4.0. Example EF-0
 
 [Problem A3.a 2021 junio coincidentes](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf)
 
@@ -968,7 +968,7 @@ Ee = magnitude((Ee_x[0], Ee_y[0]))
 > [!TIP]
 > Solution: `Ee = 12.72 N/C`
 
-#### <a name="sec-example-ef1"></a>3.4.1. Example EF-1
+#### <a id="sec-example-ef1"></a>3.4.1. Example EF-1
 
 [Problem A3.b 2021 junio coincidentes](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf)
 
@@ -1018,7 +1018,7 @@ W = Ue_0[0] - Ue_1[0]  # W = -AUe = Ue_0 - Ue_1
 > [!TIP]
 > Solution: `W = 1.97E-18 J`
 
-#### <a name="sec-example-ef2"></a>3.4.2. Example EF-2
+#### <a id="sec-example-ef2"></a>3.4.2. Example EF-2
 
 [Problem A3.b 2023 modelo](https://gitlab.com/fiquipedia/drive.fiquipedia/-/raw/main/content/home/recursos/recursospau/ficherospaufisicaporbloques/F4.1-PAU-CampoEl%C3%A9ctrico.pdf)
 
@@ -1056,9 +1056,9 @@ W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
 > [!TIP]
 > Solution: `W = 3.393E-8 J`
 
-## <a name="sec-limitations-bugs"></a>4. Limitations and bugs
+## <a id="sec-limitations-bugs"></a>4. Limitations and bugs
 
-### <a name="sec-limitations"></a>4.0. Limitations
+### <a id="sec-limitations"></a>4.0. Limitations
 
 * Trigonometric functions are not able to handle symbols or expressions (for example `math.sin`, `math.cos` or `math.atan2`). Therefore, position unknown (`p`) cannot be solved for the following equations (this error is shown: `TypeError: Cannot convert expression to float`):
     - electrical_field_intensity_equation
@@ -1070,21 +1070,21 @@ W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
 > [!TIP]
 > [Example](#sec-example-d1) uses this workaround to solve the unknown position in a dynamics problem.
 
-### <a name="sec-bugs"></a>4.1. Bugs
+### <a id="sec-bugs"></a>4.1. Bugs
 
 Contact the main author if you discover any bug, see [Section](#sec-contact).
 
-## <a name="sec-changelog"></a>5. Changelog
+## <a id="sec-changelog"></a>5. Changelog
 
 Main changes:
 
 * 25/06/23 - Initial idea
 * 22/12/23 - v1.0.0 first stable version
 
-## <a name="sec-licence"></a>6. License
+## <a id="sec-licence"></a>6. License
 
 This project includes MIT License. A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
 
-## <a name="sec-contact"></a>7. Contact
+## <a id="sec-contact"></a>7. Contact
 
 Feel free to contact mesado31@gmail.com for any suggestion or bug.
