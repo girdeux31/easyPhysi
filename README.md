@@ -87,10 +87,10 @@ Most pre-university physics problems can be solved following this structure comp
 from easyPhysi.drivers.universe import Universe
 from easyPhysi.drivers.body import Body
 
-universe = Universe(dimensions=2)  # 2 o 3 dimensions
+universe = Universe(dimensions=2)  # 2 o 3 dimensions, default is 2
 universe.set('my_prop', value)
 
-body = Body('my_body', dimensions=2)
+body = Body('my_body', dimensions=2)  # 2 o 3 dimensions, default is 2
 body.set('my_prop', value)
 
 # define more properties or more bodies as needed
@@ -104,23 +104,23 @@ unknown = universe.physics_equation('my_body').solve('my_unknown')
 
 Let's take the code apart line by line. 
 
- - Line 1 and 2: import `Universe` and `Body` objects, these are needed in every single problem solved with this library.
- - Line 4: define a universe instance with `Universe` class and include the dimensions of it, only 2 o 3 dimensions are allowed.
- - Line 5: define a property for the universe instanciated in previous line and its value. Define as many properties as needed provided they are listed in [Table](#tab-universe-properties). Properties must fulfill its type, see [Section](#sec-property-types).
- - Line 7: define a body instance with `Body` class, its name and dimensions are included as arguments. Define as many bodies as needed provided that they have different names.
- - Line 8: define a property for the body instanciated in previous line and its value. Define as many properties as needed provided they are listed in [Table](#tab-body-properties). Properties must fulfill its type, see [Section](#sec-property-types).
- - Line 12: add all defined bodies to the universe.
- - Line 16: solve the physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
+ - Line 1 and 2: import `Universe` and `Body` objects, these are needed in every single problem solved with easyPhysi.
+ - Line 4: define a universe instance with `Universe` class. The `dimensions` is an optional argument, but only 2 o 3 dimensions are allowed, default is 2.
+ - Line 5: define as many properties for the universe as needed. Universe properties are listed in [Table](#tab-universe-properties), name and value must be include as arguments. Properties must fulfill its type, see [Section](#sec-property-types).
+ - Line 7: define as many body instances as needed with `Body` class provided that they have different names. Its name must be included as first argument, the `dimensions` is an optional argument, but only 2 o 3 dimensions are allowed, default is 2.
+ - Line 8: define as many properties for the body as needed. Body properties are listed in [Table](#tab-body-properties), name and value must be include as arguments. Properties must fulfill its type, see [Section](#sec-property-types).
+ - Line 12: add all defined bodies to the universe (body and universe dimensions must match).
+ - Line 16: solve the relevant physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
 
-> [!NOTE] # TODO check
-> Define all bodies (line 7), their properties (line 8) and add them to a universe  (line 12) before instanciating any equation (line 16).
+> [!NOTE]
+> Define all bodies and properties before solving any equation.
 
 > [!TIP]
 > [Example](#sec-example-ef2) defines a 3D problem.
 
 ### <a name="sec-properties"></a>2.1. Properties
 
-Depending on the property, these are defined on a specific body or in the universe. [Table](#tab-body-properties) list all properties that are allowed to be defined on a body and [Table](#tab-universe-properties) list all properties that are allowed to be defined in the universe.
+Depending on the property, these are defined on a specific body or in the universe. [Table](#tab-body-properties) list all properties that are allowed to be defined on a body.
 
 > [!NOTE]
 > Property names are case sensitive.
@@ -140,6 +140,8 @@ Depending on the property, these are defined on a specific body or in the univer
  |m        |Mass                            |Scalar    |m                    |
  |p        |Position                        |Vector    |(p_x, p_y[, p_z])    |
  |v        |Velocity                        |Vector    |(v_x, v_y[, v_z])    |
+
+[Table](#tab-universe-properties) list all properties that are allowed to be defined in the universe.
 
 <a name="tab-universe-properties"></a>
 
@@ -425,8 +427,8 @@ universe.set('t', t[1])
 
 p_x = universe.linear_position_equation('body').get_equation('x').solve('p_x')
 
-v_x, v_y = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
-v = magnitude((v_x, v_y))
+v_x[0], v_y[0] = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
+v = magnitude((v_x[0], v_y[0]))
 ```
 
 > [!TIP]
@@ -470,9 +472,9 @@ body.add_force('N', N)
 universe = Universe()
 universe.add_body(body)
 
-a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
-f_00 = m*a_x.subs('mu', 0.0)
-f_01 = m*a_x.subs('mu', 0.1)
+a_x[0], a_y[0] = universe.newton_equation('body').solve(['a_x', 'a_y'])
+f_00 = m*a_x[0].subs('mu', 0.0)
+f_01 = m*a_x[0].subs('mu', 0.1)
 ```
 
 > [!TIP]
@@ -513,8 +515,8 @@ universe.add_body(body)
 
 sin_alpha, cos_alpha = universe.newton_equation('body').solve(['sin_alpha', 'cos_alpha'])
 
-alpha_from_sin = 90.0 - math.degrees(math.asin(sin_alpha))
-alpha_from_cos = 90.0 - math.degrees(math.acos(cos_alpha))
+alpha_from_sin = math.degrees(math.asin(sin_alpha[0]))
+alpha_from_cos = math.degrees(math.acos(cos_alpha[0]))
 ```
 
 > [!TIP]
@@ -586,7 +588,7 @@ T1, T2, a_x = system.solve(unknowns)
 ```
 
 > [!TIP]
-> Solution: `T1 = 13.54 N, T2 = 7.59 N, a_x = 0.79 m/s2`
+> Solution: `T1[0] = 13.54 N, T2[0] = 7.59 N, a_x[0] = 0.79 m/s2`
 
 #### <a name="sec-example-d3"></a>3.1.3. Example D-3
 
@@ -601,6 +603,7 @@ from sympy import Symbol
 from easyPhysi.drivers.body import Body
 from easyPhysi.drivers.universe import Universe
 from easyPhysi.drivers.system import System
+from easyPhysi.utils import magnitude
 
 g = 9.81
 mu = 0.223
@@ -634,10 +637,11 @@ universe = Universe()
 universe.add_body(body)
 
 a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
+a = magnitude((a_x[0], a_y[0]))
 ```
 
 > [!TIP]
-> Solution: `a = (0.79, -1.89) m/s2`
+> Solution: `a = 2.05 m/s2`
 
 ### <a name="sec-example-energy-conservation"></a>3.2. Energy conservation
 
@@ -682,7 +686,7 @@ vf = universe.energy_conservation_equation('body').solve('vf')
 ```
 
 > [!TIP]
-> Solution: `vf = 4.54 m/s`
+> Solution: `vf[0] = 4.54 m/s`
 
 #### <a name="sec-example-ec1"></a>3.2.1. Example EC-1
 
@@ -775,7 +779,7 @@ dx = universe.energy_conservation_equation('body').solve('dx')
 ```
 
 > [!TIP]
-> Solution: `dx = 0.227 m`
+> Solution: `dx[0] = 0.227 m`
 
 #### <a name="sec-example-ec3"></a>3.2.3. Example EC-3
 
@@ -847,11 +851,11 @@ universe.add_body(body_a)
 universe.add_body(body_b)
 
 Fg_x, Fg_y = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y'])
-Fg = magnitude((Fg_x, Fg_y))  # always positive value
+Fg = magnitude((Fg_x[0], Fg_y[0]))
 ```
 
 > [!TIP]
-> Solution: `Fg = +1.25E-10 N`
+> Solution: `Fg = 1.25E-10 N`
 
 #### <a name="sec-example-gf1"></a>3.3.1. Example GF-1
 
@@ -886,7 +890,7 @@ body_b.set('p', pb_1)
 
 Ug_1 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 
-W = Ug_0[0] - Ug_1[0] # W = -AEp = Ug_0 - Ug_1
+W = Ug_0[0] - Ug_1[0]  # W = -AEp = Ug_0 - Ug_1
 ```
 
 > [!TIP]
@@ -912,11 +916,11 @@ universe = Universe()
 universe.add_body(body_a)
 
 g_x, g_y = universe.gravitational_field_intensity_equation(point).solve(['gg_x', 'gg_y'])
-g = magnitude((g_x, g_y))  # always positive value
+g = magnitude((g_x[0], g_y[0]))
 ```
 
 > [!TIP]
-> Solution: `g = +1.33E-11 m/s2`
+> Solution: `g = 1.33E-11 m/s2`
 
 ### <a name="sec-example-electrical-field"></a>3.4. Electrical field
 
@@ -956,7 +960,7 @@ universe.add_body(body_3)
 universe.add_body(body_4)
 
 Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 'Ee_y'])
-Ee = magnitude((Ee_x, Ee_y))  # always positive value
+Ee = magnitude((Ee_x[0], Ee_y[0]))
 ```
 
 > [!TIP]
