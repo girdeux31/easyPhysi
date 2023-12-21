@@ -8,6 +8,9 @@ easyPhysi is a physics library to solve pre-university physics problems. The phy
  - Gravitational field
  - Electrical field
 
+<div class="alert alert-block alert-info">
+<b>Tip:</b> Use blue boxes (alert-info) for tips and notes.</div>
+
 > [!Note]
 > Visit GitHub page at https://github.com/girdeux31/easyPhysi
 
