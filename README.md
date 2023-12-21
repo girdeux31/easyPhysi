@@ -1,8 +1,5 @@
 # <a name="sec-top"></a>easyPhysi
 
-> [!WARNING]
-> **Library under development yet**
-
 easyPhysi is a physics library to solve pre-university physics problems. The physics areas that are covered by easyPhysi are summarized hereafter. See the main structure to use easyPhysi in [Section](#sec-main-structure) and also some [Examples](#sec-examples).
 
  - Kinematics
@@ -57,9 +54,6 @@ The main characteristics for easyPhysi are summarized in the following table.
 
 ## <a name="sec-installation"></a>1. Installation
 
-> [!WARNING]
-> **Package not in pypi yet**
-
 > [!NOTE]
 > easyPhysi is developed and tested with Python 3.10.
 
@@ -99,7 +93,7 @@ universe.add_body(body)
 
 # add more bodies as needed
 
-unknown = universe.physics_equation('my_body').solve('my_unknown')
+solution = universe.physics_equation('my_body').solve('my_unknown')
 ```
 
 Let's take the code apart line by line. 
@@ -285,6 +279,9 @@ Only one unknown is accepted.
 out = universe.physics_equation('my_body').solve('my_unk')
 ```
 
+> [!NOTE]
+> The output is always a list of roots.
+
 ##### <a name="sec-equation-type-vectorial"></a>2.3.0.ii Vectorial
 
 As many unknowns as universe dimensions are accepted, these must be defined as a list and passed as argument of `solve` method. Vector components must be append to unknown names, such as `a_x`, `a_y` and `a_z` for acceleration, see [Section](#sec-property-type-vectors). The same number of unknowns must be defined as outputs, no name restriction apply for output unknowns.
@@ -292,6 +289,9 @@ As many unknowns as universe dimensions are accepted, these must be defined as a
 ```
 out_x, out_y = universe.physics_equation('my_body').solve(['unk_x', 'unk_y'])
 ```
+
+> [!NOTE]
+> The output always have as many list of roots as unknowns.
 
 ### <a name="sec-advance-features"></a>2.4. Advance features
 
@@ -1073,6 +1073,8 @@ W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
 Contact the main author if you discover any bug, see [Section](#sec-contact).
 
 ## <a name="sec-changelog"></a>5. Changelog
+
+Main changes:
 
 * 25/06/23 - Initial idea
 * 22/12/23 - v1.0.0 first stable version
