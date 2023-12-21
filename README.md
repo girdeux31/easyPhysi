@@ -100,9 +100,9 @@ Let's take the code apart line by line.
 
  - Line 1 and 2: import `Universe` and `Body` objects, these are needed in every single problem solved with easyPhysi.
  - Line 4: define a universe instance with `Universe` class. The `dimensions` is an optional argument, but only 2 o 3 dimensions are allowed, default is 2.
- - Line 5: define as many properties for the universe as needed. Universe properties are listed in [Table](#tab-universe-properties), name and value must be include as arguments. Properties must fulfill its type, see [Section](#sec-property-types).
+ - Line 5: define as many properties for the universe as needed. Universe properties are listed in [Table](#tab-universe-properties), name and value must be included as arguments. Values must be consistent with property type, see [Section](#sec-property-types).
  - Line 7: define as many body instances as needed with `Body` class provided that they have different names. Its name must be included as first argument, the `dimensions` is an optional argument, but only 2 o 3 dimensions are allowed, default is 2.
- - Line 8: define as many properties for the body as needed. Body properties are listed in [Table](#tab-body-properties), name and value must be include as arguments. Properties must fulfill its type, see [Section](#sec-property-types).
+ - Line 8: define as many properties for the body as needed. Body properties are listed in [Table](#tab-body-properties), name and value must be included as arguments. Values must be consistent with property type, see [Section](#sec-property-types).
  - Line 12: add all defined bodies to the universe (body and universe dimensions must match).
  - Line 16: solve the relevant physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
 
@@ -114,7 +114,7 @@ Let's take the code apart line by line.
 
 ### <a name="sec-properties"></a>2.1. Properties
 
-Depending on the property, these are defined on a specific body or in the universe. [Table](#tab-body-properties) list all properties that are allowed to be defined on a body.
+Some properties are defined on a body, while others are defined on a universe. [Table](#tab-body-properties) list all properties that are allowed to be defined on a body.
 
 > [!NOTE]
 > Property names are case sensitive.
@@ -135,7 +135,7 @@ Depending on the property, these are defined on a specific body or in the univer
  |p        |Position                        |Vector    |(p_x, p_y[, p_z])    |
  |v        |Velocity                        |Vector    |(v_x, v_y[, v_z])    |
 
-[Table](#tab-universe-properties) list all properties that are allowed to be defined in the universe.
+[Table](#tab-universe-properties) list all properties that are allowed to be defined in a universe.
 
 <a name="tab-universe-properties"></a>
 
@@ -148,7 +148,7 @@ Depending on the property, these are defined on a specific body or in the univer
  |g        |Gravity                         |Vector    |(g_x, g_y[, g_z])    |
  |t        |Time                            |Scalar    |t                    |
 
-Use `set` method in an instanciated body or universe to define its property and define its value according to its type. See value types in [Section](#sec-property-types).
+Use `set` method in an instanciated body or universe to define its property and define its value according to its type, see [Section](#sec-property-types).
 
 > [!NOTE]
 > Units are up to the user. Even though SI is recommended, other systems can be used provided that different units are consistent.
@@ -178,7 +178,7 @@ body.set('prop', [0.0, -9.81])  # list
 body.set('prop', (0, +3))       # tuple
 ```
 
-The length of `value` (components) must be the same as defined in the instance of the body the property applies to and also to the instance of universe.
+The length of `value` (components) must be the same as defined in the instance of the body or universe the property applies to.
 
 > [!NOTE]
 > It is also possible to define only one component in a vector parameter (the other may be irrelevant or unknown). To do so, append `_x`, `_y` or `_z` to the property name according to the desired axis.
@@ -191,7 +191,7 @@ body.set('prop_z', value_z)
 
 #### <a name="sec-property-nondefined"></a>2.1.1. Non-defined properties
 
-Force (mainly used in `newton_equation`) and energy (mainly used in `energy_conservation_equation`) cannot be defined as properties in an instanciated body with `set` method (note that they are not listed in [Table](#tab-equations)). Instead they can be defined in an instanciated body with `add_force` and `add_energy` methods respectively.
+Force (mainly used in `newton_equation`) and energy (mainly used in `energy_conservation_equation`) cannot be defined as properties in an instanciated body (note that they are not listed in [Table](#tab-equations)). Instead they can be defined in with `add_force` and `add_energy` methods over any instanciated body.
 
 ```
 body.add_force('my_force', value)
@@ -204,7 +204,7 @@ See examples for Newton equation and energy conservation equation in [Dynamic Ex
 
 ### <a name="sec-special-bodies"></a>2.2. Special bodies
 
-Special bodies are pre-defined bodies that are ready to be used. There are two types of special bodies: subatomic particles and celestial bodies, see following tables. The mass and charge of subatomic particles are defined in kilograms and coulombs. The mass and position of celestial bodies are defined in kilograms and kilometers.
+Special bodies are pre-defined bodies that are ready to be used. There are two types of special bodies: subatomic particles and celestial bodies, see following tables. The mass and charge of subatomic particles are defined in kilograms and coulombs.
 
 <a name="tab-body-particles"></a>
 
@@ -214,8 +214,10 @@ Special bodies are pre-defined bodies that are ready to be used. There are two t
 | proton   | 1.673e-27 | 1.602e-19  |
 | neutron  | 1.675e-27 | 0.0        |
 
+The mass and position of celestial bodies are defined in kilograms and kilometers.
+
 > [!NOTE]
-> The distance of celestial bodies is the average distance to the sun (except for the moon, which is the average distance to the Earth) and is defined in the x-axis.
+> The distance of celestial bodies is the average distance to the Sun (except for the Moon, which is the average distance to the Earth) and is defined in the x-axis.
 
 <a name="tab-body-celestial"></a>
 
@@ -311,7 +313,7 @@ prop = magnitude((prop_x, prop_y))
 
 #### <a name="sec-other-feature-symbol"></a>2.4.1. Define new unknowns
 
-Most unknowns are already defined when a universe or body are instanciated, see [Table](#tab-universe-properties) and [Table](#tab-body-properties). However, sometimes new unknowns must be defined, specially with Newton equations and energy conservation equations since force and energy algebraic expressions are defined by user. In these case, Symbol class from Sympy library can be used. Then, it can be used as argument in `solve` method to calculate its numerical value.
+Most unknowns are already defined when a universe or body are instanciated, see [Table](#tab-universe-properties) and [Table](#tab-body-properties). However, sometimes new unknowns must be defined, specially with Newton equations and energy conservation equations since force and energy algebraic expressions are defined by user. In these case, `Symbol` class from Sympy library can be used. Then, it can be used as argument in `solve` method to calculate its numerical value.
 
 ```
 from sympy import Symbol
@@ -1058,7 +1060,7 @@ W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
 
 ### <a name="sec-limitations"></a>4.0. Limitations
 
-* Trigonometric functions are not able to handle symbols or expressions (for example `math.sin`, `math.cos` or `math.atan2`) and this error is shown: `TypeError: Cannot convert expression to float`. Therefore, position unknown (`p`) cannot be solved for the following equations:
+* Trigonometric functions are not able to handle symbols or expressions (for example `math.sin`, `math.cos` or `math.atan2`). Therefore, position unknown (`p`) cannot be solved for the following equations. This error is shown: `TypeError: Cannot convert expression to float`:
     - electrical_field_intensity_equation
     - electrical_force_equation
     - gravitational_field_intensity_equation
@@ -1066,7 +1068,7 @@ W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
 * For the same reason, when defining forces for `newton_equation` with `add_force` method, the angle cannot be set as un unknown as it is usually inside `math.sin` or `math.cos` functions. Fortunately, since the algebraic formula that defines each force is set by the user, arbitrary unknowns can be set instead of `math.sin(alpha)` or `math.cos(alpha)`. Then, easily get the angle with `math.asin` or `math.acos`.
 
 > [!TIP]
-> [Example](#sec-example-d1) uses this methodology to solve the position unknown in a dynamics problem.
+> [Example](#sec-example-d1) uses this workaround to solve the unknown position in a dynamics problem.
 
 ### <a name="sec-bugs"></a>4.1. Bugs
 
