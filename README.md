@@ -1060,7 +1060,7 @@ W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
 
 ### <a name="sec-limitations"></a>4.0. Limitations
 
-* Trigonometric functions are not able to handle symbols or expressions (for example `math.sin`, `math.cos` or `math.atan2`). Therefore, position unknown (`p`) cannot be solved for the following equations. This error is shown: `TypeError: Cannot convert expression to float`:
+* Trigonometric functions are not able to handle symbols or expressions (for example `math.sin`, `math.cos` or `math.atan2`). Therefore, position unknown (`p`) cannot be solved for the following equations (this error is shown: `TypeError: Cannot convert expression to float`):
     - electrical_field_intensity_equation
     - electrical_force_equation
     - gravitational_field_intensity_equation
