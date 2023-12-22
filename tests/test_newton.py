@@ -153,9 +153,9 @@ def test_newton_8():
 
     # Get newton equation for each body
 
-    eq_a = universe.newton_equation('A')['x']
-    eq_b = universe.newton_equation('B')['x']
-    eq_c = universe.newton_equation('C')['x']
+    eq_a = universe.newton_equation('A').get_equation('x')
+    eq_b = universe.newton_equation('B').get_equation('x')
+    eq_c = universe.newton_equation('C').get_equation('x')
 
     # Then solve system:
 
