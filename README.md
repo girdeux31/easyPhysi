@@ -201,10 +201,10 @@ body.add_energy('my_energy', value)
 This is designed on purpose because many different forces and energies can apply to a body and could have different algebraic expressions. Thus, the algebraic expression for the force and energy must be defined by the user.
 
 > [!TIP]
-> [Section](#sec-example-dynamics) shows examples using the Newton equation and the `add_force` method.
+> [Section](#sec-example-dynamics) shows examples using `newton_equation` and `add_force` method.
 
 > [!TIP]
-> [Section](#sec-example-energy-conservation) shows examples using the energy conservation equation and the `add_energy` method.
+> [Section](#sec-example-energy-conservation) shows examples using `energy_conservation_equation` and `add_energy` method.
 
 ### <a id="sec-special-bodies"></a>2.2. Special bodies
 
@@ -317,7 +317,7 @@ prop = magnitude((prop_x, prop_y))
 
 #### <a id="sec-other-feature-symbol"></a>2.4.1. Define new unknowns
 
-Most unknowns are already defined when a universe or body are instanciated, see [Table](#tab-universe-properties) and [Table](#tab-body-properties). However, sometimes new unknowns must be defined, specially with Newton equations and energy conservation equations since force and energy algebraic expressions are defined by user, see [Section](#sec-property-nondefined). In these case, `Symbol` class from Sympy library can be used. Then, the new unknown can be used as argument in `solve` method to calculate its numerical value.
+Most unknowns are already defined when a universe or body are instanciated, see [Table](#tab-universe-properties) and [Table](#tab-body-properties). However, sometimes new unknowns must be defined, specially with `newton_equation` and `energy_conservation_equation` since force and energy algebraic expressions are defined by user, see [Section](#sec-property-nondefined). In these case, `Symbol` class from Sympy library can be used. Then, the new unknown can be used as argument in `solve` method to calculate its numerical value.
 
 ```
 from sympy import Symbol
