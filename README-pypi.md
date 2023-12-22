@@ -8,8 +8,7 @@ easyPhysi is a physics library to solve pre-university physics problems. The phy
  - Gravitational field
  - Electrical field
 
-> [!Note]
-> Visit GitHub page at https://github.com/girdeux31/easyPhysi
+> **Note:** Visit GitHub page at https://github.com/girdeux31/easyPhysi
 
 The main characteristics for easyPhysi are summarized in the following table.
 
@@ -23,11 +22,9 @@ The main characteristics for easyPhysi are summarized in the following table.
  | Date             | 22/12/2023    |
  | Size             | ~ 40 KiB      |
 
-> [!NOTE]
-> Notes are use through this document to remark some features.
+> **Note:** Notes are use through this document to remark some features.
 
-> [!TIP]
-> Tips are use through this document to link relevant examples or show their solution.
+> **Tip:** Tips are use through this document to link relevant examples or show their solution.
 
 ## <a id="sec-index"></a>0. Index
 
@@ -54,8 +51,7 @@ The main characteristics for easyPhysi are summarized in the following table.
 
 ## <a id="sec-installation"></a>1. Installation
 
-> [!NOTE]
-> easyPhysi is developed and tested with Python 3.10.
+> **Note:** easyPhysi is developed and tested with Python 3.10.
 
 Install the package with pip,
 
@@ -106,18 +102,15 @@ Let's take the code apart line by line.
  - Line 12: add all defined bodies to the universe (body and universe dimensions must match).
  - Line 16: solve the relevant physics equation over a specific body and define the unknown(s). See a list of allowed equations and unknowns in [Table](#tab-equations).
 
-> [!NOTE]
-> Define all bodies and properties before solving any equation.
+> **Note:** Define all bodies and properties before solving any equation.
 
-> [!TIP]
-> [Example](#sec-example-ef2) defines a 3D problem.
+> **Tip:** [Example](#sec-example-ef2) defines a 3D problem.
 
 ### <a id="sec-properties"></a>2.1. Properties
 
 Some properties are defined on a body, while others are defined on a universe. Next [Table](#tab-body-properties) lists all properties that are allowed to be defined on a body.
 
-> [!NOTE]
-> Property names are case sensitive.
+> **Note:** Property names are case sensitive.
 
 <a id="tab-body-properties"></a>
 
@@ -150,11 +143,9 @@ Next [Table](#tab-universe-properties) lists all properties that are allowed to 
 
 Use `set` method in an instanciated body or universe to define its property and define its value according to its type, see [Section](#sec-property-types).
 
-> [!NOTE]
-> Units are up to the user. Even though SI is recommended, other systems can be used provided that different units are consistent.
+> **Note:** Units are up to the user. Even though SI is recommended, other systems can be used provided that different units are consistent.
 
-> [!NOTE]
-> Force and energy cannot be defined as properties since each force and energy is defined by its own algebraic formula, see [Section](#sec-property-nondefined).
+> **Note:** Force and energy cannot be defined as properties since each force and energy is defined by its own algebraic formula, see [Section](#sec-property-nondefined).
 
 #### <a id="sec-property-types"></a>2.1.0. Property types
 
@@ -180,8 +171,7 @@ body.set('prop', (0, +3))       # tuple
 
 The length of `value` (components) must be the same as defined in the instance of the body or universe the property applies to.
 
-> [!NOTE]
-> It is also possible to define only one component in a vector parameter (the other may be irrelevant or unknown). To do so, append `_x`, `_y` or `_z` to the property name according to the desired axis.
+> **Note:** It is also possible to define only one component in a vector parameter (the other may be irrelevant or unknown). To do so, append `_x`, `_y` or `_z` to the property name according to the desired axis.
 
 ```
 body.set('prop_x', value_x)
@@ -200,11 +190,9 @@ body.add_energy('my_energy', value)
 
 This is designed on purpose because many different forces and energies can apply to a body and could have different algebraic expressions. Thus, the algebraic expression for the force and energy must be defined by the user.
 
-> [!TIP]
-> [Section](#sec-example-dynamics) shows examples using the Newton equation and the `add_force` method.
+> **Tip:** [Section](#sec-example-dynamics) shows examples using the Newton equation and the `add_force` method.
 
-> [!TIP]
-> [Section](#sec-example-energy-conservation) shows examples using the energy conservation equation and the `add_energy` method.
+> **Tip:** [Section](#sec-example-energy-conservation) shows examples using the energy conservation equation and the `add_energy` method.
 
 ### <a id="sec-special-bodies"></a>2.2. Special bodies
 
@@ -220,8 +208,7 @@ Special bodies are pre-defined bodies that are ready to be used. There are two t
 
 The mass and position of celestial bodies are defined in kilograms and kilometers.
 
-> [!NOTE]
-> The distance of celestial bodies is the average distance to the Sun (except for the Moon, which is the average distance to the Earth) and is defined in the x-axis.
+> **Note:** The distance of celestial bodies is the average distance to the Sun (except for the Moon, which is the average distance to the Earth) and is defined in the x-axis.
 
 <a id="tab-body-celestial"></a>
 
@@ -242,15 +229,13 @@ Import them using the following line and use them without instanciating the body
 
 `from easyphysi.drivers.body import special_body`
 
-> [!TIP]
-> [Example](#sec-example-ef1) imports an electron from special bodies.
+> **Tip:** [Example](#sec-example-ef1) imports an electron from special bodies.
  
 ### <a id="sec-equations"></a>2.3. Equations
 
 The following equations can be solved, each one is a method defined in the `Universe` class.
 
-> [!NOTE]
-> Equation names are case sensitive.
+> **Note:** Equation names are case sensitive.
 
 <a id="tab-equations"></a>
 
@@ -285,8 +270,7 @@ Only one unknown is accepted.
 out = universe.physics_equation('my_body').solve('my_unk')
 ```
 
-> [!NOTE]
-> The output is always a list of roots.
+> **Note:** The output is always a list of roots.
 
 ##### <a id="sec-equation-type-vectorial"></a>2.3.0.ii Vectorial
 
@@ -296,8 +280,7 @@ As many unknowns as universe dimensions are accepted, these must be defined in a
 out_x, out_y = universe.physics_equation('my_body').solve(['unk_x', 'unk_y'])
 ```
 
-> [!NOTE]
-> The output always has as many list of roots as unknowns.
+> **Note:** The output always has as many list of roots as unknowns.
 
 ### <a id="sec-advance-features"></a>2.4. Advance features
 
@@ -312,8 +295,7 @@ from easyphysi.utils import magnitude
 prop = magnitude((prop_x, prop_y))
 ```
 
-> [!TIP]
-> [Example](#sec-example-k0) makes use of `magnitude` function to calculate the modulo of the velocity.
+> **Tip:** [Example](#sec-example-k0) makes use of `magnitude` function to calculate the modulo of the velocity.
 
 #### <a id="sec-other-feature-symbol"></a>2.4.1. Define new unknowns
 
@@ -324,8 +306,7 @@ from sympy import Symbol
 my_unknown = Symbol('my_unknown')
 ```
 
-> [!TIP]
-> [Example](#sec-example-ec0) makes uso of `Symbol` class to define the final velocity (`vf`) as an unknown and then solve its value.
+> **Tip:** [Example](#sec-example-ec0) makes uso of `Symbol` class to define the final velocity (`vf`) as an unknown and then solve its value.
 
 #### <a id="sec-other-feature-subs"></a>2.4.2. Substitute variable
 
@@ -336,11 +317,9 @@ foo = universe.physics_equation('body').solve('my_unk')  # several undefined pro
 out = foo.subs('my_sym', value)
 ```
 
-> [!Note]
-> There is no need to import `subs` since it is a method inherent in any Sympy expression.
+> **Note:** There is no need to import `subs` since it is a method inherent in any Sympy expression.
 
-> [!TIP]
-> [Example](#sec-example-d0) makes uso of `subs` method to substitute the friction coefficient by its value.
+> **Tip:** [Example](#sec-example-d0) makes uso of `subs` method to substitute the friction coefficient by its value.
 
 #### <a id="sec-other-feature-get-equation"></a>2.4.3. Get equation from system
 
@@ -348,8 +327,7 @@ In some cases, it is only interesting to solve a specific equation from a vector
 
 `universe.physics_equation('my_body').get_equation('axis')`
 
-> [!TIP]
-> [Example](#sec-example-k0) makes use of `get_equation` method to extract an equation from a vectorial equation (or set of equations) and, then, solve its unknown.
+> **Tip:** [Example](#sec-example-k0) makes use of `get_equation` method to extract an equation from a vectorial equation (or set of equations) and, then, solve its unknown.
 
 #### <a id="sec-other-feature-solve-systems"></a>2.4.4. Solving system of equations
 
@@ -368,8 +346,7 @@ system.add_equation(equation)
 x, y, z = system.solve(['x', 'y', 'z'])
 ```
 
-> [!TIP]
-> [Example](#sec-example-d2) makes use of `System` class to solve a set of equations.
+> **Tip:** [Example](#sec-example-d2) makes use of `System` class to solve a set of equations.
 
 #### <a id="sec-other-feature-plot"></a>2.4.5. Plotting equations
 
@@ -386,8 +363,7 @@ Arguments are described hereafter.
  - `path`: path to save image as file, optional argument, by default it is None and no image is saved.
  - `show`: if `True` the plot is shown on screen, optional argument, by default it is `True`.
 
-> [!TIP]
-> [Example](#sec-example-ec1) makes uso of `plot` method to plot a scalar equation (final velocity as a function of initial velocity).
+> **Tip:** [Example](#sec-example-ec1) makes uso of `plot` method to plot a scalar equation (final velocity as a function of initial velocity).
 
 ## <a id="sec-examples"></a>3. Examples
 
@@ -437,7 +413,6 @@ v_x[0], v_y[0] = universe.linear_velocity_equation('body').solve(['v_x', 'v_y'])
 v = magnitude((v_x[0], v_y[0]))
 ```
 
-> [!TIP]
 > **Solution:** `p_x[0] = 2.30 m, v = 14.15 m/s`
 
 ### <a id="sec-example-dynamics"></a>3.1. Dynamics
@@ -483,7 +458,6 @@ f_00 = m*a_x[0].subs('mu', 0.0)
 f_01 = m*a_x[0].subs('mu', 0.1)
 ```
 
-> [!TIP]
 > **Solution:** `f_00 = -1036.47 N, f_01 = -1258.74 N`
 
 #### <a id="sec-example-d1"></a>3.1.1. Example D-1
@@ -525,7 +499,6 @@ alpha_from_sin = math.degrees(math.asin(sin_alpha[0]))
 alpha_from_cos = math.degrees(math.acos(cos_alpha[0]))
 ```
 
-> [!TIP]
 > **Solution:** `alpha_from_sin = 25º, alpha_from_cos = 25º`
 
 #### <a id="sec-example-d2"></a>3.1.2. Example D-2
@@ -593,7 +566,6 @@ system.add_equation(eq_c)
 T1, T2, a_x = system.solve(unknowns)
 ```
 
-> [!TIP]
 > **Solution:** `T1[0] = 13.54 N, T2[0] = 7.59 N, a_x[0] = 0.79 m/s2`
 
 #### <a id="sec-example-d3"></a>3.1.3. Example D-3
@@ -646,7 +618,6 @@ a_x, a_y = universe.newton_equation('body').solve(['a_x', 'a_y'])
 a = magnitude((a_x[0], a_y[0]))
 ```
 
-> [!TIP]
 > **Solution:** `a = 2.05 m/s2`
 
 ### <a id="sec-example-energy-conservation"></a>3.2. Energy conservation
@@ -691,7 +662,6 @@ universe.add_body(body)
 vf = universe.energy_conservation_equation('body').solve('vf')
 ```
 
-> [!TIP]
 > **Solution:** `vf[0] = 4.54 m/s`
 
 #### <a id="sec-example-ec1"></a>3.2.1. Example EC-1
@@ -784,7 +754,6 @@ universe.add_body(body)
 dx = universe.energy_conservation_equation('body').solve('dx')
 ```
 
-> [!TIP]
 > **Solution:** `dx[0] = 0.227 m`
 
 #### <a id="sec-example-ec3"></a>3.2.3. Example EC-3
@@ -828,7 +797,6 @@ universe.add_body(body)
 mu = universe.energy_conservation_equation('body').solve('mu')
 ```
 
-> [!TIP]
 > **Solution:** `mu[0] = 0.40`
 
 ### <a id="sec-example-gravitational-field"></a>3.3. Gravitational field
@@ -860,7 +828,6 @@ Fg_x, Fg_y = universe.gravitational_force_equation('B').solve(['Fg_x', 'Fg_y'])
 Fg = magnitude((Fg_x[0], Fg_y[0]))
 ```
 
-> [!TIP]
 > **Solution:** `Fg = 1.25E-10 N`
 
 #### <a id="sec-example-gf1"></a>3.3.1. Example GF-1
@@ -899,7 +866,6 @@ Ug_1 = universe.gravitational_potential_energy_equation('B').solve('Ug')
 W = Ug_0[0] - Ug_1[0]  # W = -AEp = Ug_0 - Ug_1
 ```
 
-> [!TIP]
 > **Solution:** `W = 1.47E-10 J`
 
 #### <a id="sec-example-gf2"></a>3.3.2. Example GF-2
@@ -925,7 +891,6 @@ g_x, g_y = universe.gravitational_field_intensity_equation(point).solve(['gg_x',
 g = magnitude((g_x[0], g_y[0]))
 ```
 
-> [!TIP]
 > **Solution:** `g = 1.33E-11 m/s2`
 
 ### <a id="sec-example-electrical-field"></a>3.4. Electrical field
@@ -969,7 +934,6 @@ Ee_x, Ee_y = universe.electrical_field_intensity_equation(point).solve(['Ee_x', 
 Ee = magnitude((Ee_x[0], Ee_y[0]))
 ```
 
-> [!TIP]
 > **Solution:** `Ee = 12.72 N/C`
 
 #### <a id="sec-example-ef1"></a>3.4.1. Example EF-1
@@ -1019,7 +983,6 @@ Ue_1 = universe.electrical_potential_energy_equation('electron').solve('Ue')
 W = Ue_0[0] - Ue_1[0]  # W = -AUe = Ue_0 - Ue_1
 ```
 
-> [!TIP]
 > **Solution:** `W = 1.97E-18 J`
 
 #### <a id="sec-example-ef2"></a>3.4.2. Example EF-2
@@ -1057,7 +1020,6 @@ Ue_1 = universe.electrical_potential_energy_equation('point').solve('Ue')
 W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
 ```
 
-> [!TIP]
 > **Solution:** `W = 3.393E-8 J`
 
 ## <a id="sec-limitations-bugs"></a>4. Limitations and bugs
@@ -1071,8 +1033,7 @@ W = Ue_0[0] - Ue_1[0]  # W = -AEp = Ue_0 - Ue_1
     - gravitational_force_equation
 * For the same reason, when defining forces for `newton_equation` with `add_force` method, the angle cannot be set as un unknown as it is usually inside `math.sin` or `math.cos` functions. Fortunately, since the algebraic formula that defines each force is set by the user, arbitrary unknowns can be set instead of `math.sin(alpha)` or `math.cos(alpha)`. Then, easily get the angle with `math.asin` or `math.acos`.
 
-> [!TIP]
-> [Example](#sec-example-d1) uses this workaround to solve the unknown angle in a dynamics problem.
+> **Tip:** [Example](#sec-example-d1) uses this workaround to solve the unknown angle in a dynamics problem.
 
 ### <a id="sec-bugs"></a>4.1. Bugs
 
